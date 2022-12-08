@@ -1,0 +1,111 @@
+package ba.unsa.etf.rpr;
+
+import javax.swing.*;
+import javax.xml.transform.Result;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FilmDaoSQLImpl implements FilmDao {
+    private Connection connection;
+
+    public FilmDaoSQLImpl() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            this.connection = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7583502", "sql7583502", "ez7bJNj2sl");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Film getById(int id) {
+        String query = "SELECT * FROM film WHERE id = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Film film = new Film();
+                film.setId(rs.getInt("id"));
+                film.setIme(rs.getString("ime"));
+                film.setZanr(rs.getString("zanr"));
+                film.setTrajanje(rs.getInt("trajanje"));
+                rs.close();
+                return film;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Film add(Film item) {
+        String insert = "INSERT INTO film(ime) VALUES(?)";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, item.getIme());
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next(); // we know that there is one key
+            item.setId(rs.getInt(1)); //set id to return it back
+            return item;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Film update(Film item) {
+        String insert = "UPDATE film SET ime = ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, item.getIme());
+            stmt.setObject(2, item.getId());
+            stmt.executeUpdate();
+            return item;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public void delete(int id) {
+        String insert = "DELETE FROM film WHERE id = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Film> getAll() {
+        String query = "SELECT * FROM categories";
+        List<Film> filmovi = new ArrayList<Film>();
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) { // result set is iterator.
+                Film film = new Film();
+                film.setId(rs.getInt("id"));
+                film.setIme(rs.getString("ime"));
+                film.setZanr(rs.getString("zanr"));
+                film.setTrajanje(rs.getInt("trajanje"));
+                filmovi.add(film);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // poor error handling
+        }
+        return filmovi;
+    }
+}
