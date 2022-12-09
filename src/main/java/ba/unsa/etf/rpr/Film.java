@@ -40,7 +40,7 @@ public class Film {
 
     @Override
     public String toString() {
-        return "Film{id=" + id + ", ime='" + ime + "\'}";
+        return "Film{id=" + id + ", ime='" + ime + "\', zanr=" + zanr + ", trajanje=" + trajanje + "}" ;
     }
 
     @Override

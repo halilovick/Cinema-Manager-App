@@ -11,7 +11,7 @@ public class FilmDaoSQLImpl implements FilmDao {
 
     public FilmDaoSQLImpl() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            //Class.forName("com.mysql.cj.jdbc.Driver");
             this.connection = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7583502", "sql7583502", "ez7bJNj2sl");
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,7 +89,7 @@ public class FilmDaoSQLImpl implements FilmDao {
 
     @Override
     public List<Film> getAll() {
-        String query = "SELECT * FROM categories";
+        String query = "SELECT * FROM film";
         List<Film> filmovi = new ArrayList<Film>();
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
