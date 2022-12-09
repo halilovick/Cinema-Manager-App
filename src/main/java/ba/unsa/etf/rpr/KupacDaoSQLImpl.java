@@ -39,10 +39,11 @@ public class KupacDaoSQLImpl implements KupacDao{
 
     @Override
     public Kupac add(Kupac item) {
-        String insert = "INSERT INTO kupac(kupac_ime) VALUES(?)";
+        String insert = "INSERT INTO kupac(kupac_ime, vrijeme_kupovine) VALUES(?, ?)";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, item.getKupac_ime());
+            stmt.setTimestamp(2, item.getVrijeme_kupovine());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next(); // we know that there is one key
