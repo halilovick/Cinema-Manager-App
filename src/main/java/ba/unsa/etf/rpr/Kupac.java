@@ -1,19 +1,20 @@
 package ba.unsa.etf.rpr;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Kupac {
-    private int id;
+    private int idkupac;
     private String kupac_ime;
-    private Date vrijeme_kupovine;
+    private Timestamp vrijeme_kupovine;
 
     public int getId() {
-        return id;
+        return idkupac;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idkupac = id;
     }
 
     public String getKupac_ime() {
@@ -24,16 +25,16 @@ public class Kupac {
         this.kupac_ime = kupac_ime;
     }
 
-    public Date getVrijeme_kupovine() {
+    public Timestamp getVrijeme_kupovine() {
         return vrijeme_kupovine;
     }
 
-    public void setVrijeme_kupovine(Date vrijeme_kupovine) {
+    public void setVrijeme_kupovine(Timestamp vrijeme_kupovine) {
         this.vrijeme_kupovine = vrijeme_kupovine;
     }
     @Override
     public String toString() {
-        return "Kupac{id=" + id + ", ime=" + kupac_ime + ", vrijeme kupovine=" + vrijeme_kupovine + "}" ;
+        return "Kupac{id=" + idkupac + ", ime=" + kupac_ime + ", vrijeme kupovine=" + vrijeme_kupovine + "}" ;
     }
 
     @Override
@@ -41,6 +42,6 @@ public class Kupac {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Kupac kupac = (Kupac) o;
-        return id == kupac.id;
+        return idkupac == kupac.idkupac;
     }
 }

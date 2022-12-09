@@ -23,9 +23,9 @@ public class KupacDaoSQLImpl implements KupacDao{
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 Kupac kupac = new Kupac();
-                kupac.setId(rs.getInt("id"));
-                kupac.setKupac_ime(rs.getString("ime_kupca"));
-                kupac.setVrijeme_kupovine(rs.getDate("vrijeme_kupovine"));
+                kupac.setId(rs.getInt("idkupca"));
+                kupac.setKupac_ime(rs.getString("kupac_ime"));
+                kupac.setVrijeme_kupovine(rs.getTimestamp("vrijeme_kupovine"));
                 rs.close();
                 return kupac;
             } else {
@@ -90,9 +90,9 @@ public class KupacDaoSQLImpl implements KupacDao{
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) { // result set is iterator.
                 Kupac kupac = new Kupac();
-                kupac.setId(rs.getInt("id"));
-                kupac.setKupac_ime(rs.getString("ime_kupca"));
-                kupac.setVrijeme_kupovine(rs.getDate("vrijeme_kupovine"));
+                kupac.setId(rs.getInt("idkupac"));
+                kupac.setKupac_ime(rs.getString("kupac_ime"));
+                kupac.setVrijeme_kupovine(rs.getTimestamp("vrijeme_kupovine"));
                 kupci.add(kupac);
             }
             rs.close();
