@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DatabaseDbTool">
+    <option name="sources">
+      <map>
+        <entry key="sql7.freemysqlhosting.net">
+          <value>
+            <DataConfigSourceDto>
+              <option name="comment" value="" />
+              <option name="dataBaseType" value="MySQL_5" />
+              <option name="database" value="sql7583502" />
+              <option name="databaseName" value="sql7.freemysqlhosting.net" />
+              <option name="databaseSslConfig">
+                <DatabaseSslConfig>
+                  <option name="caFile" value="" />
+                  <option name="clientCertificateFile" value="" />
+                  <option name="clientKeyFile" value="" />
+                  <option name="clientKeyPassword" value="" />
+                  <option name="sslMode" value="REQUIRE" />
+                </DatabaseSslConfig>
+              </option>
+              <option name="databaseVersion">
+                <NameVersion>
+                  <option name="majorVersion" value="5" />
+                  <option name="minorVersion" value="5" />
+                  <option name="name" value="MySQL" />
+                  <option name="version" value="5.5.62-0ubuntu0.14.04.1" />
+                </NameVersion>
+              </option>
+              <option name="dbFile" value="" />
+              <option name="driverCombos" value="thin" />
+              <option name="driverType" value="MySQL 5.1" />
+              <option name="host" value="sql7.freemysqlhosting.net" />
+              <option name="jarUrl" value="C:\Users\khali\AppData\Roaming\JetBrains\IdeaIC2022.2\jdbc-drivers\MySQL ConnectorJ\5.1.47\mysql-connector-java-5.1.47.jar" />
+              <option name="myUniqueId" value="008b4180-21b4-4ebd-ada4-0034f784f950" />
+              <option name="port" value="3306" />
+              <option name="properties">
+                <map />
+              </option>
+              <option name="schemaSourceDto">
+                <SchemaSourceDto>
+                  <option name="name" value="sql7583502" />
+                  <option name="tableSources">
+                    <list>
+                      <TableSourceDto>
+                        <option name="columns">
+                          <list>
+                            <ColumnSourceDto>
+                              <option name="columnComment" value="" />
+                              <option name="columnName" value="idfilm" />
+                              <option name="columnType" value="int(11)" />
+                              <option name="dataType" value="4" />
+                              <option name="dataTypeStr" value="INT" />
+                              <option name="extra" value="" />
+                              <option name="ordinalPosition" value="1" />
+                              <option name="pk" value="true" />
+                              <option name="size" value="11" />
+                              <option name="tableName" value="film" />
+                              <option name="typeName" value="INTEGER" />
+                            </ColumnSourceDto>
+                            <ColumnSourceDto>
+                              <option name="collationName" value="latin1_swedish_ci" />
+                              <option name="columnComment" value="" />
+                              <option name="columnName" value="film_ime" />
+                              <option name="columnType" value="varchar(45)" />
+                              <option name="dataType" value="12" />
+                              <option name="dataTypeStr" value="VARCHAR" />
+                              <option name="extra" value="" />
+                              <option name="nullable" value="true" />
+                              <option name="ordinalPosition" value="2" />
+                              <option name="size" value="45" />
+                              <option name="tableName" value="film" />
+                              <option name="typeName" value="VARCHAR" />
+                            </ColumnSourceDto>
+                            <ColumnSourceDto>
+                              <option name="collationName" value="latin1_swedish_ci" />
+                              <option name="columnComment" value="" />
+                              <option name="columnName" value="film_zanr" />
+                              <option name="columnType" value="varchar(45)" />
+                              <option name="dataType" value="12" />
+                              <option name="dataTypeStr" value="VARCHAR" />
+                              <option name="extra" value="" />
+                              <option name="nullable" value="true" />
+                              <option name="ordinalPosition" value="3" />
+                              <option name="size" value="45" />
+                              <option name="tableName" value="film" />
+                              <option name="typeName" value="VARCHAR" />
+                            </ColumnSourceDto>
+                            <ColumnSourceDto>
+                              <option name="columnComment" value="" />
+                              <option name="columnName" value="film_trajanje" />
+                              <option name="columnType" value="int(11)" />
+                              <option name="dataType" value="4" />
+                              <option name="dataTypeStr" value="INT" />
+                              <option name="extra" value="" />
+                              <option name="nullable" value="true" />
+                              <option name="ordinalPosition" value="4" />
+                              <option name="size" value="11" />
+                              <option name="tableName" value="film" />
+                              <option name="typeName" value="INTEGER" />
+                            </ColumnSourceDto>
+                          </list>
+                        </option>
+                        <option name="databaseType" value="MySQL_5" />
+                        <option name="keys">
+                          <list>
+                            <ColumnIndexInfo>
+                              <option name="PK" value="true" />
+                              <option name="collation" value="A" />
+                              <option name="columnName" value="idfilm" />
+                              <option name="indexComment" value="" />
+                              <option name="indexName" value="PRIMARY" />
+                              <option name="indexType" value="BTREE" />
+                              <option name="tableName" value="film" />
+                            </ColumnIndexInfo>
+                          </list>
+                        </option>
+                        <option name="schema" value="sql7583502" />
+                        <option name="tableName" value="film" />
+                        <option name="tableRemark" value="" />
+                        <option name="tableType" value="BASE TABLE" />
+                      </TableSourceDto>
+                      <TableSourceDto>
+                        <option name="columns">
+                          <list>
+                            <ColumnSourceDto>
+                              <option name="columnComment" value="" />
+                              <option name="columnName" value="idkarta" />
+                              <option name="columnType" value="int(11)" />
+                              <option name="dataType" value="4" />
+                              <option name="dataTypeStr" value="INT" />
+                              <option name="extra" value="" />
+                              <option name="ordinalPosition" value="1" />
+                              <option name="pk" value="true" />
+                              <option name="size" value="11" />
+                              <option name="tableName" value="karta" />
+                              <option name="typeName" value="INTEGER" />
+                            </ColumnSourceDto>
+                            <ColumnSourceDto>
+                              <option name="collationName" value="latin1_swedish_ci" />
+                              <option name="columnComment" value="" />
+                              <option name="columnName" value="ime_filma" />
+                              <option name="columnType" value="varchar(45)" />
+                              <option name="dataType" value="12" />
+                              <option name="dataTypeStr" value="VARCHAR" />
+                              <option name="extra" value="" />
+                              <option name="nullable" value="true" />
+                              <option name="ordinalPosition" value="2" />
+                              <option name="size" value="45" />
+                              <option name="tableName" value="karta" />
+                              <option name="typeName" value="VARCHAR" />
+                            </ColumnSourceDto>
+                            <ColumnSourceDto>
+                              <option name="columnComment" value="" />
+                              <option name="columnName" value="kupac_id" />
+                              <option name="columnType" value="int(11)" />
+                              <option name="dataType" value="4" />
+                              <option name="dataTypeStr" value="INT" />
+                              <option name="extra" value="" />
+                              <option name="nullable" value="true" />
+                              <option name="ordinalPosition" value="3" />
+                              <option name="size" value="11" />
+                              <option name="tableName" value="karta" />
+                              <option name="typeName" value="INTEGER" />
+                            </ColumnSourceDto>
+                            <ColumnSourceDto>
+                              <option name="columnComment" value="" />
+                              <option name="columnName" value="film_id" />
+                              <option name="columnType" value="int(11)" />
+                              <option name="dataType" value="4" />
+                              <option name="dataTypeStr" value="INT" />
+                              <option name="extra" value="" />
+                              <option name="nullable" value="true" />
+                              <option name="ordinalPosition" value="4" />
+                              <option name="size" value="11" />
+                              <option name="tableName" value="karta" />
+                              <option name="typeName" value="INTEGER" />
+                            </ColumnSourceDto>
+                            <ColumnSourceDto>
+                              <option name="columnComment" value="" />
+                              <option name="columnName" value="cijena" />
+                              <option name="columnType" value="int(11)" />
+                              <option name="dataType" value="4" />
+                              <option name="dataTypeStr" value="INT" />
+                              <option name="extra" value="" />
+                              <option name="nullable" value="true" />
+                              <option name="ordinalPosition" value="5" />
+                              <option name="size" value="11" />
+                              <option name="tableName" value="karta" />
+                              <option name="typeName" value="INTEGER" />
+                            </ColumnSourceDto>
+                            <ColumnSourceDto>
+                              <option name="columnComment" value="" />
+                              <option name="columnName" value="broj_sale" />
+                              <option name="columnType" value="int(11)" />
+                              <option name="dataType" value="4" />
+                              <option name="dataTypeStr" value="INT" />
+                              <option name="extra" value="" />
+                              <option name="nullable" value="true" />
+                              <option name="ordinalPosition" value="6" />
+                              <option name="size" value="11" />
+                              <option name="tableName" value="karta" />
+                              <option name="typeName" value="INTEGER" />
+                            </ColumnSourceDto>
+                          </list>
+                        </option>
+                        <option name="databaseType" value="MySQL_5" />
+                        <option name="keys">
+                          <list>
+                            <ColumnIndexInfo>
+                              <option name="PK" value="true" />
+                              <option name="collation" value="A" />
+                              <option name="columnName" value="idkarta" />
+                              <option name="indexComment" value="" />
+                              <option name="indexName" value="PRIMARY" />
+                              <option name="indexType" value="BTREE" />
+                              <option name="tableName" value="karta" />
+                            </ColumnIndexInfo>
+                          </list>
+                        </option>
+                        <option name="schema" value="sql7583502" />
+                        <option name="tableName" value="karta" />
+                        <option name="tableRemark" value="" />
+                        <option name="tableType" value="BASE TABLE" />
+                      </TableSourceDto>
+                      <TableSourceDto>
+                        <option name="columns">
+                          <list>
+                            <ColumnSourceDto>
+                              <option name="columnComment" value="" />
+                              <option name="columnName" value="idkupac" />
+                              <option name="columnType" value="int(11)" />
+                              <option name="dataType" value="4" />
+                              <option name="dataTypeStr" value="INT" />
+                              <option name="extra" value="" />
+                              <option name="ordinalPosition" value="1" />
+                              <option name="pk" value="true" />
+                              <option name="size" value="11" />
+                              <option name="tableName" value="kupac" />
+                              <option name="typeName" value="INTEGER" />
+                            </ColumnSourceDto>
+                            <ColumnSourceDto>
+                              <option name="collationName" value="latin1_swedish_ci" />
+                              <option name="columnComment" value="" />
+                              <option name="columnName" value="kupac_ime" />
+                              <option name="columnType" value="varchar(45)" />
+                              <option name="dataType" value="12" />
+                              <option name="dataTypeStr" value="VARCHAR" />
+                              <option name="extra" value="" />
+                              <option name="nullable" value="true" />
+                              <option name="ordinalPosition" value="2" />
+                              <option name="size" value="45" />
+                              <option name="tableName" value="kupac" />
+                              <option name="typeName" value="VARCHAR" />
+                            </ColumnSourceDto>
+                          </list>
+                        </option>
+                        <option name="databaseType" value="MySQL_5" />
+                        <option name="keys">
+                          <list>
+                            <ColumnIndexInfo>
+                              <option name="PK" value="true" />
+                              <option name="collation" value="A" />
+                              <option name="columnName" value="idkupac" />
+                              <option name="indexComment" value="" />
+                              <option name="indexName" value="PRIMARY" />
+                              <option name="indexType" value="BTREE" />
+                              <option name="tableName" value="kupac" />
+                            </ColumnIndexInfo>
+                          </list>
+                        </option>
+                        <option name="schema" value="sql7583502" />
+                        <option name="tableName" value="kupac" />
+                        <option name="tableRemark" value="" />
+                        <option name="tableType" value="BASE TABLE" />
+                      </TableSourceDto>
+                    </list>
+                  </option>
+                </SchemaSourceDto>
+              </option>
+              <option name="sid" value="" />
+              <option name="url" value="jdbc:mysql://sql7.freemysqlhosting.net:3306/?useSSL=false&amp;serverTimezone=Europe/Sarajevo" />
+              <option name="userName" value="sql7583502" />
+              <option name="driverVersion">
+                <NameVersion>
+                  <option name="majorVersion" value="5" />
+                  <option name="minorVersion" value="1" />
+                  <option name="name" value="MySQL Connector Java" />
+                  <option name="version" value="mysql-connector-java-5.1.47 ( Revision: fe1903b1ecb4a96a917f7ed3190d80c049b1de29 )" />
+                </NameVersion>
+              </option>
+            </DataConfigSourceDto>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
