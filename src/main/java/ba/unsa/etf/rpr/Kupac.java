@@ -1,11 +1,12 @@
 package ba.unsa.etf.rpr;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class Kupac {
     private int id;
     private String kupac_ime;
-    private LocalDateTime vrijeme_kupovine;
+    private Date vrijeme_kupovine;
 
     public int getId() {
         return id;
@@ -23,11 +24,11 @@ public class Kupac {
         this.kupac_ime = kupac_ime;
     }
 
-    public LocalDateTime getVrijeme_kupovine() {
+    public Date getVrijeme_kupovine() {
         return vrijeme_kupovine;
     }
 
-    public void setVrijeme_kupovine(LocalDateTime vrijeme_kupovine) {
+    public void setVrijeme_kupovine(Date vrijeme_kupovine) {
         this.vrijeme_kupovine = vrijeme_kupovine;
     }
     @Override
