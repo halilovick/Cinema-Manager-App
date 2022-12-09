@@ -16,14 +16,14 @@ public class KupacDaoSQLImpl implements KupacDao{
     }
     @Override
     public Kupac getById(int id) {
-        String query = "SELECT * FROM kupac WHERE id = ?";
+        String query = "SELECT * FROM kupac WHERE idkupac = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 Kupac kupac = new Kupac();
-                kupac.setId(rs.getInt("idkupca"));
+                kupac.setId(rs.getInt("idkupac"));
                 kupac.setKupac_ime(rs.getString("kupac_ime"));
                 kupac.setVrijeme_kupovine(rs.getTimestamp("vrijeme_kupovine"));
                 rs.close();
@@ -57,11 +57,12 @@ public class KupacDaoSQLImpl implements KupacDao{
 
     @Override
     public Kupac update(Kupac item) {
-        String insert = "UPDATE kupac SET kupac_ime = ? WHERE id = ?";
+        String insert = "UPDATE kupac SET kupac_ime = ?, vrijeme_kupovine = ? WHERE idkupac = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getKupac_ime());
-            stmt.setObject(2, item.getId());
+            stmt.setObject(2, item.getVrijeme_kupovine());
+            stmt.setObject(3, item.getId());
             stmt.executeUpdate();
             return item;
         } catch (SQLException e) {
@@ -72,7 +73,7 @@ public class KupacDaoSQLImpl implements KupacDao{
 
     @Override
     public void delete(int id) {
-        String insert = "DELETE FROM kupac WHERE id = ?";
+        String insert = "DELETE FROM kupac WHERE idkupac = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, id);
