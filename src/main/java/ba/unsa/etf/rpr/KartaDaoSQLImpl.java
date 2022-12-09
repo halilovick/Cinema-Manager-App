@@ -1,37 +1,36 @@
 package ba.unsa.etf.rpr;
 
-import javax.swing.*;
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilmDaoSQLImpl implements FilmDao {
+public class KartaDaoSQLImpl implements KartaDao{
     private Connection connection;
 
-    public FilmDaoSQLImpl() {
+    public KartaDaoSQLImpl() {
         try {
             this.connection = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7583502", "sql7583502", "ez7bJNj2sl");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
     @Override
-    public Film getById(int id) {
-        String query = "SELECT * FROM film WHERE id = ?";
+    public Karta getById(int id) {
+        String query = "SELECT * FROM karta WHERE id = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                Film film = new Film();
-                film.setId(rs.getInt("id"));
-                film.setIme(rs.getString("ime"));
-                film.setZanr(rs.getString("zanr"));
-                film.setTrajanje(rs.getInt("trajanje"));
+                Karta karta = new Karta();
+                karta.setId(rs.getInt("id"));
+                karta.setIme_filma(rs.getString("ime_filma"));
+                karta.setKupac_id(rs.getInt("kupac_id"));
+                karta.setFilm_id(rs.getInt("film_id"));
+                karta.setCijena(rs.getInt("cijena"));
+                karta.setBroj_sale(rs.getInt("broj_sale"));
                 rs.close();
-                return film;
+                return karta;
             } else {
                 return null;
             }
@@ -42,13 +41,12 @@ public class FilmDaoSQLImpl implements FilmDao {
     }
 
     @Override
-    public Film add(Film item) {
-        String insert = "INSERT INTO film(ime) VALUES(?)";
+    public Karta add(Karta item) {
+        String insert = "INSERT INTO karta(ime_filma) VALUES(?)";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, item.getIme());
+            stmt.setString(1, item.getIme_filma());
             stmt.executeUpdate();
-
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next(); // we know that there is one key
             item.setId(rs.getInt(1)); //set id to return it back
@@ -60,11 +58,11 @@ public class FilmDaoSQLImpl implements FilmDao {
     }
 
     @Override
-    public Film update(Film item) {
-        String insert = "UPDATE film SET ime = ? WHERE id = ?";
+    public Karta update(Karta item) {
+        String insert = "UPDATE karta SET ime_filma = ? WHERE id = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1, item.getIme());
+            stmt.setObject(1, item.getIme_filma());
             stmt.setObject(2, item.getId());
             stmt.executeUpdate();
             return item;
@@ -76,7 +74,7 @@ public class FilmDaoSQLImpl implements FilmDao {
 
     @Override
     public void delete(int id) {
-        String insert = "DELETE FROM film WHERE id = ?";
+        String insert = "DELETE FROM karta WHERE id = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, id);
@@ -87,24 +85,26 @@ public class FilmDaoSQLImpl implements FilmDao {
     }
 
     @Override
-    public List<Film> getAll() {
-        String query = "SELECT * FROM film";
-        List<Film> filmovi = new ArrayList<Film>();
+    public List<Karta> getAll() {
+        String query = "SELECT * FROM karta";
+        List<Karta> karte = new ArrayList<Karta>();
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) { // result set is iterator.
-                Film film = new Film();
-                film.setId(rs.getInt("id"));
-                film.setIme(rs.getString("ime"));
-                film.setZanr(rs.getString("zanr"));
-                film.setTrajanje(rs.getInt("trajanje"));
-                filmovi.add(film);
+                Karta karta = new Karta();
+                karta.setId(rs.getInt("id"));
+                karta.setIme_filma(rs.getString("ime_filma"));
+                karta.setKupac_id(rs.getInt("kupac_id"));
+                karta.setFilm_id(rs.getInt("film_id"));
+                karta.setCijena(rs.getInt("cijena"));
+                karta.setBroj_sale(rs.getInt("broj_sale"));
+                karte.add(karta);
             }
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace(); // poor error handling
         }
-        return filmovi;
+        return karte;
     }
 }
