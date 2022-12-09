@@ -5,16 +5,16 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Kupac {
-    private int idkupac;
+    private int id;
     private String kupac_ime;
     private Timestamp vrijeme_kupovine;
 
     public int getId() {
-        return idkupac;
+        return id;
     }
 
     public void setId(int id) {
-        this.idkupac = id;
+        this.id = id;
     }
 
     public String getKupac_ime() {
@@ -34,7 +34,7 @@ public class Kupac {
     }
     @Override
     public String toString() {
-        return "Kupac{id=" + idkupac + ", ime=" + kupac_ime + ", vrijeme kupovine=" + vrijeme_kupovine + "}" ;
+        return "Kupac{id=" + id + ", ime=" + kupac_ime + ", vrijeme kupovine=" + vrijeme_kupovine + "}" ;
     }
 
     @Override
@@ -42,6 +42,6 @@ public class Kupac {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Kupac kupac = (Kupac) o;
-        return idkupac == kupac.idkupac;
+        return id == kupac.id;
     }
 }

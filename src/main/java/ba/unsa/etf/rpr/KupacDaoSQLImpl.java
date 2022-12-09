@@ -16,14 +16,14 @@ public class KupacDaoSQLImpl implements KupacDao{
     }
     @Override
     public Kupac getById(int id) {
-        String query = "SELECT * FROM kupac WHERE idkupac = ?";
+        String query = "SELECT * FROM kupac WHERE id = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 Kupac kupac = new Kupac();
-                kupac.setId(rs.getInt("idkupac"));
+                kupac.setId(rs.getInt("id"));
                 kupac.setKupac_ime(rs.getString("kupac_ime"));
                 kupac.setVrijeme_kupovine(rs.getTimestamp("vrijeme_kupovine"));
                 rs.close();
@@ -57,7 +57,7 @@ public class KupacDaoSQLImpl implements KupacDao{
 
     @Override
     public Kupac update(Kupac item) {
-        String insert = "UPDATE kupac SET kupac_ime = ?, vrijeme_kupovine = ? WHERE idkupac = ?";
+        String insert = "UPDATE kupac SET kupac_ime = ?, vrijeme_kupovine = ? WHERE id = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getKupac_ime());
@@ -73,7 +73,7 @@ public class KupacDaoSQLImpl implements KupacDao{
 
     @Override
     public void delete(int id) {
-        String insert = "DELETE FROM kupac WHERE idkupac = ?";
+        String insert = "DELETE FROM kupac WHERE id = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, id);
@@ -92,7 +92,7 @@ public class KupacDaoSQLImpl implements KupacDao{
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) { // result set is iterator.
                 Kupac kupac = new Kupac();
-                kupac.setId(rs.getInt("idkupac"));
+                kupac.setId(rs.getInt("id"));
                 kupac.setKupac_ime(rs.getString("kupac_ime"));
                 kupac.setVrijeme_kupovine(rs.getTimestamp("vrijeme_kupovine"));
                 kupci.add(kupac);
