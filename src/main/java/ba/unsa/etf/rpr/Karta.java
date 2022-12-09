@@ -2,7 +2,6 @@ package ba.unsa.etf.rpr;
 
 public class Karta {
     private int id;
-    private String ime_filma;
     private int kupac_id;
     private int film_id;
     private int cijena;
@@ -14,14 +13,6 @@ public class Karta {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getIme_filma() {
-        return ime_filma;
-    }
-
-    public void setIme_filma(String ime_filma) {
-        this.ime_filma = ime_filma;
     }
 
     public int getKupac_id() {
@@ -58,7 +49,7 @@ public class Karta {
 
     @Override
     public String toString() {
-        return "Karta{id=" + id + ", ime filma='" + ime_filma + "\', id kupca=" + kupac_id + ", id filma=" + film_id + ", cijena=" + cijena + ", broj sale=" + broj_sale + "}" ;
+        return "Karta{id=" + id + ", id kupca=" + kupac_id + ", id filma=" + film_id + ", cijena=" + cijena + ", broj sale=" + broj_sale + "}" ;
     }
 
     @Override

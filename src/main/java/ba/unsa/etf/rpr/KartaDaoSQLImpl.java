@@ -24,7 +24,6 @@ public class KartaDaoSQLImpl implements KartaDao{
             if (rs.next()) {
                 Karta karta = new Karta();
                 karta.setId(rs.getInt("id"));
-                karta.setIme_filma(rs.getString("ime_filma"));
                 karta.setKupac_id(rs.getInt("kupac_id"));
                 karta.setFilm_id(rs.getInt("film_id"));
                 karta.setCijena(rs.getInt("cijena"));
@@ -42,10 +41,13 @@ public class KartaDaoSQLImpl implements KartaDao{
 
     @Override
     public Karta add(Karta item) {
-        String insert = "INSERT INTO karta(ime_filma) VALUES(?)";
+        String insert = "INSERT INTO karta(kupac_id, film_id, cijena, broj_sale) VALUES(?,?,?,?)";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, item.getIme_filma());
+            stmt.setInt(1, item.getKupac_id());
+            stmt.setInt(2, item.getFilm_id());
+            stmt.setInt(3, item.getCijena());
+            stmt.setInt(4, item.getBroj_sale());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next(); // we know that there is one key
@@ -59,11 +61,14 @@ public class KartaDaoSQLImpl implements KartaDao{
 
     @Override
     public Karta update(Karta item) {
-        String insert = "UPDATE karta SET ime_filma = ? WHERE id = ?";
+        String insert = "UPDATE karta SET kupac_id = ?, film_id = ?, cijena = ?, broj_sale = ? WHERE id = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1, item.getIme_filma());
-            stmt.setObject(2, item.getId());
+            stmt.setObject(1, item.getKupac_id());
+            stmt.setObject(2, item.getFilm_id());
+            stmt.setObject(3, item.getCijena());
+            stmt.setObject(4, item.getBroj_sale());
+            stmt.setObject(5, item.getId());
             stmt.executeUpdate();
             return item;
         } catch (SQLException e) {
@@ -94,7 +99,6 @@ public class KartaDaoSQLImpl implements KartaDao{
             while (rs.next()) { // result set is iterator.
                 Karta karta = new Karta();
                 karta.setId(rs.getInt("id"));
-                karta.setIme_filma(rs.getString("ime_filma"));
                 karta.setKupac_id(rs.getInt("kupac_id"));
                 karta.setFilm_id(rs.getInt("film_id"));
                 karta.setCijena(rs.getInt("cijena"));
