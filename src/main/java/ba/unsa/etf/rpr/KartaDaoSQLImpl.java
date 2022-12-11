@@ -1,15 +1,32 @@
 package ba.unsa.etf.rpr;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class KartaDaoSQLImpl implements KartaDao{
     private Connection connection;
 
     public KartaDaoSQLImpl() {
+        String server = new String();
+        String user = new String();
+        String pass = new String();
         try {
-            this.connection = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7583502", "sql7583502", "ez7bJNj2sl");
+            File f = new File("/Users/khali/Desktop/sqluserpass.txt");
+            Scanner sc = new Scanner(f);
+            server = sc.nextLine();
+            user = sc.nextLine();
+            pass = sc.nextLine();
+            sc.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Greska pri otvaranju file-a!");
+            e.printStackTrace();
+        }
+        try {
+            this.connection = DriverManager.getConnection(server, user, pass);
         } catch (Exception e) {
             e.printStackTrace();
         }
