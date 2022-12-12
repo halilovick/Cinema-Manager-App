@@ -1,7 +1,7 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.dao;
 
-import javax.swing.*;
-import javax.xml.transform.Result;
+import ba.unsa.etf.rpr.domain.Film;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.*;
