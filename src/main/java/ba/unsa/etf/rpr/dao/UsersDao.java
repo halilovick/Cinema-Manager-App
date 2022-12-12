@@ -7,4 +7,5 @@ import java.sql.SQLException;
 public interface UsersDao extends Dao<User>{
     Boolean loginCheck(String username, String password) throws SQLException;
     int getLoggedInId(String username, String password);
+    int getLoggedInAdmin(String username, String password);
 }

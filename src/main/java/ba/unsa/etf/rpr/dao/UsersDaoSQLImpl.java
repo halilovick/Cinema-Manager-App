@@ -174,4 +174,18 @@ public class UsersDaoSQLImpl implements UsersDao {
         }
         return 0;
     }
+    @Override
+    public int getLoggedInAdmin(String username, String password) {
+        String query = "SELECT id, user, password, admin FROM users WHERE user = ? AND password = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) return rs.getInt("admin");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }
