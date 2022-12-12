@@ -175,4 +175,21 @@ public class FilmDaoSQLImpl implements FilmDao {
         }
         return filmovi;
     }
+
+    @Override
+    public List<String> getAllNames() {
+        String query = "SELECT * FROM film";
+        List<String> filmovi = new ArrayList<String>();
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) { // result set is iterator.
+                filmovi.add(rs.getString("ime"));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // poor error handling
+        }
+        return filmovi;
+    }
 }
