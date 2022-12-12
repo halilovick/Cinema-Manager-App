@@ -1,9 +1,9 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.domain;
 
 public class Karta {
     private int id;
-    private int kupac_id;
-    private int film_id;
+    private User user;
+    private Film film;
     private int cijena;
     private int broj_sale;
 
@@ -15,20 +15,20 @@ public class Karta {
         this.id = id;
     }
 
-    public int getKupac_id() {
-        return kupac_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setKupac_id(int kupac_id) {
-        this.kupac_id = kupac_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getFilm_id() {
-        return film_id;
+    public Film getFilm() {
+        return film;
     }
 
-    public void setFilm_id(int film_id) {
-        this.film_id = film_id;
+    public void setFilm(Film film) {
+        this.film = film;
     }
 
     public int getCijena() {
@@ -49,7 +49,7 @@ public class Karta {
 
     @Override
     public String toString() {
-        return "Karta{id=" + id + ", id kupca=" + kupac_id + ", id filma=" + film_id + ", cijena=" + cijena + ", broj sale=" + broj_sale + "}" ;
+        return "Karta{id=" + id + ", id kupca=" + user.getId() + ", id filma=" + film.getId() + ", cijena=" + cijena + ", broj sale=" + broj_sale + "}";
     }
 
     @Override

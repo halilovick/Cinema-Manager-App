@@ -1,4 +1,6 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.dao;
+
+import ba.unsa.etf.rpr.domain.Karta;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class KartaDaoSQLImpl implements KartaDao{
+public class KartaDaoSQLImpl implements KartaDao {
     private Connection connection;
 
     public KartaDaoSQLImpl() {
@@ -31,6 +33,7 @@ public class KartaDaoSQLImpl implements KartaDao{
             e.printStackTrace();
         }
     }
+
     @Override
     public Karta getById(int id) {
         String query = "SELECT * FROM karta WHERE id = ?";
@@ -39,10 +42,12 @@ public class KartaDaoSQLImpl implements KartaDao{
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+                UsersDaoSQLImpl k = new UsersDaoSQLImpl();
+                FilmDaoSQLImpl f = new FilmDaoSQLImpl();
                 Karta karta = new Karta();
                 karta.setId(rs.getInt("id"));
-                karta.setKupac_id(rs.getInt("kupac_id"));
-                karta.setFilm_id(rs.getInt("film_id"));
+                karta.setUser(k.getById(rs.getInt("user_id")));
+                karta.setFilm(f.getById(rs.getInt("film_id")));
                 karta.setCijena(rs.getInt("cijena"));
                 karta.setBroj_sale(rs.getInt("broj_sale"));
                 rs.close();
@@ -58,11 +63,11 @@ public class KartaDaoSQLImpl implements KartaDao{
 
     @Override
     public Karta add(Karta item) {
-        String insert = "INSERT INTO karta(kupac_id, film_id, cijena, broj_sale) VALUES(?,?,?,?)";
+        String insert = "INSERT INTO karta(user_id, film_id, cijena, broj_sale) VALUES(?,?,?,?)";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, item.getKupac_id());
-            stmt.setInt(2, item.getFilm_id());
+            stmt.setInt(1, item.getUser().getId());
+            stmt.setInt(2, item.getFilm().getId());
             stmt.setInt(3, item.getCijena());
             stmt.setInt(4, item.getBroj_sale());
             stmt.executeUpdate();
@@ -78,11 +83,11 @@ public class KartaDaoSQLImpl implements KartaDao{
 
     @Override
     public Karta update(Karta item) {
-        String insert = "UPDATE karta SET kupac_id = ?, film_id = ?, cijena = ?, broj_sale = ? WHERE id = ?";
+        String insert = "UPDATE karta SET user_id = ?, film_id = ?, cijena = ?, broj_sale = ? WHERE id = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1, item.getKupac_id());
-            stmt.setObject(2, item.getFilm_id());
+            stmt.setObject(1, item.getUser().getId());
+            stmt.setObject(2, item.getFilm().getId());
             stmt.setObject(3, item.getCijena());
             stmt.setObject(4, item.getBroj_sale());
             stmt.setObject(5, item.getId());
@@ -114,10 +119,12 @@ public class KartaDaoSQLImpl implements KartaDao{
             PreparedStatement stmt = this.connection.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) { // result set is iterator.
+                UsersDaoSQLImpl k = new UsersDaoSQLImpl();
+                FilmDaoSQLImpl f = new FilmDaoSQLImpl();
                 Karta karta = new Karta();
                 karta.setId(rs.getInt("id"));
-                karta.setKupac_id(rs.getInt("kupac_id"));
-                karta.setFilm_id(rs.getInt("film_id"));
+                karta.setUser(k.getById(rs.getInt("user_id")));
+                karta.setFilm(f.getById(rs.getInt("film_id")));
                 karta.setCijena(rs.getInt("cijena"));
                 karta.setBroj_sale(rs.getInt("broj_sale"));
                 karte.add(karta);
