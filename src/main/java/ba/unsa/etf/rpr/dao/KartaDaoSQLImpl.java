@@ -48,8 +48,6 @@ public class KartaDaoSQLImpl implements KartaDao {
                 karta.setId(rs.getInt("id"));
                 karta.setUser(k.getById(rs.getInt("user_id")));
                 karta.setFilm(f.getById(rs.getInt("film_id")));
-                karta.setCijena(rs.getInt("cijena"));
-                karta.setBroj_sale(rs.getInt("broj_sale"));
                 rs.close();
                 return karta;
             } else {
@@ -63,13 +61,11 @@ public class KartaDaoSQLImpl implements KartaDao {
 
     @Override
     public Karta add(Karta item) {
-        String insert = "INSERT INTO karta(user_id, film_id, cijena, broj_sale) VALUES(?,?,?,?)";
+        String insert = "INSERT INTO karta(user_id, film_id) VALUES(?,?)";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, item.getUser().getId());
             stmt.setInt(2, item.getFilm().getId());
-            stmt.setInt(3, item.getCijena());
-            stmt.setInt(4, item.getBroj_sale());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next(); // we know that there is one key
@@ -83,14 +79,12 @@ public class KartaDaoSQLImpl implements KartaDao {
 
     @Override
     public Karta update(Karta item) {
-        String insert = "UPDATE karta SET user_id = ?, film_id = ?, cijena = ?, broj_sale = ? WHERE id = ?";
+        String insert = "UPDATE karta SET user_id = ?, film_id = ? WHERE id = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getUser().getId());
             stmt.setObject(2, item.getFilm().getId());
-            stmt.setObject(3, item.getCijena());
-            stmt.setObject(4, item.getBroj_sale());
-            stmt.setObject(5, item.getId());
+            stmt.setObject(3, item.getId());
             stmt.executeUpdate();
             return item;
         } catch (SQLException e) {
@@ -125,8 +119,6 @@ public class KartaDaoSQLImpl implements KartaDao {
                 karta.setId(rs.getInt("id"));
                 karta.setUser(k.getById(rs.getInt("user_id")));
                 karta.setFilm(f.getById(rs.getInt("film_id")));
-                karta.setCijena(rs.getInt("cijena"));
-                karta.setBroj_sale(rs.getInt("broj_sale"));
                 karte.add(karta);
             }
             rs.close();
@@ -134,5 +126,16 @@ public class KartaDaoSQLImpl implements KartaDao {
             e.printStackTrace(); // poor error handling
         }
         return karte;
+    }
+
+    @Override
+    public void resetIncrement() {
+        String query = "ALTER TABLE karta AUTO_INCREMENT = 1";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); // poor error handling
+        }
     }
 }

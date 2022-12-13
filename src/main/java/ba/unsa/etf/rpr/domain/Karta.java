@@ -4,8 +4,6 @@ public class Karta {
     private int id;
     private User user;
     private Film film;
-    private int cijena;
-    private int broj_sale;
 
     public int getId() {
         return id;
@@ -31,25 +29,9 @@ public class Karta {
         this.film = film;
     }
 
-    public int getCijena() {
-        return cijena;
-    }
-
-    public void setCijena(int cijena) {
-        this.cijena = cijena;
-    }
-
-    public int getBroj_sale() {
-        return broj_sale;
-    }
-
-    public void setBroj_sale(int broj_sale) {
-        this.broj_sale = broj_sale;
-    }
-
     @Override
     public String toString() {
-        return "Karta{id=" + id + ", id kupca=" + user.getId() + ", id filma=" + film.getId() + ", cijena=" + cijena + ", broj sale=" + broj_sale + "}";
+        return "Karta{id=" + id + ", id kupca=" + user.getId() + ", id filma=" + film.getId() + "}";
     }
 
     @Override
