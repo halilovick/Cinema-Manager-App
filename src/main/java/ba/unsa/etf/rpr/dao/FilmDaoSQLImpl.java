@@ -47,6 +47,8 @@ public class FilmDaoSQLImpl implements FilmDao {
                 film.setIme(rs.getString("ime"));
                 film.setZanr(rs.getString("zanr"));
                 film.setTrajanje(rs.getInt("trajanje"));
+                film.setCijena(rs.getInt("cijena"));
+                film.setBroj_sale(rs.getInt("broj_sale"));
                 rs.close();
                 return film;
             } else {
@@ -60,12 +62,14 @@ public class FilmDaoSQLImpl implements FilmDao {
 
     @Override
     public Film add(Film item) {
-        String insert = "INSERT INTO film(ime, zanr, trajanje) VALUES(?, ?, ?)";
+        String insert = "INSERT INTO film(ime, zanr, trajanje, cijena, broj_sale) VALUES(?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, item.getIme());
             stmt.setObject(2, item.getZanr());
             stmt.setObject(3, item.getTrajanje());
+            stmt.setObject(4, item.getCijena());
+            stmt.setObject(5, item.getBroj_sale());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next(); // we know that there is one key
@@ -79,13 +83,15 @@ public class FilmDaoSQLImpl implements FilmDao {
 
     @Override
     public Film update(Film item) {
-        String insert = "UPDATE film SET ime = ?, zanr = ?, trajanje = ? WHERE id = ?";
+        String insert = "UPDATE film SET ime = ?, zanr = ?, trajanje = ?, cijena = ?, broj_sale = ? WHERE id = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             stmt.setObject(1, item.getIme());
             stmt.setObject(2, item.getZanr());
             stmt.setObject(3, item.getTrajanje());
-            stmt.setObject(4, item.getId());
+            stmt.setObject(4, item.getCijena());
+            stmt.setObject(5, item.getBroj_sale());
+            stmt.setObject(6, item.getId());
             stmt.executeUpdate();
             return item;
         } catch (SQLException e) {
@@ -119,6 +125,8 @@ public class FilmDaoSQLImpl implements FilmDao {
                 film.setIme(rs.getString("ime"));
                 film.setZanr(rs.getString("zanr"));
                 film.setTrajanje(rs.getInt("trajanje"));
+                film.setCijena(rs.getInt("cijena"));
+                film.setBroj_sale(rs.getInt("broj_sale"));
                 filmovi.add(film);
             }
             rs.close();
@@ -126,6 +134,17 @@ public class FilmDaoSQLImpl implements FilmDao {
             e.printStackTrace(); // poor error handling
         }
         return filmovi;
+    }
+
+    @Override
+    public void resetIncrement() {
+        String query = "ALTER TABLE film AUTO_INCREMENT = 1";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); // poor error handling
+        }
     }
 
     @Override
@@ -144,6 +163,8 @@ public class FilmDaoSQLImpl implements FilmDao {
                 film.setIme(rs.getString("ime"));
                 film.setZanr(rs.getString("zanr"));
                 film.setTrajanje(rs.getInt("trajanje"));
+                film.setCijena(rs.getInt("cijena"));
+                film.setBroj_sale(rs.getInt("broj_sale"));
                 filmovi.add(film);
             }
             rs.close();
@@ -167,6 +188,8 @@ public class FilmDaoSQLImpl implements FilmDao {
                 film.setIme(rs.getString("ime"));
                 film.setZanr(rs.getString("zanr"));
                 film.setTrajanje(rs.getInt("trajanje"));
+                film.setCijena(rs.getInt("cijena"));
+                film.setBroj_sale(rs.getInt("broj_sale"));
                 filmovi.add(film);
             }
             rs.close();
@@ -191,5 +214,31 @@ public class FilmDaoSQLImpl implements FilmDao {
             e.printStackTrace(); // poor error handling
         }
         return filmovi;
+    }
+
+    @Override
+    public Film getByIme(String ime) {
+        String query = "SELECT * FROM film WHERE ime = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1, ime);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Film film = new Film();
+                film.setId(rs.getInt("id"));
+                film.setIme(rs.getString("ime"));
+                film.setZanr(rs.getString("zanr"));
+                film.setTrajanje(rs.getInt("trajanje"));
+                film.setCijena(rs.getInt("cijena"));
+                film.setBroj_sale(rs.getInt("broj_sale"));
+                rs.close();
+                return film;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

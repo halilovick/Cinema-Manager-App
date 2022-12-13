@@ -5,6 +5,24 @@ public class Film {
     private String ime;
     private String zanr;
     private int trajanje;
+    private int cijena;
+    private int broj_sale;
+
+    public int getCijena() {
+        return cijena;
+    }
+
+    public void setCijena(int cijena) {
+        this.cijena = cijena;
+    }
+
+    public int getBroj_sale() {
+        return broj_sale;
+    }
+
+    public void setBroj_sale(int broj_sale) {
+        this.broj_sale = broj_sale;
+    }
 
     public int getId() {
         return id;

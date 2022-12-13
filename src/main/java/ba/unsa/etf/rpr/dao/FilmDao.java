@@ -8,4 +8,5 @@ public interface FilmDao extends Dao<Film>{
     List<Film> searchByTrajanje(int a, int b);
     List<Film> searchByZanr(String zanr);
     List<String> getAllNames();
+    Film getByIme(String ime);
 }
