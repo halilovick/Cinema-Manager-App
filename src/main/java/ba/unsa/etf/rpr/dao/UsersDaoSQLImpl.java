@@ -146,6 +146,17 @@ public class UsersDaoSQLImpl implements UsersDao {
     }
 
     @Override
+    public void resetIncrement() {
+        String query = "ALTER TABLE users AUTO_INCREMENT = 1";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); // poor error handling
+        }
+    }
+
+    @Override
     public Boolean loginCheck(String username, String password) throws SQLException {
         String query = "SELECT user, password FROM users WHERE user = ? AND password = ?";
         try {

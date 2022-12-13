@@ -41,4 +41,5 @@ public interface Dao<T> {
      * @return List of entities from database
      */
     List<T> getAll();
+    void resetIncrement();
 }
