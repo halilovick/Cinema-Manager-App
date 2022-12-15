@@ -137,4 +137,17 @@ public class KartaDaoSQLImpl implements KartaDao {
             e.printStackTrace(); // poor error handling
         }
     }
+
+    @Override
+    public void deleteAll() {
+        String query = "DELETE FROM karta";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.executeUpdate();
+            KartaDao k = new KartaDaoSQLImpl();
+            k.resetIncrement();
+        } catch (SQLException e) {
+            e.printStackTrace(); // poor error handling
+        }
+    }
 }
