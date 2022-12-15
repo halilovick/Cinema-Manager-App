@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.Controllers;
 
+import ba.unsa.etf.rpr.App;
 import ba.unsa.etf.rpr.dao.*;
 import ba.unsa.etf.rpr.domain.Film;
 import ba.unsa.etf.rpr.domain.Karta;
@@ -9,30 +10,36 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
 import static ba.unsa.etf.rpr.Controllers.LoginController.user;
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class UserProdajaKarataController {
     public ChoiceBox<Integer> brojKarataChoiceBox;
     public Label ukupnaCijenaLabel;
-    public FilmDao f = new FilmDaoSQLImpl();
-    public List<String> listaFilmova = f.getAllNames();
-    public ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
-    public ObservableList<Integer> brKarata = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    private FilmDao f = new FilmDaoSQLImpl();
+    private List<String> listaFilmova = f.getAllNames();
+    private ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
+    private ObservableList<Integer> brKarata = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     public ChoiceBox<String> filmChoiceBox;
-    public String imeOdabranogFilma = new String();
-    public int brojKarata = 0;
+    private String imeOdabranogFilma = new String();
+    private int brojKarata = 0;
     public DatePicker odabirDatuma;
-    public LocalDate datum;
+    private LocalDate datum;
     public Button kupiButton;
-    public Film film = new Film();
+    private Film film = new Film();
+    private int ukupnaCijena;
 
     @FXML
     private void initialize() {
@@ -48,7 +55,8 @@ public class UserProdajaKarataController {
                         FilmDao ft = new FilmDaoSQLImpl();
                         //film = ft.getByIme(odabraniFilm);
                         brojKarata = brKarata.get(newValue.intValue());
-                        ukupnaCijenaLabel.setText("Ukupna cijena: " + brojKarata*ft.getByIme(imeOdabranogFilma).getCijena());
+                        ukupnaCijena = brojKarata*ft.getByIme(imeOdabranogFilma).getCijena();
+                        ukupnaCijenaLabel.setText("Ukupna cijena: " + ukupnaCijena);
                     }
                 });
             }
@@ -60,7 +68,7 @@ public class UserProdajaKarataController {
         //System.out.println(datum);
     }
 
-    public void kupiButtonClick(ActionEvent actionEvent) {
+    public void kupiButtonClick(ActionEvent actionEvent) throws IOException {
         int br = brojKarata;
         KartaDao kdao = new KartaDaoSQLImpl();
         UsersDao u = new UsersDaoSQLImpl();
@@ -72,5 +80,15 @@ public class UserProdajaKarataController {
             kdao.add(k);
             br--;
         }
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/KupljenaKarta.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        KupljenaKartaController kkc = fxmlLoader.getController();
+        kkc.imeFilma.setText("Ime filma: " + imeOdabranogFilma);
+        kkc.datumFilma.setText("Datum: " + datum);
+        kkc.cijenaKarte.setText("Cijena: " + ukupnaCijena + "KM");
+        stage.setTitle("Karta kupljena!");
+        stage.setScene(scene);
+        stage.show();
     }
 }
