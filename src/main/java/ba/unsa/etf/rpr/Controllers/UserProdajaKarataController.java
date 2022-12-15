@@ -65,7 +65,6 @@ public class UserProdajaKarataController {
 
     public void odabirDatumaClick(ActionEvent actionEvent) {
         datum = odabirDatuma.getValue();
-        //System.out.println(datum);
     }
 
     public void kupiButtonClick(ActionEvent actionEvent) throws IOException {

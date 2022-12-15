@@ -1,0 +1,44 @@
+
+o
+java:S2293v"YReplace the type specification in this constructor call with the diamond operator ("<>").(ğ¿óÚ
+p
+java:S2293š"YReplace the type specification in this constructor call with the diamond operator ("<>").(ğ¿óÚ
+p
+java:S2293´"YReplace the type specification in this constructor call with the diamond operator ("<>").(ğ¿óÚ
+u
+java:S2293Í"YReplace the type specification in this constructor call with the diamond operator ("<>").(‰Æï¡úÿÿÿÿ
+`
+java:S11923"JDefine a constant instead of duplicating this literal "broj_sale" 5 times.(×ïÏ
+_
+java:S11921"IDefine a constant instead of duplicating this literal "trajanje" 5 times.(ƒ¾Õ¼
+b
+java:S11922"GDefine a constant instead of duplicating this literal "cijena" 5 times.(„€öÜûÿÿÿÿ
+j
+java:S2095)"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¦ä×Íıÿÿÿÿ
+e
+java:S2095X"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(œñî«
+k
+java:S2095œ"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¦ä×Íıÿÿÿÿ
+e
+java:S2095k"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(œñî«
+r
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¦ä×Íıÿÿÿÿ8•‰äĞ0
+e
+java:S2095C"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(œñî«
+r
+java:S2095Ï"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¦ä×Íıÿÿÿÿ8·ŠÀãĞ0
+k
+java:S2095ß"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¦ä×Íıÿÿÿÿ
+j
+java:S2095x"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¦ä×Íıÿÿÿÿ
+k
+java:S2095¶"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¦ä×Íıÿÿÿÿ
+;
+java:S2129" Remove this "String" constructor(ãÄ„…ıÿÿÿÿ
+;
+java:S2129" Remove this "String" constructor(óıˆ‹üÿÿÿÿ
+;
+java:S2129" Remove this "String" constructor(ÓîÎûÿÿÿÿ
+W
+java:S1075"ARefactor your code to get this URI from a customizable parameter.(¨™›
+S	java:S106"9Replace this use of System.out or System.err by a logger.(¨ŸÁàıÿÿÿÿ

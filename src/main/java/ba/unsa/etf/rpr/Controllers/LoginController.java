@@ -25,7 +25,6 @@ public class LoginController {
     public void prijavaButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
         UsersDao u = new UsersDaoSQLImpl();
         int loginId = u.getLoggedInId(fieldUsername.getText(), fieldPassword.getText());
-        //System.out.println(loginId);
         if(loginId != 0){
             user = u.getById(loginId);
             if(user.isAdmin()){

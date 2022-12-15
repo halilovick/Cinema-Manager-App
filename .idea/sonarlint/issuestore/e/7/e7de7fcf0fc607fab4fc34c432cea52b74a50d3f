@@ -1,0 +1,7 @@
+
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×˜Í¼8¼€èâĞ0
+p	java:S116	"TRename this field "broj_sale" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–¹®8’ÈçâĞ0
+k
+java:S1206A"PThis class overrides "equals()" and should therefore also override "hashCode()".(İ¢êÍıÿÿÿÿ
+o	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(º¤ÌÆûÿÿÿÿ8Æ€èâĞ0
+j	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×˜Í¼8Ç€èâĞ0

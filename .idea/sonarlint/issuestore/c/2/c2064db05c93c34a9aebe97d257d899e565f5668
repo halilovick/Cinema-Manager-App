@@ -1,0 +1,13 @@
+
+m	java:S117D"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â§„Ë8ŸÞö¿Ð0
+5
+java:S1700"Rename field "user"(‡ÏÇ³øÿÿÿÿ8Šíó¿Ð0
+u	java:S116"YRename this field "datum_rodjenja" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÛŒó™8¢îõ¿Ð0
+k
+java:S1206b"PThis class overrides "equals()" and should therefore also override "hashCode()".(Ý¢êÍýÿÿÿÿ
+y
+java:S4144P"WUpdate this method so that its implementation is not identical to "isAdmin" on line 72.(í×µ°ýÿÿÿÿ8©ý‰ÀÐ0
+i	java:S100@"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹éÞ.8¯Þö¿Ð0
+j	java:S100D"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â§„Ë8¯Þö¿Ð0
+Y
+java:S1117e"7Rename "user" which hides the field declared at line 7.(”Ä¼Ûûÿÿÿÿ8¶Âù¿Ð0
