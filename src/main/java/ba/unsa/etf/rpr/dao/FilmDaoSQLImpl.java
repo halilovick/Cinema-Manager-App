@@ -2,12 +2,13 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Film;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Properties;
 
 public class FilmDaoSQLImpl implements FilmDao {
     private Connection connection;
@@ -16,16 +17,14 @@ public class FilmDaoSQLImpl implements FilmDao {
         String server = new String();
         String user = new String();
         String pass = new String();
-        try {
-            File f = new File("/Users/khali/Desktop/sqluserpass.txt");
-            Scanner sc = new Scanner(f);
-            server = sc.nextLine();
-            user = sc.nextLine();
-            pass = sc.nextLine();
-            sc.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Greska pri otvaranju file-a!");
-            e.printStackTrace();
+        try (InputStream input = new FileInputStream("config.properties")) {
+            Properties prop = new Properties();
+            prop.load(input);
+            server = prop.getProperty("db.url");
+            user = prop.getProperty("db.user");
+            pass = prop.getProperty("db.password");
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         try {
             this.connection = DriverManager.getConnection(server, user, pass);
