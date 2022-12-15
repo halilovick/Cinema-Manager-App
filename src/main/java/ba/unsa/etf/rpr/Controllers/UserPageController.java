@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -13,6 +14,8 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class UserPageController {
     public Label dobrodosaoLabela;
+    public Button promjenaPodatakaButton;
+    public Button kupovinaKarataButton;
 
     public void kupovinaKarataButtonClick(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
@@ -20,6 +23,16 @@ public class UserPageController {
         Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
         UserProdajaKarataController upkc = fxmlLoader.getController();
         stage.setTitle("Prodaja");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void promjenaPodatakaButtonClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/PromjenaPodataka.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        PromjenaPodatakaController ppc = fxmlLoader.getController();
+        stage.setTitle("Promjena podataka");
         stage.setScene(scene);
         stage.show();
     }
