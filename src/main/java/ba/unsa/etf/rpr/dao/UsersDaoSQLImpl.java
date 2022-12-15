@@ -48,6 +48,7 @@ public class UsersDaoSQLImpl implements UsersDao {
                 user.setIme(rs.getString("ime"));
                 user.setEmail(rs.getString("email"));
                 user.setGrad(rs.getString("grad"));
+                user.setAdresa(rs.getString("adresa"));
                 user.setDatum_rodjenja(rs.getDate("datum_rodjenja"));
                 user.setAdmin(rs.getBoolean("admin"));
                 rs.close();
