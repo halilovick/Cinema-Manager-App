@@ -1,0 +1,6 @@
+
+Q	java:S125"<This block of commented-out lines of code should be removed.(êİä…
+„
+java:S1130"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(Á¯¦ş
+]	java:S125"<This block of commented-out lines of code should be removed.(¨™‡ûÿÿÿÿ8Û…º„Ñ0
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(Ë‹œüÿÿÿÿ8Ü…º„Ñ0

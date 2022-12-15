@@ -1,0 +1,8 @@
+
+p
+java:S1104"TMake imeFilma a static final constant or non-public and provide accessors if needed.(éƒ£C8“é åĞ0
+s
+java:S1104"VMake datumFilma a static final constant or non-public and provide accessors if needed.(ÈºÛ„8 ¡åĞ0
+t
+java:S1104"WMake cijenaKarte a static final constant or non-public and provide accessors if needed.(íóàå8‘¾¡åĞ0
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(â°¦şÿÿÿÿ

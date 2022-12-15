@@ -1,0 +1,44 @@
+
+C
+java:S1604-"(Make this anonymous inner class a lambda(Â…Ø¨ÿÿÿÿÿ
+C
+java:S1604)"(Make this anonymous inner class a lambda(òÎØ®ÿÿÿÿÿ
+u
+java:S1104"_Make brojKarataChoiceBox a static final constant or non-public and provide accessors if needed.(ÂÜµ
+r
+java:S1104"]Make ukupnaCijenaLabel a static final constant or non-public and provide accessors if needed.(—ï´p
+h
+java:S1104"MMake f a static final constant or non-public and provide accessors if needed.(ä¸‹ıÿÿÿÿ
+s
+java:S1104"XMake listaFilmova a static final constant or non-public and provide accessors if needed.(Æíöˆùÿÿÿÿ
+i
+java:S1104"SMake filmovi a static final constant or non-public and provide accessors if needed.(éÄ„ 
+j
+java:S1104"TMake brKarata a static final constant or non-public and provide accessors if needed.(íéŞ‘
+o
+java:S1104"YMake filmChoiceBox a static final constant or non-public and provide accessors if needed.(¬Ë†ƒ
+x
+java:S1104"]Make imeOdabranogFilma a static final constant or non-public and provide accessors if needed.(“ÇäĞıÿÿÿÿ
+l
+java:S1104"VMake brojKarata a static final constant or non-public and provide accessors if needed.(¼¹—¤
+s
+java:S1104 "XMake odabirDatuma a static final constant or non-public and provide accessors if needed.(¶˜Õ…ıÿÿÿÿ
+g
+java:S1104!"QMake datum a static final constant or non-public and provide accessors if needed.(”ËÖ¦
+q
+java:S1104""VMake kupiButton a static final constant or non-public and provide accessors if needed.(öìéŸúÿÿÿÿ
+f
+java:S1104#"PMake film a static final constant or non-public and provide accessors if needed.(±ç¿
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(â°¦şÿÿÿÿ
+;
+java:S2129" Remove this "String" constructor(“ÇäĞıÿÿÿÿ
+V	java:S1251"<This block of commented-out lines of code should be removed.(ì†©­ıÿÿÿÿ
+H
+java:S1172:"2Remove this unused method parameter "actionEvent".(ğõËÃ
+V	java:S125<"<This block of commented-out lines of code should be removed.(ô‘Ìüÿÿÿÿ
+W
+java:S1854B"5Remove this useless assignment to local variable "u".(Ëş¾êûÿÿÿÿ8ŠÒ æĞ0
+H
+java:S1172?"2Remove this unused method parameter "actionEvent".(˜ã˜
+H
+java:S1481B"&Remove this unused "u" local variable.(Ëş¾êûÿÿÿÿ8ŠÒ æĞ0
