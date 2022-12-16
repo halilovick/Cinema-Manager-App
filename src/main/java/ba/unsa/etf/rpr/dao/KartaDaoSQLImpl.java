@@ -67,8 +67,8 @@ public class KartaDaoSQLImpl implements KartaDao {
             stmt.setInt(2, item.getFilm().getId());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
-            rs.next(); // we know that there is one key
-            item.setId(rs.getInt(1)); //set id to return it back
+            rs.next();
+            item.setId(rs.getInt(1));
             return item;
         } catch (SQLException e) {
             e.printStackTrace();

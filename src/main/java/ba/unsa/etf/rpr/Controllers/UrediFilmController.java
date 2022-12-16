@@ -45,6 +45,14 @@ public class UrediFilmController {
         });
     }
     public void promjeniButtonClick(ActionEvent actionEvent) {
+        if(idFilm == 0){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Odaberite film!");
+            alert.setContentText("Niti jedan film nije odabran.");
+            alert.showAndWait();
+            return;
+        }
         Film f = new Film();
         FilmDao fd = new FilmDaoSQLImpl();
         f.setId(idFilm);

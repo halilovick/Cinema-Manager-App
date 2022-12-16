@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class BrisanjeFilmaController {
     public ChoiceBox brisanjeChoiceBox;
-    public Button obrisiButton;
+    public Button obrisiButtonBrisanjeFilma;
     private FilmDao f = new FilmDaoSQLImpl();
     private ObservableList<String> filmovi = FXCollections.observableArrayList(f.getAllNames());
     private String imeOdabranogFilma = new String();
@@ -34,6 +34,14 @@ public class BrisanjeFilmaController {
     }
 
     public void obrisiButtonClick(ActionEvent actionEvent) {
+        if(imeOdabranogFilma.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Odaberite film!");
+            alert.setContentText("Niti jedan film nije odabran.");
+            alert.showAndWait();
+            return;
+        }
         FilmDao fd = new FilmDaoSQLImpl();
         Film film = fd.getByIme(imeOdabranogFilma);
         fd.delete(film.getId());
