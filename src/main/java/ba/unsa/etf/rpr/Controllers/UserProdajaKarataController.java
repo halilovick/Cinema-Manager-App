@@ -12,10 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -68,6 +66,21 @@ public class UserProdajaKarataController {
     }
 
     public void kupiButtonClick(ActionEvent actionEvent) throws IOException {
+        if(imeOdabranogFilma.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Odaberite film!");
+            alert.setContentText("Niti jedan film nije odabran.");
+            alert.showAndWait();
+            return;
+        } else if(brojKarata == 0){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Odaberite broj karata!");
+            alert.setContentText("Broj karata za film nije odabran.");
+            alert.showAndWait();
+            return;
+        }
         int br = brojKarata;
         KartaDao kdao = new KartaDaoSQLImpl();
         UsersDao u = new UsersDaoSQLImpl();
@@ -86,6 +99,8 @@ public class UserProdajaKarataController {
         kkc.imeFilma.setText("Ime filma: " + imeOdabranogFilma);
         kkc.datumFilma.setText("Datum: " + datum);
         kkc.cijenaKarte.setText("Cijena: " + ukupnaCijena + "KM");
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
         stage.setTitle("Karta kupljena!");
         stage.setScene(scene);
         stage.show();
