@@ -6,7 +6,7 @@
 <?import java.net.URL?>
 <GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.Controllers.LoginController">
     <stylesheets>
-        <URL value="@login.css" />
+        <URL value="@config.css" />
     </stylesheets>
     <columnConstraints>
     <ColumnConstraints hgrow="ALWAYS" />

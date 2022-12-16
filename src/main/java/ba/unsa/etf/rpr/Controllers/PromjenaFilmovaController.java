@@ -26,7 +26,14 @@ public class PromjenaFilmovaController {
         stage.show();
     }
 
-    public void urediFilmButtonClick(ActionEvent actionEvent) {
+    public void urediFilmButtonClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/UrediFilm.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        UrediFilmController ufc = fxmlLoader.getController();
+        stage.setTitle("Uredi film");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void obrisiFilmButtonClick(ActionEvent actionEvent) throws IOException {
