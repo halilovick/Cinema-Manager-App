@@ -27,6 +27,13 @@ public class AdminPageController {
         stage.show();
     }
 
-    public void promjenaFilmovaButtonClick(ActionEvent actionEvent) {
+    public void promjenaFilmovaButtonClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/PromjenaFilmova.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        PromjenaFilmovaController pfc = fxmlLoader.getController();
+        stage.setTitle("Promjena filmova");
+        stage.setScene(scene);
+        stage.show();
     }
 }
