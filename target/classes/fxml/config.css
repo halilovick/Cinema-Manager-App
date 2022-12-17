@@ -2,8 +2,16 @@
     -fx-background-image: url("/fxml/backgrounds/bg1.png");
 }
 
+#LoginScreen{
+    -fx-background-image: url("/fxml/backgrounds/diagonal-motion-lines-white-background_1017-33198.png");
+}
+
 #adminGridPane {
     -fx-background-image: url("/fxml/backgrounds/bg1.png");
+}
+
+#napraviRacunGridPane {
+    -fx-background-image: url("/fxml/backgrounds/bgempty.png");
 }
 
 #kupovinaGridPane {
@@ -11,34 +19,88 @@
 }
 
 #prijavaButton {
-    -fx-background-color: lightskyblue;
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+            #9d4024,
+            #d86e3a,
+            radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+#prijavaButton:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+            #9d4024,
+            #d86e3a,
+            radial-gradient(center 50% 50%, radius 100%, #ea7f4b, #c54e2c);
+}
+#prijavaButton:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+#prijavaButton Text {
+    -fx-fill: white;
+    -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
 }
 
-#promjenaPodatakaGridPane{
+#createAccountButton {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+            #9d4024,
+            #d86e3a,
+            radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+#createAccountButton:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+            #9d4024,
+            #d86e3a,
+            radial-gradient(center 50% 50%, radius 100%, #ea7f4b, #c54e2c);
+}
+#createAccountButton:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+#createAccountButton Text {
+    -fx-fill: white;
+    -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
+}
+
+#promjenaPodatakaGridPane {
     -fx-background-image: url("/fxml/backgrounds/bgempty.png");
 }
 
-#urediFilmPage{
+#urediFilmPage {
     -fx-background-image: url("/fxml/backgrounds/bgempty.png");
 }
 
-#PromjenaFilmovaPage{
+#PromjenaFilmovaPage {
     -fx-background-image: url("/fxml/backgrounds/bgempty.png");
 }
 
-#DodavanjeFilmaScreen{
+#DodavanjeFilmaScreen {
     -fx-background-image: url("/fxml/backgrounds/bgempty.png");
 }
 
-#ObrisiFilmScreen{
+#ObrisiFilmScreen {
     -fx-background-image: url("/fxml/backgrounds/bgempty.png");
 }
 
-#ticketScreen{
+#ticketScreen {
     -fx-background-image: url("/fxml/backgrounds/ticket.png");
 }
 
-#dodajFilmButton{
+#dodajFilmButton {
     -fx-background-color: #090a0c,
     linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
     linear-gradient(#20262b, #191d22),
@@ -53,7 +115,7 @@
     -fx-padding: 10 20 10 20;
 }
 
-#urediFilmButton{
+#urediFilmButton {
     -fx-background-color: #090a0c,
     linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
     linear-gradient(#20262b, #191d22),
@@ -68,7 +130,7 @@
     -fx-padding: 10 20 10 20;
 }
 
-#obrisiFilmButton{
+#obrisiFilmButton {
     -fx-background-color: #090a0c,
     linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
     linear-gradient(#20262b, #191d22),
@@ -83,7 +145,7 @@
     -fx-padding: 10 20 10 20;
 }
 
-#dodajButton{
+#dodajButton {
     -fx-background-color: #090a0c,
     linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
     linear-gradient(#20262b, #191d22),
@@ -98,7 +160,7 @@
     -fx-padding: 10 20 10 20;
 }
 
-#promjeniButton{
+#promjeniButton {
     -fx-background-color: #090a0c,
     linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
     linear-gradient(#20262b, #191d22),
@@ -113,7 +175,7 @@
     -fx-padding: 10 20 10 20;
 }
 
-#promjeniPodatkeButton{
+#napraviAccountButton {
     -fx-background-color: #090a0c,
     linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
     linear-gradient(#20262b, #191d22),
@@ -128,7 +190,7 @@
     -fx-padding: 10 20 10 20;
 }
 
-#zatvoriButton{
+#promjeniPodatkeButton {
     -fx-background-color: #090a0c,
     linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
     linear-gradient(#20262b, #191d22),
@@ -143,7 +205,22 @@
     -fx-padding: 10 20 10 20;
 }
 
-#kupiButton{
+#zatvoriButton {
+    -fx-background-color: #090a0c,
+    linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+    linear-gradient(#20262b, #191d22),
+    radial-gradient(center 50% 0%, radius 100%, rgba(114, 131, 148, 0.9), rgba(255, 255, 255, 0));
+    -fx-background-radius: 5, 4, 3, 5;
+    -fx-background-insets: 0, 1, 2, 0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 12px;
+    -fx-padding: 10 20 10 20;
+}
+
+#kupiButton {
     -fx-background-color: #090a0c,
     linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
     linear-gradient(#20262b, #191d22),
@@ -218,7 +295,7 @@
     -fx-padding: 10 20 10 20;
 }
 
-#obrisiButtonBrisanjeFilma{
+#obrisiButtonBrisanjeFilma {
     -fx-background-color: #090a0c,
     linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
     linear-gradient(#20262b, #191d22),

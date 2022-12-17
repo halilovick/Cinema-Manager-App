@@ -157,21 +157,6 @@ public class UsersDaoSQLImpl implements UsersDao {
     }
 
     @Override
-    public Boolean loginCheck(String username, String password) throws SQLException {
-        String query = "SELECT user, password FROM users WHERE user = ? AND password = ?";
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
-            if(!rs.next()) return false;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
-    @Override
     public int getLoggedInId(String username, String password) {
         String query = "SELECT id, user, password FROM users WHERE user = ? AND password = ?";
         try {

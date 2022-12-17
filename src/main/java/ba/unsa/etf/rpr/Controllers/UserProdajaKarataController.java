@@ -24,12 +24,10 @@ import static ba.unsa.etf.rpr.Controllers.LoginController.user;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class UserProdajaKarataController {
-    public ChoiceBox<Integer> brojKarataChoiceBox;
-    public Label ukupnaCijenaLabel;
+    public TextField brojKarataTextField;
     private FilmDao f = new FilmDaoSQLImpl();
     private List<String> listaFilmova = f.getAllNames();
     private ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
-    private ObservableList<Integer> brKarata = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
     public ChoiceBox<String> filmChoiceBox;
     private String imeOdabranogFilma = new String();
     private int brojKarata = 0;
@@ -42,21 +40,10 @@ public class UserProdajaKarataController {
     @FXML
     private void initialize() {
         filmChoiceBox.setItems(filmovi);
-        brojKarataChoiceBox.setItems(brKarata);
         filmChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 imeOdabranogFilma = listaFilmova.get(newValue.intValue());
-                brojKarataChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                        FilmDao ft = new FilmDaoSQLImpl();
-                        //film = ft.getByIme(odabraniFilm);
-                        brojKarata = brKarata.get(newValue.intValue());
-                        ukupnaCijena = brojKarata*ft.getByIme(imeOdabranogFilma).getCijena();
-                        ukupnaCijenaLabel.setText("Ukupna cijena: " + ukupnaCijena);
-                    }
-                });
             }
         });
     }
@@ -66,14 +53,25 @@ public class UserProdajaKarataController {
     }
 
     public void kupiButtonClick(ActionEvent actionEvent) throws IOException {
-        if(imeOdabranogFilma.isEmpty()){
+        try {
+            brojKarata = Integer.parseInt(brojKarataTextField.getText());
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Pogresni podaci");
+            alert.setContentText("Uneseni su nevalidni podaci!");
+            alert.showAndWait();
+        }
+        FilmDao ft = new FilmDaoSQLImpl();
+        ukupnaCijena = brojKarata * ft.getByIme(imeOdabranogFilma).getCijena();
+        if (imeOdabranogFilma.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Odaberite film!");
             alert.setContentText("Niti jedan film nije odabran.");
             alert.showAndWait();
             return;
-        } else if(brojKarata == 0){
+        } else if (brojKarata <= 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Odaberite broj karata!");
@@ -81,16 +79,15 @@ public class UserProdajaKarataController {
             alert.showAndWait();
             return;
         }
-        int br = brojKarata;
         KartaDao kdao = new KartaDaoSQLImpl();
         UsersDao u = new UsersDaoSQLImpl();
-        while(br != 0){
+        while (brojKarata != 0) {
             Karta k = new Karta();
             film = f.getByIme(imeOdabranogFilma);
             k.setFilm(film);
             k.setUser(user);
             kdao.add(k);
-            br--;
+            brojKarata--;
         }
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/KupljenaKarta.fxml"));
