@@ -25,6 +25,12 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class UserProdajaKarataController {
     public TextField brojKarataTextField;
+    public Label zanrLabel;
+    public Label trajanjeLabel;
+    public Label cijenaLabel;
+    public Label zanrLabelFiksna;
+    public Label trajanjeLabelFiksna;
+    public Label cijenaLabelFiksna;
     private FilmDao f = new FilmDaoSQLImpl();
     private List<String> listaFilmova = f.getAllNames();
     private ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
@@ -44,6 +50,14 @@ public class UserProdajaKarataController {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 imeOdabranogFilma = listaFilmova.get(newValue.intValue());
+                FilmDao ft = new FilmDaoSQLImpl();
+                Film f = ft.getByIme(imeOdabranogFilma);
+                trajanjeLabelFiksna.setText("TRAJANJE:");
+                cijenaLabelFiksna.setText("CIJENA:");
+                zanrLabelFiksna.setText("ZANR:");
+                trajanjeLabel.setText(String.valueOf(f.getTrajanje()) + " MIN");
+                zanrLabel.setText(f.getZanr());
+                cijenaLabel.setText(String.valueOf(f.getCijena()) + " KM");
             }
         });
     }
