@@ -1,25 +1,25 @@
 #UserPageScreen {
-    -fx-background-image: url("/fxml/backgrounds/diagonal-motion-lines-white-background_1017-33198.png");
+    -fx-background-image: url("/fxml/backgrounds/generic_background.png");
 }
 
 #LoginScreen{
-    -fx-background-image: url("/fxml/backgrounds/diagonal-motion-lines-white-background_1017-33198.png");
+    -fx-background-image: url("/fxml/backgrounds/generic_background.png");
 }
 
 #pregledFilmovaAdmin{
-    -fx-background-image: url("/fxml/backgrounds/diagonal-motion-lines-white-background_1017-33198.png");
+    -fx-background-image: url("/fxml/backgrounds/generic_background.png");
 }
 
 #adminGridPane {
-    -fx-background-image: url("/fxml/backgrounds/diagonal-motion-lines-white-background_1017-33198.png");
+    -fx-background-image: url("/fxml/backgrounds/generic_background.png");
 }
 
 #napraviRacunGridPane {
-    -fx-background-image: url("/fxml/backgrounds/diagonal-motion-lines-white-background_1017-33198.png");
+    -fx-background-image: url("/fxml/backgrounds/generic_background.png");
 }
 
 #ProdajaKarataScreen {
-    -fx-background-image: url("/fxml/backgrounds/diagonal-motion-lines-white-background_1017-33198.png");
+    -fx-background-image: url("/fxml/backgrounds/generic_background.png");
 }
 
 #signOutButton{
@@ -95,23 +95,23 @@
 }
 
 #promjenaPodatakaGridPane {
-    -fx-background-image: url("/fxml/backgrounds/diagonal-motion-lines-white-background_1017-33198.png");
+    -fx-background-image: url("/fxml/backgrounds/generic_background.png");
 }
 
 #urediFilmPage {
-    -fx-background-image: url("/fxml/backgrounds/diagonal-motion-lines-white-background_1017-33198.png");
+    -fx-background-image: url("/fxml/backgrounds/generic_background.png");
 }
 
 #PromjenaFilmovaPage {
-    -fx-background-image: url("/fxml/backgrounds/diagonal-motion-lines-white-background_1017-33198.png");
+    -fx-background-image: url("/fxml/backgrounds/generic_background.png");
 }
 
 #DodavanjeFilmaScreen {
-    -fx-background-image: url("/fxml/backgrounds/diagonal-motion-lines-white-background_1017-33198.png");
+    -fx-background-image: url("/fxml/backgrounds/generic_background.png");
 }
 
 #ObrisiFilmScreen {
-    -fx-background-image: url("/fxml/backgrounds/diagonal-motion-lines-white-background_1017-33198.png");
+    -fx-background-image: url("/fxml/backgrounds/generic_background.png");
 }
 
 #ticketScreen {
