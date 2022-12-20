@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.dao.UsersDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -50,6 +51,9 @@ public class LoginController {
                 homeStage.setScene(scene);
                 homeStage.show();
             }
+            Node n = (Node) actionEvent.getSource();
+            Stage stage2 = (Stage) n.getScene().getWindow();
+            stage2.close();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
