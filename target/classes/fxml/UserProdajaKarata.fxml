@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -30,7 +31,6 @@
         <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
@@ -67,7 +67,10 @@
             </font>
         </Label>
         <DatePicker fx:id="odabirDatuma" maxWidth="300.0" prefWidth="300.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
-        <Button fx:id="kupiButton" mnemonicParsing="false" onAction="#kupiButtonClick" prefHeight="84.0" prefWidth="167.0" text="Kupi!" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+        <Button fx:id="kupiButton" mnemonicParsing="false" onAction="#kupiButtonClick" prefHeight="84.0" prefWidth="167.0" text="Kupi!" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+         <GridPane.margin>
+            <Insets left="30.0" />
+         </GridPane.margin></Button>
       <Label fx:id="zanrLabelFiksna" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
          <font>
             <Font name="Tahoma Bold" size="12.0" />
@@ -83,5 +86,15 @@
             <Font name="Tahoma Bold" size="12.0" />
          </font>
       </Label>
+      <Label text="PRODAJA KARATA" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.halignment="CENTER">
+         <font>
+            <Font name="Tahoma Bold" size="43.0" />
+         </font>
+      </Label>
+      <Button fx:id="nazadButton" mnemonicParsing="false" onAction="#nazadButtonClick" prefHeight="84.0" prefWidth="167.0" text="Nazad" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+         <GridPane.margin>
+            <Insets right="30.0" />
+         </GridPane.margin>
+      </Button>
     </children>
 </GridPane>

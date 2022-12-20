@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -115,5 +116,20 @@ public class UserProdajaKarataController {
         stage.setTitle("Karta kupljena!");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void nazadButtonClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/UserPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        UserPageController upc = fxmlLoader.getController();
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
+        stage.setTitle("User page");
+        stage.setScene(scene);
+        stage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage2 = (Stage) n.getScene().getWindow();
+        stage2.close();
     }
 }
