@@ -1,21 +1,27 @@
 package ba.unsa.etf.rpr.Controllers;
 
+import ba.unsa.etf.rpr.App;
 import ba.unsa.etf.rpr.dao.UsersDao;
 import ba.unsa.etf.rpr.dao.UsersDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Date;
 
 import static ba.unsa.etf.rpr.Controllers.LoginController.homeStage;
 import static ba.unsa.etf.rpr.Controllers.LoginController.user;
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class PromjenaPodatakaController {
     public TextField usernameTextField;
@@ -62,9 +68,18 @@ public class PromjenaPodatakaController {
         homeStage.close();
     }
 
-    public void zatvoriButtonClick(ActionEvent actionEvent) {
+    public void zatvoriButtonClick(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/UserPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        UserPageController upc = fxmlLoader.getController();
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
+        stage.setTitle("User page");
+        stage.setScene(scene);
+        stage.show();
         Node n = (Node) actionEvent.getSource();
-        Stage stage = (Stage) n.getScene().getWindow();
-        stage.close();
+        Stage stage2 = (Stage) n.getScene().getWindow();
+        stage2.close();
     }
 }
