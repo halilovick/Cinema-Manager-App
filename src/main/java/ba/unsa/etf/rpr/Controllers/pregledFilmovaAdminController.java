@@ -1,9 +1,11 @@
 package ba.unsa.etf.rpr.Controllers;
 
 import ba.unsa.etf.rpr.App;
+import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.dao.FilmDao;
 import ba.unsa.etf.rpr.dao.FilmDaoSQLImpl;
 import ba.unsa.etf.rpr.domain.Film;
+import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,8 +42,8 @@ public class pregledFilmovaAdminController {
     public TableColumn colBrojSale;
     public TableView<Film> tabelaFilmova;
 
-    public void dodajButtonClick(ActionEvent actionEvent) {
-        if(imeField.getText().isEmpty() || zanrField.getText().isEmpty() || trajanjeField.getText().isEmpty() || cijenaField.getText().isEmpty() || brojsaleField.getText().isEmpty()){
+    public void dodajButtonClick(ActionEvent actionEvent) throws FilmoviException {
+        if (imeField.getText().isEmpty() || zanrField.getText().isEmpty() || trajanjeField.getText().isEmpty() || cijenaField.getText().isEmpty() || brojsaleField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Pogresni podaci");
@@ -56,25 +58,26 @@ public class pregledFilmovaAdminController {
             f.setTrajanje(Integer.parseInt(trajanjeField.getText()));
             f.setCijena(Integer.parseInt(cijenaField.getText()));
             f.setBroj_sale(Integer.parseInt(brojsaleField.getText()));
-            FilmDao fd = new FilmDaoSQLImpl();
-            fd.add(f);
+            DaoFactory.filmDao().add(f);
             UpdateTable();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Dodavanje uspješno");
             alert.setHeaderText(null);
             alert.setContentText("Film je dodan!");
             alert.showAndWait();
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Pogresni podaci");
             alert.setContentText("Uneseni su nevalidni podaci!");
             alert.showAndWait();
+        } catch (FilmoviException e) {
+            throw new FilmoviException(e.getMessage(), e);
         }
     }
 
-    public void azurirajButtonClick(ActionEvent actionEvent) {
-        if(imeField.getText().isEmpty() || zanrField.getText().isEmpty() || trajanjeField.getText().isEmpty() || cijenaField.getText().isEmpty() || brojsaleField.getText().isEmpty()){
+    public void azurirajButtonClick(ActionEvent actionEvent) throws FilmoviException {
+        if (imeField.getText().isEmpty() || zanrField.getText().isEmpty() || trajanjeField.getText().isEmpty() || cijenaField.getText().isEmpty() || brojsaleField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Odaberite film!");
@@ -83,14 +86,13 @@ public class pregledFilmovaAdminController {
             return;
         }
         Film f = new Film();
-        FilmDao fd = new FilmDaoSQLImpl();
         f.setId(id);
         f.setIme(imeField.getText());
         f.setZanr(zanrField.getText());
         f.setTrajanje(Integer.parseInt(trajanjeField.getText()));
         f.setCijena(Integer.parseInt(cijenaField.getText()));
         f.setBroj_sale(Integer.parseInt(brojsaleField.getText()));
-        fd.update(f);
+        DaoFactory.filmDao().update(f);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Uređivanje uspješno!");
         alert.setHeaderText(null);
@@ -99,8 +101,8 @@ public class pregledFilmovaAdminController {
         alert.showAndWait();
     }
 
-    public void obrisiButtonClick(ActionEvent actionEvent) {
-        if(imeField.getText().isEmpty()){
+    public void obrisiButtonClick(ActionEvent actionEvent) throws FilmoviException {
+        if (imeField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Odaberite film!");
@@ -108,9 +110,8 @@ public class pregledFilmovaAdminController {
             alert.showAndWait();
             return;
         }
-        FilmDao fd = new FilmDaoSQLImpl();
-        Film film = fd.getByIme(imeField.getText());
-        fd.delete(film.getId());
+        Film film = DaoFactory.filmDao().getByIme(imeField.getText());
+        DaoFactory.filmDao().delete(film.getId());
         UpdateTable();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Brisanje uspješno");
@@ -121,7 +122,7 @@ public class pregledFilmovaAdminController {
 
     public void getSelected(MouseEvent mouseEvent) {
         int index = tabelaFilmova.getSelectionModel().getSelectedIndex();
-        if(index <= -1) return;
+        if (index <= -1) return;
         id = Integer.valueOf(colID.getCellData(index).toString());
         imeField.setText(colIme.getCellData(index).toString());
         zanrField.setText(colZanr.getCellData(index).toString());
@@ -130,7 +131,7 @@ public class pregledFilmovaAdminController {
         brojsaleField.setText(colBrojSale.getCellData(index).toString());
     }
 
-    public void UpdateTable(){
+    public void UpdateTable() {
         colID.setCellValueFactory(new PropertyValueFactory<Film, Integer>("id"));
         colIme.setCellValueFactory(new PropertyValueFactory<Film, String>("ime"));
         colZanr.setCellValueFactory(new PropertyValueFactory<Film, String>("zanr"));
@@ -145,7 +146,7 @@ public class pregledFilmovaAdminController {
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         UpdateTable();
     }
 
