@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.domain;
 
-public class Karta {
+public class Karta implements Idable{
     private int id;
     private User user;
     private Film film;
