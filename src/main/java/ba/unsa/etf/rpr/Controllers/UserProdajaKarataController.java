@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.App;
 import ba.unsa.etf.rpr.dao.*;
 import ba.unsa.etf.rpr.domain.Film;
 import ba.unsa.etf.rpr.domain.Karta;
+import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -32,11 +33,10 @@ public class UserProdajaKarataController {
     public Label zanrLabelFiksna;
     public Label trajanjeLabelFiksna;
     public Label cijenaLabelFiksna;
-    private FilmDao f = new FilmDaoSQLImpl();
-    private List<String> listaFilmova = f.getAllNames();
-    private ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
+    private final List<String> listaFilmova = DaoFactory.filmDao().getAllNames();
+    private final ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
     public ChoiceBox<String> filmChoiceBox;
-    private String imeOdabranogFilma = new String();
+    private String imeOdabranogFilma = "";
     private int brojKarata = 0;
     public DatePicker odabirDatuma;
     private LocalDate datum;
@@ -44,21 +44,27 @@ public class UserProdajaKarataController {
     private Film film = new Film();
     private int ukupnaCijena;
 
+    public UserProdajaKarataController() throws FilmoviException {
+    }
+
     @FXML
     private void initialize() {
         filmChoiceBox.setItems(filmovi);
         filmChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                imeOdabranogFilma = listaFilmova.get(newValue.intValue());
-                FilmDao ft = new FilmDaoSQLImpl();
-                Film f = ft.getByIme(imeOdabranogFilma);
-                trajanjeLabelFiksna.setText("TRAJANJE:");
-                cijenaLabelFiksna.setText("CIJENA:");
-                zanrLabelFiksna.setText("ZANR:");
-                trajanjeLabel.setText(String.valueOf(f.getTrajanje()) + " MIN");
-                zanrLabel.setText(f.getZanr());
-                cijenaLabel.setText(String.valueOf(f.getCijena()) + " KM");
+                try {
+                    imeOdabranogFilma = listaFilmova.get(newValue.intValue());
+                    Film f = DaoFactory.filmDao().getByIme(imeOdabranogFilma);
+                    trajanjeLabelFiksna.setText("TRAJANJE:");
+                    cijenaLabelFiksna.setText("CIJENA:");
+                    zanrLabelFiksna.setText("ZANR:");
+                    trajanjeLabel.setText(f.getTrajanje() + " MIN");
+                    zanrLabel.setText(f.getZanr());
+                    cijenaLabel.setText(f.getCijena() + " KM");
+                } catch (FilmoviException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
@@ -67,7 +73,7 @@ public class UserProdajaKarataController {
         datum = odabirDatuma.getValue();
     }
 
-    public void kupiButtonClick(ActionEvent actionEvent) throws IOException {
+    public void kupiButtonClick(ActionEvent actionEvent) throws IOException, FilmoviException {
         try {
             brojKarata = Integer.parseInt(brojKarataTextField.getText());
         } catch (Exception e) {
@@ -77,8 +83,7 @@ public class UserProdajaKarataController {
             alert.setContentText("Uneseni su nevalidni podaci!");
             alert.showAndWait();
         }
-        FilmDao ft = new FilmDaoSQLImpl();
-        ukupnaCijena = brojKarata * ft.getByIme(imeOdabranogFilma).getCijena();
+        ukupnaCijena = brojKarata * DaoFactory.filmDao().getByIme(imeOdabranogFilma).getCijena();
         if (imeOdabranogFilma.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -94,14 +99,11 @@ public class UserProdajaKarataController {
             alert.showAndWait();
             return;
         }
-        KartaDao kdao = new KartaDaoSQLImpl();
-        UsersDao u = new UsersDaoSQLImpl();
         while (brojKarata != 0) {
             Karta k = new Karta();
-            film = f.getByIme(imeOdabranogFilma);
-            k.setFilm(film);
+            k.setFilm(DaoFactory.filmDao().getByIme(imeOdabranogFilma));
             k.setUser(user);
-            kdao.add(k);
+            DaoFactory.kartaDao().add(k);
             brojKarata--;
         }
         Stage stage = new Stage();
