@@ -29,6 +29,9 @@ public class AdminPageController {
         stage.setTitle("Prodaja");
         stage.setScene(scene);
         stage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage2 = (Stage) n.getScene().getWindow();
+        stage2.close();
     }
 
     public void promjenaFilmovaButtonClick(ActionEvent actionEvent) throws IOException {
@@ -41,6 +44,9 @@ public class AdminPageController {
         stage.setTitle("Promjena filmova");
         stage.setScene(scene);
         stage.show();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage2 = (Stage) n.getScene().getWindow();
+        stage2.close();
     }
 
     public void signOutButtonClick(ActionEvent actionEvent) throws IOException {
@@ -56,5 +62,8 @@ public class AdminPageController {
         Node n = (Node) actionEvent.getSource();
         Stage stage2 = (Stage) n.getScene().getWindow();
         stage2.close();
+    }
+
+    public void useriButtonClick(ActionEvent actionEvent) {
     }
 }
