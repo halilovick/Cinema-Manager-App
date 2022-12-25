@@ -3,7 +3,10 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Karta;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -37,18 +40,37 @@ public class KartaDaoSQLImpl extends AbstractDao<Karta> implements KartaDao {
 
     @Override
     public void resetIncrement(int i) throws FilmoviException {
+        String query = "ALTER TABLE karta AUTO_INCREMENT = ?";
         try {
-            executeQuery("ALTER TABLE karta AUTO_INCREMENT = ?", new Object[]{i});
-        } catch (FilmoviException e) {
-            throw new FilmoviException(e.getMessage(), e);
+            PreparedStatement stmt = this.getConnection().prepareStatement(query);
+            stmt.setObject(1, i);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); // poor error handling
         }
     }
 
     @Override
     public void deleteAll() throws FilmoviException {
+        String query = "DELETE FROM karta";
         try {
-            executeQuery("DELETE FROM karta", new Object[]{});
-        } catch (FilmoviException e) {
+            PreparedStatement stmt = this.getConnection().prepareStatement(query);
+            stmt.executeUpdate();
+            KartaDao k = new KartaDaoSQLImpl();
+            k.resetIncrement(1);
+        } catch (SQLException e) {
+            e.printStackTrace(); // poor error handling
+        }
+    }
+
+    @Override
+    public void deleteWithFilmId(int film_id) throws FilmoviException {
+        String sql = "DELETE FROM karta WHERE film_id = ?";
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, film_id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
             throw new FilmoviException(e.getMessage(), e);
         }
     }
