@@ -131,7 +131,7 @@ public class pregledFilmovaAdminController {
         brojsaleField.setText(colBrojSale.getCellData(index).toString());
     }
 
-    public void UpdateTable() {
+    public void UpdateTable() throws FilmoviException {
         colID.setCellValueFactory(new PropertyValueFactory<Film, Integer>("id"));
         colIme.setCellValueFactory(new PropertyValueFactory<Film, String>("ime"));
         colZanr.setCellValueFactory(new PropertyValueFactory<Film, String>("zanr"));
@@ -139,14 +139,14 @@ public class pregledFilmovaAdminController {
         colCijena.setCellValueFactory(new PropertyValueFactory<Film, Integer>("cijena"));
         colBrojSale.setCellValueFactory(new PropertyValueFactory<Film, Integer>("broj_sale"));
         FilmDao fd = new FilmDaoSQLImpl();
-        List<Film> filmovi = fd.getAll();
+        List<Film> filmovi = DaoFactory.filmDao().getAll();
         ObservableList<Film> f = FXCollections.observableArrayList(filmovi);
         tabelaFilmova.setItems(f);
         tabelaFilmova.refresh();
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws FilmoviException {
         UpdateTable();
     }
 
