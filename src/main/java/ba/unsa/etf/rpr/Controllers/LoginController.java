@@ -1,9 +1,9 @@
 package ba.unsa.etf.rpr.Controllers;
 
 import ba.unsa.etf.rpr.App;
-import ba.unsa.etf.rpr.dao.UsersDao;
-import ba.unsa.etf.rpr.dao.UsersDaoSQLImpl;
+import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,7 +15,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -25,11 +24,10 @@ public class LoginController {
     public static User user = new User();
     public static Stage homeStage = new Stage();
 
-    public void prijavaButtonClick(ActionEvent actionEvent) throws SQLException, IOException {
-        UsersDao u = new UsersDaoSQLImpl();
-        int loginId = u.getLoggedInId(fieldUsername.getText(), fieldPassword.getText());
+    public void prijavaButtonClick(ActionEvent actionEvent) throws FilmoviException, IOException {
+        int loginId = DaoFactory.usersDao().getLoggedInId(fieldUsername.getText(), fieldPassword.getText());
         if (loginId != 0) {
-            user = u.getById(loginId);
+            user = DaoFactory.usersDao().getById(loginId);
             if (user.isAdmin()) {
                 FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/AdminPage.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
