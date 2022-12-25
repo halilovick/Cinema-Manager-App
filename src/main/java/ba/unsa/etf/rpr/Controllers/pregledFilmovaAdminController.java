@@ -110,8 +110,8 @@ public class pregledFilmovaAdminController {
             alert.showAndWait();
             return;
         }
-        Film film = DaoFactory.filmDao().getByIme(imeField.getText());
-        DaoFactory.filmDao().delete(film.getId());
+        DaoFactory.kartaDao().deleteWithFilmId(DaoFactory.filmDao().getByIme(imeField.getText()).getId());
+        DaoFactory.filmDao().delete(DaoFactory.filmDao().getByIme(imeField.getText()).getId());
         UpdateTable();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Brisanje uspješno");

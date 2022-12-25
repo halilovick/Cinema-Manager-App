@@ -1,9 +1,9 @@
 package ba.unsa.etf.rpr.Controllers;
 
 import ba.unsa.etf.rpr.App;
-import ba.unsa.etf.rpr.dao.UsersDao;
-import ba.unsa.etf.rpr.dao.UsersDaoSQLImpl;
+import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +35,7 @@ public class PromjenaPodatakaController {
     public TextField imeTextField;
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         usernameTextField.setText(user.getUser());
         lozinkaTextField.setText(user.getPassword());
         imeTextField.setText(user.getIme());
@@ -45,7 +45,7 @@ public class PromjenaPodatakaController {
         datumRodjenjaField.setValue(user.getDatum_rodjenja().toLocalDate());
     }
 
-    public void promjeniPodatkeButtonClick(ActionEvent actionEvent) {
+    public void promjeniPodatkeButtonClick(ActionEvent actionEvent) throws FilmoviException {
         User u = new User();
         u.setId(user.getId());
         u.setUser(usernameTextField.getText());
@@ -55,8 +55,7 @@ public class PromjenaPodatakaController {
         u.setAdresa(adresaTextField.getText());
         u.setGrad(gradTextField.getText());
         u.setDatum_rodjenja(Date.valueOf(datumRodjenjaField.getValue()));
-        UsersDao ud = new UsersDaoSQLImpl();
-        ud.update(u);
+        DaoFactory.usersDao().update(u);
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
