@@ -67,12 +67,20 @@ public class FilmDaoSQLImpl extends AbstractDao<Film> implements FilmDao {
     }
 
     @Override
-    public List<Film> getAllNames() throws FilmoviException {
+    public List<String> getAllNames() throws FilmoviException {
+        String query = "SELECT * FROM film";
+        List<String> filmovi = new ArrayList<String>();
         try {
-            return executeQuery("SELECT ime FROM film", new Object[]{});
-        } catch (FilmoviException e) {
-            throw new FilmoviException(e.getMessage(), e);
+            PreparedStatement stmt = this.getConnection().prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) { // result set is iterator.
+                filmovi.add(rs.getString("ime"));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace(); // poor error handling
         }
+        return filmovi;
     }
 
     @Override
