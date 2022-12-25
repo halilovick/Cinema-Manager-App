@@ -1,8 +1,8 @@
 package ba.unsa.etf.rpr.Controllers;
 
-import ba.unsa.etf.rpr.dao.UsersDao;
-import ba.unsa.etf.rpr.dao.UsersDaoSQLImpl;
+import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -20,7 +20,7 @@ public class NapraviRacunController {
     public TextField gradTextField;
     public DatePicker datumRodjenjaField;
     public TextField imeTextField;
-    public void napraviAccountButtonClick(ActionEvent actionEvent) {
+    public void napraviAccountButtonClick(ActionEvent actionEvent) throws FilmoviException {
         if(usernameTextField.getText().isEmpty() || lozinkaTextField.getText().isEmpty() || imeTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || adresaTextField.getText().isEmpty() || gradTextField.getText().isEmpty() || datumRodjenjaField.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -37,8 +37,7 @@ public class NapraviRacunController {
         u.setAdresa(adresaTextField.getText());
         u.setGrad(gradTextField.getText());
         u.setDatum_rodjenja(Date.valueOf(datumRodjenjaField.getValue()));
-        UsersDao ud = new UsersDaoSQLImpl();
-        ud.add(u);
+        DaoFactory.usersDao().add(u);
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
