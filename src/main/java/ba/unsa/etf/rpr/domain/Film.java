@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.domain;
 
-public class Film {
+public class Film implements Idable{
     private int id;
     private String ime;
     private String zanr;
