@@ -2,7 +2,7 @@ package ba.unsa.etf.rpr.domain;
 
 import java.sql.Date;
 
-public class User {
+public class User implements Idable{
     private int id;
     private String user;
     private String password;
