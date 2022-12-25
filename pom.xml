@@ -26,19 +26,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
             <version>2.14.0</version>
         </dependency>
         <dependency>
-            <groupId>com.github.jiconfont</groupId>
-            <artifactId>jiconfont-font_awesome</artifactId>
-            <version>4.7.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.jiconfont</groupId>
-            <artifactId>jiconfont-javafx</artifactId>
-            <version>1.0.0</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.14.0</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -46,16 +41,20 @@
             <version>2.14.0</version>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-xml</artifactId>
-            <version>2.14.0</version>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.30</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17.0.2</version>
+            <version>19-ea+7</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-maven-plugin -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-maven-plugin</artifactId>
@@ -64,18 +63,14 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>17.0.2</version>
+            <version>19-ea+7</version>
         </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>4.8.0</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.30</version>
-        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
+<!--        <dependency>-->
+<!--            <groupId>org.codehaus.mojo</groupId>-->
+<!--            <artifactId>versions-maven-plugin</artifactId>-->
+<!--            <version>2.14.1</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
@@ -92,18 +87,11 @@
                     <version>3.0.2</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.openjfx</groupId>
-                    <artifactId>javafx-maven-plugin</artifactId>
-                    <version>0.0.8</version>
-                    <configuration>
-                        <mainClass>projekat1/ba.unsa.etf.rpr.App</mainClass>
-                    </configuration>
-                </plugin>
-                <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.0</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.22.1</version>
                 </plugin>
@@ -115,7 +103,6 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>2.8.2</version>
                 </plugin>
-                <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.7.1</version>
@@ -124,21 +111,26 @@
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
+
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <configuration>
-                        <archive>
-                            <manifestFile>src/main/resources/MANIFEST.MF</manifestFile>
-                        </archive>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>com.gluonhq</groupId>
-                    <artifactId>gluonfx-maven-plugin</artifactId>
-                    <version>1.0.16</version>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-maven-plugin</artifactId>
+                    <version>0.0.8</version>
                     <configuration>
                         <mainClass>ba.unsa.etf.rpr.App</mainClass>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.0.2</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addClasspath>true</addClasspath>
+                                <mainClass>ba.unsa.etf.rpr.App</mainClass>
+                            </manifest>
+                        </archive>
                     </configuration>
                 </plugin>
             </plugins>
@@ -148,8 +140,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>9</source>
-                    <target>9</target>
+                    <source>16</source>
+                    <target>16</target>
                 </configuration>
             </plugin>
         </plugins>
