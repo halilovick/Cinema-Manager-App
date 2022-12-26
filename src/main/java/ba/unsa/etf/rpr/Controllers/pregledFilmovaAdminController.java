@@ -42,7 +42,7 @@ public class pregledFilmovaAdminController {
     public TableColumn colCijena;
     public TableColumn colBrojSale;
     public TableView<Film> tabelaFilmova;
-    private filmoviManager manager = new filmoviManager();
+    private final filmoviManager manager = new filmoviManager();
 
     public void dodajButtonClick(ActionEvent actionEvent) throws FilmoviException {
         if (imeField.getText().isEmpty() || zanrField.getText().isEmpty() || trajanjeField.getText().isEmpty() || cijenaField.getText().isEmpty() || brojsaleField.getText().isEmpty()) {

@@ -2,12 +2,10 @@ package ba.unsa.etf.rpr.Controllers;
 
 import ba.unsa.etf.rpr.App;
 import ba.unsa.etf.rpr.business.filmoviManager;
-import ba.unsa.etf.rpr.dao.*;
+import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Film;
 import ba.unsa.etf.rpr.domain.Karta;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,9 +38,7 @@ public class UserProdajaKarataController {
     public DatePicker odabirDatuma;
     private LocalDate datum;
     public Button kupiButton;
-    private Film film = new Film();
-    private int ukupnaCijena;
-    private filmoviManager fmanager = new filmoviManager();
+    private final filmoviManager fmanager = new filmoviManager();
     private final List<String> listaFilmova = fmanager.getAllNames();
     private final ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
 
@@ -52,30 +48,27 @@ public class UserProdajaKarataController {
     @FXML
     private void initialize() {
         filmChoiceBox.setItems(filmovi);
-        filmChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                try {
-                    imeOdabranogFilma = listaFilmova.get(newValue.intValue());
-                    Film f = fmanager.getByIme(imeOdabranogFilma);
-                    trajanjeLabelFiksna.setText("TRAJANJE:");
-                    cijenaLabelFiksna.setText("CIJENA:");
-                    zanrLabelFiksna.setText("ZANR:");
-                    trajanjeLabel.setText(f.getTrajanje() + " MIN");
-                    zanrLabel.setText(f.getZanr());
-                    cijenaLabel.setText(f.getCijena() + " KM");
-                } catch (FilmoviException e) {
-                    throw new RuntimeException(e);
-                }
+        filmChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                imeOdabranogFilma = listaFilmova.get(newValue.intValue());
+                Film f = fmanager.getByIme(imeOdabranogFilma);
+                trajanjeLabelFiksna.setText("TRAJANJE:");
+                cijenaLabelFiksna.setText("CIJENA:");
+                zanrLabelFiksna.setText("ZANR:");
+                trajanjeLabel.setText(f.getTrajanje() + " MIN");
+                zanrLabel.setText(f.getZanr());
+                cijenaLabel.setText(f.getCijena() + " KM");
+            } catch (FilmoviException e) {
+                throw new RuntimeException(e);
             }
         });
     }
 
-    public void odabirDatumaClick(ActionEvent actionEvent) {
+    public void odabirDatumaClick() {
         datum = odabirDatuma.getValue();
     }
 
-    public void kupiButtonClick(ActionEvent actionEvent) throws IOException, FilmoviException {
+    public void kupiButtonClick() throws IOException, FilmoviException {
         try {
             brojKarata = Integer.parseInt(brojKarataTextField.getText());
         } catch (Exception e) {
@@ -85,7 +78,7 @@ public class UserProdajaKarataController {
             alert.setContentText("Uneseni su nevalidni podaci!");
             alert.showAndWait();
         }
-        ukupnaCijena = brojKarata * fmanager.getByIme(imeOdabranogFilma).getCijena();
+        int ukupnaCijena = brojKarata * fmanager.getByIme(imeOdabranogFilma).getCijena();
         if (imeOdabranogFilma.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
