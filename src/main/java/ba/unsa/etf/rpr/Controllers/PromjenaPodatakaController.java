@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr.Controllers;
 
 import ba.unsa.etf.rpr.App;
-import ba.unsa.etf.rpr.dao.DaoFactory;
+import ba.unsa.etf.rpr.business.usersManager;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import javafx.event.ActionEvent;
@@ -33,6 +33,7 @@ public class PromjenaPodatakaController {
     public Button zatvoriButton;
     public DatePicker datumRodjenjaField;
     public TextField imeTextField;
+    private usersManager umanager = new usersManager();
 
     @FXML
     private void initialize() {
@@ -55,7 +56,7 @@ public class PromjenaPodatakaController {
         u.setAdresa(adresaTextField.getText());
         u.setGrad(gradTextField.getText());
         u.setDatum_rodjenja(Date.valueOf(datumRodjenjaField.getValue()));
-        DaoFactory.usersDao().update(u);
+        umanager.update(u);
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

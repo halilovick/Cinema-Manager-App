@@ -1,7 +1,7 @@
 package ba.unsa.etf.rpr.Controllers;
 
 import ba.unsa.etf.rpr.App;
-import ba.unsa.etf.rpr.dao.DaoFactory;
+import ba.unsa.etf.rpr.business.usersManager;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import javafx.event.ActionEvent;
@@ -23,11 +23,12 @@ public class LoginController {
     public TextField fieldUsername;
     public static User user = new User();
     public static Stage homeStage = new Stage();
+    private usersManager umanager = new usersManager();
 
     public void prijavaButtonClick(ActionEvent actionEvent) throws FilmoviException, IOException {
-        int loginId = DaoFactory.usersDao().getLoggedInId(fieldUsername.getText(), fieldPassword.getText());
+        int loginId = umanager.getLoggedInId(fieldUsername.getText(), fieldPassword.getText());
         if (loginId != 0) {
-            user = DaoFactory.usersDao().getById(loginId);
+            user = umanager.getById(loginId);
             if (user.isAdmin()) {
                 FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/AdminPage.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
@@ -60,6 +61,7 @@ public class LoginController {
             alert.showAndWait();
         }
     }
+
     public User getUser() {
         return user;
     }

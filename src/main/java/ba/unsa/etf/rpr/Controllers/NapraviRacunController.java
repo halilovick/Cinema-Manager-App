@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.Controllers;
 
-import ba.unsa.etf.rpr.dao.DaoFactory;
+import ba.unsa.etf.rpr.business.usersManager;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import javafx.beans.value.ChangeListener;
@@ -30,6 +30,7 @@ public class NapraviRacunController {
     public TextField imeTextField;
     public Label passwordStrengthLabel;
     private boolean ispravanEmail = false;
+    private usersManager umanager = new usersManager();
 
     private static String passwordCheck(String password) {
         int n = password.length();
@@ -116,7 +117,7 @@ public class NapraviRacunController {
         u.setAdresa(adresaTextField.getText());
         u.setGrad(gradTextField.getText());
         u.setDatum_rodjenja(Date.valueOf(datumRodjenjaField.getValue()));
-        DaoFactory.usersDao().add(u);
+        umanager.add(u);
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
