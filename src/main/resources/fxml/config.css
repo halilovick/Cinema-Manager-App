@@ -6,6 +6,18 @@
     -fx-control-inner-background: lightpink;
 }
 
+.strongPassword{
+    -fx-control-inner-background: greenyellow;
+}
+
+.moderatePassword{
+    -fx-control-inner-background: #fbff91;
+}
+
+.weakPassword{
+    -fx-control-inner-background: lightpink;
+}
+
 #UserPageScreen {
     -fx-background-image: url("/fxml/backgrounds/generic_background.png");
 }
