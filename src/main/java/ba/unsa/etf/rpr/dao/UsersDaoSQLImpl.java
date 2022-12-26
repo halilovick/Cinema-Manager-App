@@ -65,4 +65,14 @@ public class UsersDaoSQLImpl extends AbstractDao<User> implements UsersDao {
             throw new FilmoviException(e.getMessage(), e);
         }
     }
+
+    @Override
+    public boolean userExists(String username) throws FilmoviException {
+        try {
+            User u = executeQueryUnique("SELECT * FROM users WHERE user = ?", new Object[]{username});
+            return true;
+        } catch (FilmoviException f) {
+            return false;
+        }
+    }
 }

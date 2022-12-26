@@ -29,6 +29,7 @@ public class NapraviRacunController {
     public DatePicker datumRodjenjaField;
     public TextField imeTextField;
     public Label passwordStrengthLabel;
+    public Label usernameZauzetLabel;
     private boolean ispravanEmail = false;
     private usersManager umanager = new usersManager();
 
@@ -49,6 +50,24 @@ public class NapraviRacunController {
 
     @FXML
     void initialize() {
+        usernameTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    if (!umanager.userExists(newValue)) {
+                        usernameTextField.getStyleClass().removeAll("poljeNijeIspravno");
+                        usernameTextField.getStyleClass().add("poljeIspravno");
+                        usernameZauzetLabel.setText("");
+                    } else {
+                        usernameTextField.getStyleClass().removeAll("poljeIspravno");
+                        usernameTextField.getStyleClass().add("poljeNijeIspravno");
+                        usernameZauzetLabel.setText("Username se koristi!");
+                    }
+                } catch (FilmoviException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         lozinkaTextField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {

@@ -38,4 +38,8 @@ public class usersManager {
     public User getById(int id) throws FilmoviException {
         return DaoFactory.usersDao().getById(id);
     }
+
+    public boolean userExists(String username) throws FilmoviException {
+        return DaoFactory.usersDao().userExists(username);
+    }
 }
