@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.Controllers;
 
 import ba.unsa.etf.rpr.App;
+import ba.unsa.etf.rpr.business.filmoviManager;
 import ba.unsa.etf.rpr.dao.*;
 import ba.unsa.etf.rpr.domain.Film;
 import ba.unsa.etf.rpr.domain.Karta;
@@ -33,8 +34,6 @@ public class UserProdajaKarataController {
     public Label zanrLabelFiksna;
     public Label trajanjeLabelFiksna;
     public Label cijenaLabelFiksna;
-    private final List<String> listaFilmova = DaoFactory.filmDao().getAllNames();
-    private final ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
     public ChoiceBox<String> filmChoiceBox;
     private String imeOdabranogFilma = "";
     private int brojKarata = 0;
@@ -43,6 +42,9 @@ public class UserProdajaKarataController {
     public Button kupiButton;
     private Film film = new Film();
     private int ukupnaCijena;
+    private filmoviManager fmanager = new filmoviManager();
+    private final List<String> listaFilmova = fmanager.getAllNames();
+    private final ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
 
     public UserProdajaKarataController() throws FilmoviException {
     }
@@ -55,7 +57,7 @@ public class UserProdajaKarataController {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 try {
                     imeOdabranogFilma = listaFilmova.get(newValue.intValue());
-                    Film f = DaoFactory.filmDao().getByIme(imeOdabranogFilma);
+                    Film f = fmanager.getByIme(imeOdabranogFilma);
                     trajanjeLabelFiksna.setText("TRAJANJE:");
                     cijenaLabelFiksna.setText("CIJENA:");
                     zanrLabelFiksna.setText("ZANR:");
@@ -83,7 +85,7 @@ public class UserProdajaKarataController {
             alert.setContentText("Uneseni su nevalidni podaci!");
             alert.showAndWait();
         }
-        ukupnaCijena = brojKarata * DaoFactory.filmDao().getByIme(imeOdabranogFilma).getCijena();
+        ukupnaCijena = brojKarata * fmanager.getByIme(imeOdabranogFilma).getCijena();
         if (imeOdabranogFilma.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -101,7 +103,7 @@ public class UserProdajaKarataController {
         }
         while (brojKarata != 0) {
             Karta k = new Karta();
-            k.setFilm(DaoFactory.filmDao().getByIme(imeOdabranogFilma));
+            k.setFilm(fmanager.getByIme(imeOdabranogFilma));
             k.setUser(user);
             DaoFactory.kartaDao().add(k);
             brojKarata--;

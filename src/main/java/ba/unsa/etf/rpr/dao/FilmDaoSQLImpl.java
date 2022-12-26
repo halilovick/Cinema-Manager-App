@@ -78,7 +78,7 @@ public class FilmDaoSQLImpl extends AbstractDao<Film> implements FilmDao {
             }
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace(); // poor error handling
+            e.printStackTrace();
         }
         return filmovi;
     }
