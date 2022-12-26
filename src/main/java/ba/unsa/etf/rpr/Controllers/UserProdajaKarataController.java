@@ -2,7 +2,7 @@ package ba.unsa.etf.rpr.Controllers;
 
 import ba.unsa.etf.rpr.App;
 import ba.unsa.etf.rpr.business.filmoviManager;
-import ba.unsa.etf.rpr.dao.DaoFactory;
+import ba.unsa.etf.rpr.business.karteManager;
 import ba.unsa.etf.rpr.domain.Film;
 import ba.unsa.etf.rpr.domain.Karta;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
@@ -39,6 +39,7 @@ public class UserProdajaKarataController {
     private LocalDate datum;
     public Button kupiButton;
     private final filmoviManager fmanager = new filmoviManager();
+    private final karteManager kmanager = new karteManager();
     private final List<String> listaFilmova = fmanager.getAllNames();
     private final ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
 
@@ -98,7 +99,7 @@ public class UserProdajaKarataController {
             Karta k = new Karta();
             k.setFilm(fmanager.getByIme(imeOdabranogFilma));
             k.setUser(user);
-            DaoFactory.kartaDao().add(k);
+            kmanager.add(k);
             brojKarata--;
         }
         Stage stage = new Stage();

@@ -1,10 +1,8 @@
 package ba.unsa.etf.rpr.Controllers;
 
 import ba.unsa.etf.rpr.App;
-import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.business.filmoviManager;
-import ba.unsa.etf.rpr.dao.FilmDao;
-import ba.unsa.etf.rpr.dao.FilmDaoSQLImpl;
+import ba.unsa.etf.rpr.business.karteManager;
 import ba.unsa.etf.rpr.domain.Film;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import javafx.collections.FXCollections;
@@ -42,7 +40,8 @@ public class pregledFilmovaAdminController {
     public TableColumn colCijena;
     public TableColumn colBrojSale;
     public TableView<Film> tabelaFilmova;
-    private final filmoviManager manager = new filmoviManager();
+    private final filmoviManager fmanager = new filmoviManager();
+    private final karteManager kmanager = new karteManager();
 
     public void dodajButtonClick(ActionEvent actionEvent) throws FilmoviException {
         if (imeField.getText().isEmpty() || zanrField.getText().isEmpty() || trajanjeField.getText().isEmpty() || cijenaField.getText().isEmpty() || brojsaleField.getText().isEmpty()) {
@@ -60,7 +59,7 @@ public class pregledFilmovaAdminController {
             f.setTrajanje(Integer.parseInt(trajanjeField.getText()));
             f.setCijena(Integer.parseInt(cijenaField.getText()));
             f.setBroj_sale(Integer.parseInt(brojsaleField.getText()));
-            manager.add(f);
+            fmanager.add(f);
             UpdateTable();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Dodavanje uspješno");
@@ -94,7 +93,7 @@ public class pregledFilmovaAdminController {
         f.setTrajanje(Integer.parseInt(trajanjeField.getText()));
         f.setCijena(Integer.parseInt(cijenaField.getText()));
         f.setBroj_sale(Integer.parseInt(brojsaleField.getText()));
-        manager.update(f);
+        fmanager.update(f);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Uređivanje uspješno!");
         alert.setHeaderText(null);
@@ -112,8 +111,8 @@ public class pregledFilmovaAdminController {
             alert.showAndWait();
             return;
         }
-        DaoFactory.kartaDao().deleteWithFilmId(DaoFactory.filmDao().getByIme(imeField.getText()).getId());
-        manager.delete(manager.getByIme(imeField.getText()).getId());
+        kmanager.deleteWithFilmId(fmanager.getByIme(imeField.getText()).getId());
+        fmanager.delete(fmanager.getByIme(imeField.getText()).getId());
         UpdateTable();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Brisanje uspješno");
@@ -140,8 +139,7 @@ public class pregledFilmovaAdminController {
         colTrajanje.setCellValueFactory(new PropertyValueFactory<Film, Integer>("trajanje"));
         colCijena.setCellValueFactory(new PropertyValueFactory<Film, Integer>("cijena"));
         colBrojSale.setCellValueFactory(new PropertyValueFactory<Film, Integer>("broj_sale"));
-        FilmDao fd = new FilmDaoSQLImpl();
-        List<Film> filmovi = manager.getAll();
+        List<Film> filmovi = fmanager.getAll();
         ObservableList<Film> f = FXCollections.observableArrayList(filmovi);
         tabelaFilmova.setItems(f);
         tabelaFilmova.refresh();
