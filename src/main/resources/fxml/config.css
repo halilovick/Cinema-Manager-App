@@ -1,3 +1,11 @@
+.poljeIspravno {
+    -fx-control-inner-background: greenyellow;
+}
+
+.poljeNijeIspravno {
+    -fx-control-inner-background: lightpink;
+}
+
 #UserPageScreen {
     -fx-background-image: url("/fxml/backgrounds/generic_background.png");
 }
