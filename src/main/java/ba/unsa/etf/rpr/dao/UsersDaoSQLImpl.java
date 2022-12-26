@@ -60,6 +60,7 @@ public class UsersDaoSQLImpl extends AbstractDao<User> implements UsersDao {
     public int getLoggedInId(String username, String password) throws FilmoviException {
         try {
             List<User> l = executeQuery("SELECT * FROM users WHERE user = ? AND password = ?", new Object[]{username, password});
+            if (l.isEmpty()) return 0;
             return l.get(0).getId();
         } catch (FilmoviException e) {
             throw new FilmoviException(e.getMessage(), e);
