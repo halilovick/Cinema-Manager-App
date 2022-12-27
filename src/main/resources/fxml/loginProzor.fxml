@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -74,7 +73,5 @@
                 <Image url="@backgrounds/kokice.png" />
             </image>
         </ImageView>
-        <FontAwesomeIconView glyphName="USER" size="20" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-        <FontAwesomeIconView glyphName="LOCK" size="20" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
     </children>
 </GridPane>
