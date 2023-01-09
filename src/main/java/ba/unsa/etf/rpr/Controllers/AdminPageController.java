@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.business.filmoviManager;
 import ba.unsa.etf.rpr.business.karteManager;
 import ba.unsa.etf.rpr.business.usersManager;
 import ba.unsa.etf.rpr.domain.Film;
+import ba.unsa.etf.rpr.domain.Karta;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import javafx.collections.FXCollections;
@@ -21,9 +22,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+import static ba.unsa.etf.rpr.Controllers.LoginController.user;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class AdminPageController {
@@ -49,6 +52,7 @@ public class AdminPageController {
     public Label cijenaLabelFiksna;
     public Label trajanjeLabelFiksna;
     public Label zanrLabelFiksna;
+    private int brojKarata = 0;
     private final filmoviManager fmanager = new filmoviManager();
     private final karteManager kmanager = new karteManager();
     private final List<String> listaFilmova = fmanager.getAllNames();
@@ -59,6 +63,7 @@ public class AdminPageController {
     public Label cijenaLabel;
     public TextField brojKarataTextField;
     public DatePicker odabirDatuma;
+    private LocalDate datum;
     String imeOdabranogFilma = "";
     private Integer id;
     public TableColumn colID;
@@ -328,8 +333,53 @@ public class AdminPageController {
     }
 
     public void odabirDatumaClick(ActionEvent actionEvent) {
+        datum = odabirDatuma.getValue();
     }
 
-    public void kupiButtonClick(ActionEvent actionEvent) {
+    public void kupiButtonClick(ActionEvent actionEvent) throws FilmoviException, IOException {
+        try {
+            brojKarata = Integer.parseInt(brojKarataTextField.getText());
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Pogresni podaci");
+            alert.setContentText("Uneseni su nevalidni podaci!");
+            alert.showAndWait();
+        }
+        int ukupnaCijena = brojKarata * fmanager.getByIme(imeOdabranogFilma).getCijena();
+        if (imeOdabranogFilma.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Odaberite film!");
+            alert.setContentText("Niti jedan film nije odabran.");
+            alert.showAndWait();
+            return;
+        } else if (brojKarata <= 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Odaberite broj karata!");
+            alert.setContentText("Broj karata za film nije odabran.");
+            alert.showAndWait();
+            return;
+        }
+        while (brojKarata != 0) {
+            Karta k = new Karta();
+            k.setFilm(fmanager.getByIme(imeOdabranogFilma));
+            k.setUser(user);
+            kmanager.add(k);
+            brojKarata--;
+        }
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/KupljenaKarta.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        KupljenaKartaController kkc = fxmlLoader.getController();
+        kkc.imeFilma.setText("Ime filma: " + imeOdabranogFilma);
+        kkc.datumFilma.setText("Datum: " + datum);
+        kkc.cijenaKarte.setText("Cijena: " + ukupnaCijena + "KM");
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
+        stage.setTitle("Karta kupljena!");
+        stage.setScene(scene);
+        stage.show();
     }
 }
