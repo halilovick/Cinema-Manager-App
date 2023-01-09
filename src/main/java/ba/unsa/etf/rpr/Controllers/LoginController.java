@@ -33,8 +33,7 @@ public class LoginController {
                 FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/AdminPage.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
                 AdminPageController apc = fxmlLoader.getController();
-                apc.dobrodosaoLabela.setText(apc.dobrodosaoLabela.getText() + fieldUsername.getText() + "!");
-                homeStage.setResizable(false);
+                //homeStage.setResizable(false);
                 homeStage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
                 homeStage.setTitle("Admin Page");
                 homeStage.setScene(scene);

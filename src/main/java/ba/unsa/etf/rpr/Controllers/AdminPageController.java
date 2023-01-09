@@ -46,6 +46,20 @@ public class AdminPageController {
     public Button obrisiButton1;
     public Button nazadButton21;
     public TableView tabelaUsera;
+    public Label cijenaLabelFiksna;
+    public Label trajanjeLabelFiksna;
+    public Label zanrLabelFiksna;
+    private final filmoviManager fmanager = new filmoviManager();
+    private final karteManager kmanager = new karteManager();
+    private final List<String> listaFilmova = fmanager.getAllNames();
+    private final ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
+    public ChoiceBox filmChoiceBox;
+    public Label zanrLabel;
+    public Label trajanjeLabel;
+    public Label cijenaLabel;
+    public TextField brojKarataTextField;
+    public DatePicker odabirDatuma;
+    String imeOdabranogFilma = "";
     private Integer id;
     public TableColumn colID;
     public TableColumn colIme;
@@ -54,14 +68,15 @@ public class AdminPageController {
     public TableColumn colCijena;
     public TableColumn colBrojSale;
     public TableView<Film> tabelaFilmova;
-    private final filmoviManager fmanager = new filmoviManager();
-    private final karteManager kmanager = new karteManager();
     private final usersManager umanager = new usersManager();
     public TextField imeField;
     public TextField zanrField;
     public TextField trajanjeField;
     public TextField cijenaField;
     public TextField brojsaleField;
+
+    public AdminPageController() throws FilmoviException {
+    }
 
     public void dodajFilmButtonClick(ActionEvent actionEvent) throws FilmoviException {
         if (imeField.getText().isEmpty() || zanrField.getText().isEmpty() || trajanjeField.getText().isEmpty() || cijenaField.getText().isEmpty() || brojsaleField.getText().isEmpty()) {
@@ -165,8 +180,27 @@ public class AdminPageController {
         tabelaFilmova.refresh();
     }
 
+    public void UpdateProdajaTable() {
+        filmChoiceBox.setItems(filmovi);
+        filmChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                imeOdabranogFilma = listaFilmova.get(newValue.intValue());
+                Film f = fmanager.getByIme(imeOdabranogFilma);
+                trajanjeLabelFiksna.setText("TRAJANJE:");
+                cijenaLabelFiksna.setText("CIJENA:");
+                zanrLabelFiksna.setText("ZANR:");
+                trajanjeLabel.setText(f.getTrajanje() + " MIN");
+                zanrLabel.setText(f.getZanr());
+                cijenaLabel.setText(f.getCijena() + " KM");
+            } catch (FilmoviException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
     @FXML
     public void initialize() throws FilmoviException {
+        UpdateProdajaTable();
         UpdateFilmoviTable();
         UpdateUseriTable();
     }
@@ -291,5 +325,11 @@ public class AdminPageController {
         ObservableList<User> u = FXCollections.observableArrayList(useri);
         tabelaUsera.setItems(u);
         tabelaUsera.refresh();
+    }
+
+    public void odabirDatumaClick(ActionEvent actionEvent) {
+    }
+
+    public void kupiButtonClick(ActionEvent actionEvent) {
     }
 }
