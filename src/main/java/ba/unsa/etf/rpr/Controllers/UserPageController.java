@@ -1,55 +1,119 @@
 package ba.unsa.etf.rpr.Controllers;
 
 import ba.unsa.etf.rpr.App;
+import ba.unsa.etf.rpr.business.filmoviManager;
+import ba.unsa.etf.rpr.business.karteManager;
+import ba.unsa.etf.rpr.domain.Film;
+import ba.unsa.etf.rpr.domain.Karta;
+import ba.unsa.etf.rpr.exceptions.FilmoviException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 
+import static ba.unsa.etf.rpr.Controllers.LoginController.user;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class UserPageController {
-    public Label dobrodosaoLabela;
-    public Button promjenaPodatakaButton;
-    public Button kupovinaKarataButton;
 
-    public void kupovinaKarataButtonClick(ActionEvent actionEvent) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/UserProdajaKarata.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-        UserProdajaKarataController upkc = fxmlLoader.getController();
-        stage.setResizable(false);
-        stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
-        stage.setTitle("Prodaja");
-        stage.setScene(scene);
-        stage.show();
-        Node n = (Node) actionEvent.getSource();
-        Stage stage2 = (Stage) n.getScene().getWindow();
-        stage2.close();
+    public TextField brojKarataTextField;
+    public Label zanrLabel;
+    public Label trajanjeLabel;
+    public Label cijenaLabel;
+    public Label zanrLabelFiksna;
+    public Label trajanjeLabelFiksna;
+    public Label cijenaLabelFiksna;
+    public ChoiceBox<String> filmChoiceBox;
+    private String imeOdabranogFilma = "";
+    private int brojKarata = 0;
+    public DatePicker odabirDatuma;
+    private LocalDate datum;
+    public Button kupiButton;
+    private final filmoviManager fmanager = new filmoviManager();
+    private final karteManager kmanager = new karteManager();
+    private final List<String> listaFilmova = fmanager.getAllNames();
+    private final ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
+
+    public UserPageController() throws FilmoviException {
     }
 
-    public void promjenaPodatakaButtonClick(ActionEvent actionEvent) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/PromjenaPodataka.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-        PromjenaPodatakaController ppc = fxmlLoader.getController();
-        stage.setResizable(false);
-        stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
-        stage.setTitle("Promjena podataka");
-        stage.setScene(scene);
-        stage.show();
-        Node n = (Node) actionEvent.getSource();
-        Stage stage2 = (Stage) n.getScene().getWindow();
-        stage2.close();
+    @FXML
+    private void initialize() {
+        filmChoiceBox.setItems(filmovi);
+        filmChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                imeOdabranogFilma = listaFilmova.get(newValue.intValue());
+                Film f = fmanager.getByIme(imeOdabranogFilma);
+                trajanjeLabelFiksna.setText("TRAJANJE:");
+                cijenaLabelFiksna.setText("CIJENA:");
+                zanrLabelFiksna.setText("ZANR:");
+                trajanjeLabel.setText(f.getTrajanje() + " MIN");
+                zanrLabel.setText(f.getZanr());
+                cijenaLabel.setText(f.getCijena() + " KM");
+            } catch (FilmoviException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
-    public void signOutButtonClick(ActionEvent actionEvent) throws IOException {
+    public void kupiButtonClick() throws IOException, FilmoviException {
+        try {
+            brojKarata = Integer.parseInt(brojKarataTextField.getText());
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Pogresni podaci");
+            alert.setContentText("Uneseni su nevalidni podaci!");
+            alert.showAndWait();
+        }
+        int ukupnaCijena = brojKarata * fmanager.getByIme(imeOdabranogFilma).getCijena();
+        if (imeOdabranogFilma.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Odaberite film!");
+            alert.setContentText("Niti jedan film nije odabran.");
+            alert.showAndWait();
+            return;
+        } else if (brojKarata <= 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Odaberite broj karata!");
+            alert.setContentText("Broj karata za film nije odabran.");
+            alert.showAndWait();
+            return;
+        }
+        while (brojKarata != 0) {
+            Karta k = new Karta();
+            k.setFilm(fmanager.getByIme(imeOdabranogFilma));
+            k.setUser(user);
+            kmanager.add(k);
+            brojKarata--;
+        }
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/KupljenaKarta.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        KupljenaKartaController kkc = fxmlLoader.getController();
+        kkc.imeFilma.setText("Ime filma: " + imeOdabranogFilma);
+        kkc.datumFilma.setText("Datum: " + datum);
+        kkc.cijenaKarte.setText("Cijena: " + ukupnaCijena + "KM");
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
+        stage.setTitle("Karta kupljena!");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void nazadButtonClick(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/loginProzor.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
@@ -63,4 +127,16 @@ public class UserPageController {
         Stage stage2 = (Stage) n.getScene().getWindow();
         stage2.close();
     }
+
+    public void promjeniPodatkeButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void zatvoriButtonClick(ActionEvent actionEvent) throws IOException {
+        nazadButtonClick(actionEvent);
+    }
+
+    public void odabirDatumaClick() {
+        datum = odabirDatuma.getValue();
+    }
+
 }
