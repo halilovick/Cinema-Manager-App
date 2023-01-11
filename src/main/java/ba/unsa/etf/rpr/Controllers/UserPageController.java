@@ -3,8 +3,10 @@ package ba.unsa.etf.rpr.Controllers;
 import ba.unsa.etf.rpr.App;
 import ba.unsa.etf.rpr.business.filmoviManager;
 import ba.unsa.etf.rpr.business.karteManager;
+import ba.unsa.etf.rpr.business.usersManager;
 import ba.unsa.etf.rpr.domain.Film;
 import ba.unsa.etf.rpr.domain.Karta;
+import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -43,6 +46,16 @@ public class UserPageController {
     private final karteManager kmanager = new karteManager();
     private final List<String> listaFilmova = fmanager.getAllNames();
     private final ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
+    public TextField usernameTextField;
+    public TextField lozinkaTextField;
+    public TextField emailTextField;
+    public TextField adresaTextField;
+    public TextField gradTextField;
+    public Button promjeniPodatkeButton;
+    public Button zatvoriButton;
+    public DatePicker datumRodjenjaField;
+    public TextField imeTextField;
+    private usersManager umanager = new usersManager();
 
     public UserPageController() throws FilmoviException {
     }
@@ -64,6 +77,13 @@ public class UserPageController {
                 throw new RuntimeException(e);
             }
         });
+        usernameTextField.setText(user.getUser());
+        lozinkaTextField.setText(user.getPassword());
+        imeTextField.setText(user.getIme());
+        emailTextField.setText(user.getEmail());
+        adresaTextField.setText(user.getAdresa());
+        gradTextField.setText(user.getGrad());
+        datumRodjenjaField.setValue(user.getDatum_rodjenja().toLocalDate());
     }
 
     public void kupiButtonClick() throws IOException, FilmoviException {
@@ -128,7 +148,34 @@ public class UserPageController {
         stage2.close();
     }
 
-    public void promjeniPodatkeButtonClick(ActionEvent actionEvent) {
+    public void promjeniPodatkeButtonClick(ActionEvent actionEvent) throws FilmoviException, IOException {
+        User u = new User();
+        u.setId(user.getId());
+        u.setUser(usernameTextField.getText());
+        u.setPassword(lozinkaTextField.getText());
+        u.setIme(imeTextField.getText());
+        u.setEmail(emailTextField.getText());
+        u.setAdresa(adresaTextField.getText());
+        u.setGrad(gradTextField.getText());
+        u.setDatum_rodjenja(Date.valueOf(datumRodjenjaField.getValue()));
+        umanager.update(u);
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Uređivanje uspješno!");
+        alert.setHeaderText(null);
+        alert.setContentText("Podaci su spašeni. Ulogujte se ponovo.");
+        alert.showAndWait();
+        stage.close();
+        Stage stage1 = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/loginProzor.fxml"));
+        Scene scene1 = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+        LoginController lc = fxmlLoader.getController();
+        stage1.setResizable(false);
+        stage1.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
+        stage1.setTitle("Prijava");
+        stage1.setScene(scene1);
+        stage1.show();
     }
 
     public void zatvoriButtonClick(ActionEvent actionEvent) throws IOException {
