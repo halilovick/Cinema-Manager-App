@@ -52,6 +52,7 @@ public class AdminPageController {
     public Label cijenaLabelFiksna;
     public Label trajanjeLabelFiksna;
     public Label zanrLabelFiksna;
+    public Tab prodajaKarataAdminButton;
     private int brojKarata = 0;
     private final filmoviManager fmanager = new filmoviManager();
     private final karteManager kmanager = new karteManager();

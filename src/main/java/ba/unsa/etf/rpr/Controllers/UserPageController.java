@@ -62,6 +62,11 @@ public class UserPageController {
 
     @FXML
     private void initialize() {
+        initializeKupovinaKarata();
+        initializePromjenaPodataka();
+    }
+
+    private void initializeKupovinaKarata() {
         filmChoiceBox.setItems(filmovi);
         filmChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             try {
@@ -77,6 +82,9 @@ public class UserPageController {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    private void initializePromjenaPodataka() {
         usernameTextField.setText(user.getUser());
         lozinkaTextField.setText(user.getPassword());
         imeTextField.setText(user.getIme());
@@ -185,5 +193,4 @@ public class UserPageController {
     public void odabirDatumaClick() {
         datum = odabirDatuma.getValue();
     }
-
 }
