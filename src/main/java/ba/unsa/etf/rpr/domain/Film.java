@@ -8,9 +8,7 @@ public class Film implements Idable{
     private int cijena;
     private int broj_sale;
 
-    public int getCijena() {
-        return cijena;
-    }
+    public int getCijena() { return cijena; }
 
     public void setCijena(int cijena) {
         this.cijena = cijena;
