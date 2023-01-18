@@ -39,12 +39,4 @@ public class filmoviManager {
     public List<String> getAllNames() throws FilmoviException {
         return DaoFactory.filmDao().getAllNames();
     }
-
-    public List<Film> searchByTrajanje(int a, int b) throws FilmoviException {
-        return DaoFactory.filmDao().searchByTrajanje(a, b);
-    }
-
-    public List<Film> searchByZanr(String zanr) throws FilmoviException {
-        return DaoFactory.filmDao().searchByZanr(zanr);
-    }
 }
