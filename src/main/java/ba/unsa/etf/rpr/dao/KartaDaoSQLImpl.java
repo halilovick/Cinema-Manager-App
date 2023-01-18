@@ -11,9 +11,20 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class KartaDaoSQLImpl extends AbstractDao<Karta> implements KartaDao {
+    private static KartaDaoSQLImpl instance = null;
+
 
     public KartaDaoSQLImpl() {
         super("karta");
+    }
+
+    public static KartaDaoSQLImpl getInstance() {
+        if (instance == null) instance = new KartaDaoSQLImpl();
+        return instance;
+    }
+
+    public static void removeInstance() {
+        if (instance != null) instance = null;
     }
 
     @Override
