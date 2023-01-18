@@ -10,14 +10,15 @@ import java.io.PrintWriter;
 
 public class App {
     private static final Option addFilm = new Option("f", "add-film", false, "Adding new film to database (name, genre, duration)");
-    private static final Option deleteFilm = new Option("delF", "delete-film", false, "Deleting a film from database (name)");
+    private static final Option deleteFilm = new Option("delF", "delete-film", false, "Deleting a film from database (\"name\")");
     private static final Option getFilms = new Option("getF", "get-films", false, "Printing all films from database");
+    private static final Option deleteTickets = new Option("delT", "delete-tickets", false, "Deleting existing tickets (ticket id to delete single ticket or name of film to delete all related tickets)");
     private static final Option getUsers = new Option("getU", "get-users", false, "Printing all users from database");
 
     public static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
         PrintWriter printWriter = new PrintWriter(System.out);
-        helpFormatter.printUsage(printWriter, 150, "java -jar cinema-manager-cli-jar-with-dependencies.jar [option] 'something else if needed' ");
+        helpFormatter.printUsage(printWriter, 150, "java -jar cinema-manager-cli-jar-with-dependencies.jar [option] (parameters) ");
         helpFormatter.printOptions(printWriter, 150, options, 2, 7);
         printWriter.close();
     }
@@ -27,6 +28,7 @@ public class App {
         options.addOption(addFilm);
         options.addOption(deleteFilm);
         options.addOption(getFilms);
+        options.addOption(deleteTickets);
         options.addOption(getUsers);
         return options;
     }
@@ -61,6 +63,8 @@ public class App {
         } else if (cl.hasOption(getFilms.getOpt()) || cl.hasOption(getFilms.getLongOpt())) {
             filmoviManager fm = new filmoviManager();
             fm.getAll().forEach(f -> System.out.println(f.getIme()));
+        } else if (cl.hasOption(deleteTickets.getOpt()) || cl.hasOption(deleteTickets.getLongOpt())) {
+
         } else if (cl.hasOption(getUsers.getOpt()) || cl.hasOption(getUsers.getLongOpt())) {
             usersManager um = new usersManager();
             um.getAll().forEach(u -> System.out.println(u.getIme()));
