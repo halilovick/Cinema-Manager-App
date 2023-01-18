@@ -1,39 +1,55 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.business.filmoviManager;
+import ba.unsa.etf.rpr.domain.Film;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
+import org.apache.commons.cli.*;
 
-import java.io.IOException;
-import java.sql.SQLException;
+import java.io.PrintWriter;
 
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
+public class App {
+    private static final Option addFilm = new Option("f", "add-film", false, "Adding new film to database");
+    private static final Option getFilms = new Option("getF", "get-films", false, "Printing all films from database");
+    private static final Option getUsers = new Option("getU", "get-users", false, "Printing all users from database");
 
-public class App extends Application {
-    @Override
-    public void start(Stage primarystage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/loginProzor.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-        primarystage.setResizable(false);
-        primarystage.setMinHeight(150);
-        primarystage.setMinWidth(300);
-        primarystage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
-        primarystage.setTitle("Prijava");
-        primarystage.setScene(scene);
-        primarystage.show();
+    public static void printFormattedOptions(Options options) {
+        HelpFormatter helpFormatter = new HelpFormatter();
+        PrintWriter printWriter = new PrintWriter(System.out);
+        helpFormatter.printUsage(printWriter, 150, "java -jar cinema-manager-0.1.jar [option] 'something else if needed' ");
+        helpFormatter.printOptions(printWriter, 150, options, 2, 7);
+        printWriter.close();
     }
 
-    public static void main(String[] args) throws SQLException, FilmoviException {
-        launch();
-        // napraviti regex gdje god je moguce - dodati check jel username zauzet..
-        // dodati help bar i help popups
-        // dodati Users page (admin screen kao i za filmove)
-        // dodati pretragu filmova
-        // poboljsati dizajn - omoguciti resize prozora - napraviti sve u jednom prozoru
-        // dodati menu bar
-        // uraditi refactoring linija poput geticons, setresizable....
+    public static Options addOptions() {
+        Options options = new Options();
+        options.addOption(addFilm);
+        options.addOption(getFilms);
+        options.addOption(getUsers);
+        return options;
+    }
+
+    public static void main(String[] args) throws ParseException, FilmoviException {
+        Options options = addOptions();
+
+        CommandLineParser commandLineParser = new DefaultParser();
+
+        CommandLine cl = commandLineParser.parse(options, args);
+
+        if (cl.hasOption(addFilm.getOpt()) || cl.hasOption(addFilm.getLongOpt())) {
+            filmoviManager fm = new filmoviManager();
+            Film f = new Film();
+            f.setIme(cl.getArgList().get(0));
+            f.setZanr(cl.getArgList().get(1));
+            f.setCijena(Integer.parseInt(cl.getArgList().get(2)));
+            fm.add(f);
+            System.out.println("Film successfully added to database!");
+            //System.out.println(cl.getArgList().get(0) + " " + cl.getArgList().get(1));
+        } else if (cl.hasOption(getFilms.getOpt()) || cl.hasOption(getFilms.getLongOpt())) {
+            filmoviManager fm = new filmoviManager();
+            fm.getAll().forEach(f -> System.out.println(f.getIme()));
+        } else {
+            printFormattedOptions(options);
+            System.exit(-1);
+        }
     }
 }
