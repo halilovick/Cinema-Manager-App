@@ -15,7 +15,7 @@ public class App {
     public static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
         PrintWriter printWriter = new PrintWriter(System.out);
-        helpFormatter.printUsage(printWriter, 150, "java -jar cinema-manager-0.1.jar [option] 'something else if needed' ");
+        helpFormatter.printUsage(printWriter, 150, "java -jar cinema-manager-cli-jar-with-dependencies.jar [option] 'something else if needed' ");
         helpFormatter.printOptions(printWriter, 150, options, 2, 7);
         printWriter.close();
     }
@@ -43,7 +43,6 @@ public class App {
             f.setCijena(Integer.parseInt(cl.getArgList().get(2)));
             fm.add(f);
             System.out.println("Film successfully added to database!");
-            //System.out.println(cl.getArgList().get(0) + " " + cl.getArgList().get(1));
         } else if (cl.hasOption(getFilms.getOpt()) || cl.hasOption(getFilms.getLongOpt())) {
             filmoviManager fm = new filmoviManager();
             fm.getAll().forEach(f -> System.out.println(f.getIme()));
