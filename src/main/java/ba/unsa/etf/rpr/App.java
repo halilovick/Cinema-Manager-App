@@ -10,11 +10,12 @@ import org.apache.commons.cli.*;
 import java.io.PrintWriter;
 
 public class App {
-    private static final Option addFilm = new Option("f", "add-film", false, "Adding new film to database (name, genre, duration)");
+    private static final Option addFilm = new Option("f", "add-film", false, "Adding a new film to database (name, genre, duration)");
     private static final Option deleteFilm = new Option("delF", "delete-film", false, "Deleting a film from database (\"name\")");
     private static final Option getFilms = new Option("getF", "get-films", false, "Printing all films from database");
     private static final Option deleteTickets = new Option("delT", "delete-tickets", false, "Deleting existing tickets (ticket id to delete single ticket or \"name\" of film to delete all related tickets)");
     private static final Option getUsers = new Option("getU", "get-users", false, "Printing all users from database");
+    private static final Option deleteUser = new Option("delU", "delete-user", false, "Deleting a user from database (user-id)");
     private static final Option getTickets = new Option("getT", "get-tickets", false, "Printing all tickets from database");
 
     public static void printFormattedOptions(Options options) {
@@ -33,6 +34,7 @@ public class App {
         options.addOption(deleteTickets);
         options.addOption(getUsers);
         options.addOption(getTickets);
+        options.addOption(deleteUser);
         return options;
     }
 
@@ -47,21 +49,23 @@ public class App {
 
     public static void main(String[] args) throws ParseException, FilmoviException {
         Options options = addOptions();
-
         CommandLineParser commandLineParser = new DefaultParser();
-
         CommandLine cl = commandLineParser.parse(options, args);
-
+        filmoviManager fm = new filmoviManager();
+        karteManager km = new karteManager();
+        usersManager um = new usersManager();
         if (cl.hasOption(addFilm.getOpt()) || cl.hasOption(addFilm.getLongOpt())) {
-            filmoviManager fm = new filmoviManager();
             Film f = new Film();
             f.setIme(cl.getArgList().get(0));
             f.setZanr(cl.getArgList().get(1));
+            if (!isDigit(cl.getArgList().get(2))) {
+                System.out.println("You must enter a valid price!");
+                return;
+            }
             f.setCijena(Integer.parseInt(cl.getArgList().get(2)));
             fm.add(f);
             System.out.println("Film successfully added to database!");
         } else if (cl.hasOption(deleteFilm.getOpt()) || cl.hasOption(deleteFilm.getLongOpt())) {
-            filmoviManager fm = new filmoviManager();
             Film f = new Film();
             try {
                 f = fm.getByIme(cl.getArgList().get(0));
@@ -73,11 +77,8 @@ public class App {
                 System.out.println("Film cannot be deleted. First delete related tickets before deleting film.");
             }
         } else if (cl.hasOption(getFilms.getOpt()) || cl.hasOption(getFilms.getLongOpt())) {
-            filmoviManager fm = new filmoviManager();
             fm.getAll().forEach(f -> System.out.println(f.getIme()));
         } else if (cl.hasOption(deleteTickets.getOpt()) || cl.hasOption(deleteTickets.getLongOpt())) {
-            karteManager km = new karteManager();
-            filmoviManager fm = new filmoviManager();
             if (isDigit(cl.getArgList().get(0))) {
                 try {
                     km.delete(Integer.parseInt(cl.getArgList().get(0)));
@@ -94,11 +95,20 @@ public class App {
                 }
             }
         } else if (cl.hasOption(getUsers.getOpt()) || cl.hasOption(getUsers.getLongOpt())) {
-            usersManager um = new usersManager();
             um.getAll().forEach(u -> System.out.println(u.getIme()));
         } else if (cl.hasOption(getTickets.getOpt()) || cl.hasOption(getTickets.getLongOpt())) {
-            karteManager km = new karteManager();
             km.getAll().forEach(k -> System.out.println("User:" + k.getUser().getIme() + "; Film: " + k.getFilm().getIme()));
+        } else if (cl.hasOption(deleteUser.getOpt()) || cl.hasOption(deleteUser.getLongOpt())) {
+            if (!isDigit(cl.getArgList().get(0))) {
+                System.out.println("You must enter a valid user id!");
+                return;
+            }
+            try {
+                um.delete(Integer.parseInt(cl.getArgList().get(0)));
+                System.out.println("User deleted successfully!");
+            } catch (FilmoviException f) {
+                System.out.println("User does not exist!");
+            }
         } else {
             printFormattedOptions(options);
             System.exit(-1);
