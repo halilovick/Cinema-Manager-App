@@ -3,9 +3,6 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
 
@@ -23,16 +20,12 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
             String server = new String();
             String user = new String();
             String pass = new String();
-            try (InputStream input = new FileInputStream("config.properties")) {
+            try {
                 Properties prop = new Properties();
-                prop.load(input);
+                prop.load(ClassLoader.getSystemResource("config.properties").openStream());
                 server = prop.getProperty("db.url");
                 user = prop.getProperty("db.user");
                 pass = prop.getProperty("db.password");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            try {
                 AbstractDao.connection = DriverManager.getConnection(server, user, pass);
             } catch (Exception e) {
                 e.printStackTrace();
