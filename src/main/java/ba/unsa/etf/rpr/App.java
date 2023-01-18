@@ -15,6 +15,7 @@ public class App {
     private static final Option getFilms = new Option("getF", "get-films", false, "Printing all films from database");
     private static final Option deleteTickets = new Option("delT", "delete-tickets", false, "Deleting existing tickets (ticket id to delete single ticket or \"name\" of film to delete all related tickets)");
     private static final Option getUsers = new Option("getU", "get-users", false, "Printing all users from database");
+    private static final Option getTickets = new Option("getT", "get-tickets", false, "Printing all tickets from database");
 
     public static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
@@ -31,6 +32,7 @@ public class App {
         options.addOption(getFilms);
         options.addOption(deleteTickets);
         options.addOption(getUsers);
+        options.addOption(getTickets);
         return options;
     }
 
@@ -94,6 +96,9 @@ public class App {
         } else if (cl.hasOption(getUsers.getOpt()) || cl.hasOption(getUsers.getLongOpt())) {
             usersManager um = new usersManager();
             um.getAll().forEach(u -> System.out.println(u.getIme()));
+        } else if (cl.hasOption(getTickets.getOpt()) || cl.hasOption(getTickets.getLongOpt())) {
+            karteManager km = new karteManager();
+            km.getAll().forEach(k -> System.out.println("User:" + k.getUser().getIme() + "; Film: " + k.getFilm().getIme()));
         } else {
             printFormattedOptions(options);
             System.exit(-1);
