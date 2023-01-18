@@ -7,6 +7,16 @@ import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import java.util.List;
 
 public class karteManager {
+    private boolean kartaExists(int id) throws FilmoviException {
+        karteManager km = new karteManager();
+        try {
+            Karta k = km.getById(id);
+        } catch (FilmoviException f) {
+            return false;
+        }
+        return true;
+    }
+
     public Karta add(Karta k) throws FilmoviException {
         try {
             return DaoFactory.kartaDao().add(k);
@@ -16,6 +26,7 @@ public class karteManager {
     }
 
     public void delete(int kartaId) throws FilmoviException {
+        if (!kartaExists(kartaId)) throw new FilmoviException("Karta does not exist!");
         try {
             DaoFactory.kartaDao().delete(kartaId);
         } catch (FilmoviException e) {
