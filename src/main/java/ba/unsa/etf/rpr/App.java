@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr;
 
 import ba.unsa.etf.rpr.business.filmoviManager;
+import ba.unsa.etf.rpr.business.usersManager;
 import ba.unsa.etf.rpr.domain.Film;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import org.apache.commons.cli.*;
@@ -46,6 +47,9 @@ public class App {
         } else if (cl.hasOption(getFilms.getOpt()) || cl.hasOption(getFilms.getLongOpt())) {
             filmoviManager fm = new filmoviManager();
             fm.getAll().forEach(f -> System.out.println(f.getIme()));
+        } else if (cl.hasOption(getUsers.getOpt()) || cl.hasOption(getUsers.getLongOpt())) {
+            usersManager um = new usersManager();
+            um.getAll().forEach(u -> System.out.println(u.getIme()));
         } else {
             printFormattedOptions(options);
             System.exit(-1);
