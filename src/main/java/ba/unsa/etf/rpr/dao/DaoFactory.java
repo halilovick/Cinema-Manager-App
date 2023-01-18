@@ -1,13 +1,9 @@
 package ba.unsa.etf.rpr.dao;
 
 public class DaoFactory {
-    private static final FilmDao filmDao = new FilmDaoSQLImpl();
-    private static final KartaDao kartaDao = new KartaDaoSQLImpl();
-    private static final UsersDao usersDao = new UsersDaoSQLImpl();
-
-    private DaoFactory() {
-
-    }
+    private static final FilmDao filmDao = FilmDaoSQLImpl.getInstance();
+    private static final KartaDao kartaDao = KartaDaoSQLImpl.getInstance();
+    private static final UsersDao usersDao = UsersDaoSQLImpl.getInstance();
 
     public static FilmDao filmDao() {
         return filmDao;
