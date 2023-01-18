@@ -9,8 +9,19 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class UsersDaoSQLImpl extends AbstractDao<User> implements UsersDao {
+    private static UsersDaoSQLImpl instance = null;
+
     public UsersDaoSQLImpl() {
         super("users");
+    }
+
+    public static UsersDaoSQLImpl getInstance() {
+        if (instance == null) instance = new UsersDaoSQLImpl();
+        return instance;
+    }
+
+    public static void removeInstance() {
+        if (instance != null) instance = null;
     }
 
     @Override
