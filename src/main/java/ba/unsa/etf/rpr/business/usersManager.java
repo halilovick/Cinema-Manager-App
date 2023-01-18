@@ -7,6 +7,16 @@ import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import java.util.List;
 
 public class usersManager {
+    private boolean userExists(int id) throws FilmoviException {
+        usersManager um = new usersManager();
+        try {
+            User u = um.getById(id);
+        } catch (FilmoviException f) {
+            return false;
+        }
+        return true;
+    }
+
     public User add(User u) throws FilmoviException {
         try {
             return DaoFactory.usersDao().add(u);
@@ -16,6 +26,7 @@ public class usersManager {
     }
 
     public void delete(int userId) throws FilmoviException {
+        if (!userExists(userId)) throw new FilmoviException("User does not exist!");
         try {
             DaoFactory.usersDao().delete(userId);
         } catch (FilmoviException e) {
