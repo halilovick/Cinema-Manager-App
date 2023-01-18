@@ -10,36 +10,38 @@ import java.sql.*;
 import java.util.*;
 
 public abstract class AbstractDao<T extends Idable> implements Dao<T> {
-    private Connection connection;
+    private static Connection connection = null;
     private String tableName;
 
     public AbstractDao(String tableName) {
         this.tableName = tableName;
-        String server = new String();
-        String user = new String();
-        String pass = new String();
-        try (InputStream input = new FileInputStream("config.properties")) {
-            Properties prop = new Properties();
-            prop.load(input);
-            server = prop.getProperty("db.url");
-            user = prop.getProperty("db.user");
-            pass = prop.getProperty("db.password");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        try {
-            this.connection = DriverManager.getConnection(server, user, pass);
-        } catch (Exception e) {
-            e.printStackTrace();
+        createConnection();
+    }
+
+    private static void createConnection() {
+        if (AbstractDao.connection == null) {
+            String server = new String();
+            String user = new String();
+            String pass = new String();
+            try (InputStream input = new FileInputStream("config.properties")) {
+                Properties prop = new Properties();
+                prop.load(input);
+                server = prop.getProperty("db.url");
+                user = prop.getProperty("db.user");
+                pass = prop.getProperty("db.password");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            try {
+                AbstractDao.connection = DriverManager.getConnection(server, user, pass);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public Connection getConnection() {
         return this.connection;
-    }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
     }
 
     /**
@@ -168,12 +170,10 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     public T add(T item) throws FilmoviException {
         Map<String, Object> row = object2row(item);
         Map.Entry<String, String> columns = prepareInsertParts(row);
-
         StringBuilder builder = new StringBuilder();
         builder.append("INSERT INTO ").append(tableName);
         builder.append(" (").append(columns.getKey()).append(") ");
         builder.append("VALUES (").append(columns.getValue()).append(")");
-
         try {
             PreparedStatement stmt = getConnection().prepareStatement(builder.toString(), Statement.RETURN_GENERATED_KEYS);
             // bind params. IMPORTANT treeMap is used to keep columns sorted so params are bind correctly
@@ -184,11 +184,9 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
                 counter++;
             }
             stmt.executeUpdate();
-
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next(); // we know that there is one key
             item.setId(rs.getInt(1)); //set id to return it back */
-
             return item;
         } catch (SQLException e) {
             throw new FilmoviException(e.getMessage(), e);
@@ -205,10 +203,10 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
                 .append(updateColumns)
                 .append(" WHERE id = ?");
 
-        try{
+        try {
             PreparedStatement stmt = getConnection().prepareStatement(builder.toString());
             int counter = 1;
-            for (Map.Entry<String, Object> entry: row.entrySet()) {
+            for (Map.Entry<String, Object> entry : row.entrySet()) {
                 if (entry.getKey().equals("id")) continue; // skip ID
                 stmt.setObject(counter, entry.getValue());
                 counter++;
@@ -216,7 +214,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
             stmt.setObject(counter, item.getId());
             stmt.executeUpdate();
             return item;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new FilmoviException(e.getMessage(), e);
         }
     }
