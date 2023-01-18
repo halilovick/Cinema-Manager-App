@@ -47,5 +47,4 @@ class filmoviManagerTest {
         Mockito.verify(filmoviManager).add(film);
         daoFactoryMockedStatic.close();
     }
-
 }
