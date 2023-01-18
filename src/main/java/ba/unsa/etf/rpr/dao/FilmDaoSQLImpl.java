@@ -7,8 +7,19 @@ import java.sql.*;
 import java.util.*;
 
 public class FilmDaoSQLImpl extends AbstractDao<Film> implements FilmDao {
+    private static FilmDaoSQLImpl instance = null;
+
     public FilmDaoSQLImpl() {
         super("film");
+    }
+
+    public static FilmDaoSQLImpl getInstance() {
+        if (instance == null) instance = new FilmDaoSQLImpl();
+        return instance;
+    }
+
+    public static void removeInstance() {
+        if (instance != null) instance = null;
     }
 
     @Override
@@ -43,24 +54,6 @@ public class FilmDaoSQLImpl extends AbstractDao<Film> implements FilmDao {
     public void resetIncrement(int i) throws FilmoviException {
         try {
             executeQuery("ALTER TABLE film AUTO_INCREMENT = ?", new Object[]{i});
-        } catch (FilmoviException e) {
-            throw new FilmoviException(e.getMessage(), e);
-        }
-    }
-
-    @Override
-    public List<Film> searchByTrajanje(int a, int b) throws FilmoviException {
-        try {
-            return executeQuery("SELECT * FROM film WHERE trajanje BETWEEN ? AND ?", new Object[]{a, b});
-        } catch (FilmoviException e) {
-            throw new FilmoviException(e.getMessage(), e);
-        }
-    }
-
-    @Override
-    public List<Film> searchByZanr(String zanr) throws FilmoviException {
-        try {
-            return executeQuery("SELECT * FROM film WHERE zanr = ?", new Object[]{zanr});
         } catch (FilmoviException e) {
             throw new FilmoviException(e.getMessage(), e);
         }
