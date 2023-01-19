@@ -133,7 +133,7 @@
                                 <TableColumn fx:id="colZanr" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0" text="GENRE" />
                                 <TableColumn fx:id="colTrajanje" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="DURATION" />
                                 <TableColumn fx:id="colCijena" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="PRICE" />
-                                <TableColumn fx:id="colBrojSale" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="SALA" />
+                                <TableColumn fx:id="colBrojSale" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="THEATER" />
                             </columns>
                             <GridPane.margin>
                                 <Insets />
@@ -159,7 +159,7 @@
                                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                             </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="brojsaleField" promptText="Broj sale" GridPane.rowIndex="4">
+                        <TextField fx:id="brojsaleField" promptText="Theater number" GridPane.rowIndex="4">
                             <GridPane.margin>
                                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                             </GridPane.margin>
