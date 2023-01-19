@@ -21,7 +21,7 @@
         <URL value="@config.css" />
     </stylesheets>
     <tabs>
-        <Tab fx:id="prodajaKarataAdminButton" text="Prodaja karata">
+        <Tab fx:id="prodajaKarataAdminButton" text="Ticket shop">
          <content>
             <GridPane fx:id="ProdajaKarataScreen" prefHeight="550.0" prefWidth="999.0">
                <stylesheets>
@@ -45,7 +45,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="223.80002441406248" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label text="Odaberite film" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <Label text="Choose a film" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font name="Tahoma Bold" size="16.0" />
                      </font>
@@ -66,19 +66,19 @@
                      </font>
                   </Label>
                   <ChoiceBox fx:id="filmChoiceBox" prefWidth="300.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-                  <Label text="Unesite broj karata" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                  <Label text="Number of tickets" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                      <font>
                         <Font name="Tahoma Bold" size="16.0" />
                      </font>
                   </Label>
                   <TextField fx:id="brojKarataTextField" maxWidth="300.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
-                  <Label text="Unesite datum" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                  <Label text="Date of film" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                      <font>
                         <Font name="Tahoma Bold" size="16.0" />
                      </font>
                   </Label>
                   <DatePicker fx:id="odabirDatuma" maxWidth="300.0" onAction="#odabirDatumaClick" prefWidth="300.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
-                  <Button fx:id="kupiButton" mnemonicParsing="false" onAction="#kupiButtonClick" prefHeight="84.0" prefWidth="167.0" text="Kupi!" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+                  <Button fx:id="kupiButton" mnemonicParsing="false" onAction="#kupiButtonClick" prefHeight="84.0" prefWidth="167.0" text="Buy now!" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
@@ -106,7 +106,7 @@
                </children>
             </GridPane>
          </content></Tab>
-        <Tab fx:id="filmoviTab" text="Pregled filmova">
+        <Tab fx:id="filmoviTab" text="Film management">
             <content>
                 <GridPane fx:id="pregledFilmovaAdmin" prefHeight="572.0" prefWidth="999.0">
                     <columnConstraints>
@@ -129,32 +129,32 @@
                         <TableView fx:id="tabelaFilmova" onMouseClicked="#getSelectedFilm" prefHeight="571.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowSpan="10">
                             <columns>
                                 <TableColumn fx:id="colID" maxWidth="-1.0" minWidth="65.0" prefWidth="100.0" text="ID" />
-                                <TableColumn fx:id="colIme" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0" text="IME" />
-                                <TableColumn fx:id="colZanr" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0" text="ŽANR" />
-                                <TableColumn fx:id="colTrajanje" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="TRAJANJE" />
-                                <TableColumn fx:id="colCijena" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="CIJENA" />
+                                <TableColumn fx:id="colIme" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0" text="TITLE" />
+                                <TableColumn fx:id="colZanr" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0" text="GENRE" />
+                                <TableColumn fx:id="colTrajanje" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="DURATION" />
+                                <TableColumn fx:id="colCijena" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="PRICE" />
                                 <TableColumn fx:id="colBrojSale" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="SALA" />
                             </columns>
                             <GridPane.margin>
                                 <Insets />
                             </GridPane.margin>
                         </TableView>
-                        <TextField fx:id="imeField" promptText="Ime filma">
+                        <TextField fx:id="imeField" promptText="Film title">
                             <GridPane.margin>
                                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                             </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="zanrField" promptText="Žanr" GridPane.rowIndex="1">
+                        <TextField fx:id="zanrField" promptText="Genre" GridPane.rowIndex="1">
                             <GridPane.margin>
                                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                             </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="trajanjeField" promptText="Trajanje" GridPane.rowIndex="2">
+                        <TextField fx:id="trajanjeField" promptText="Duration" GridPane.rowIndex="2">
                             <GridPane.margin>
                                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                             </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="cijenaField" promptText="Cijena" GridPane.rowIndex="3">
+                        <TextField fx:id="cijenaField" promptText="Price" GridPane.rowIndex="3">
                             <GridPane.margin>
                                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                             </GridPane.margin>
@@ -164,9 +164,9 @@
                                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                             </GridPane.margin>
                         </TextField>
-                        <Button fx:id="dodajButton" mnemonicParsing="false" onAction="#dodajFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Dodaj" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                        <Button fx:id="azurirajButton" mnemonicParsing="false" onAction="#azurirajFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Ažuriraj" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-                        <Button fx:id="obrisiButton" mnemonicParsing="false" onAction="#obrisiFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Obriši" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+                        <Button fx:id="dodajButton" mnemonicParsing="false" onAction="#dodajFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Add" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <Button fx:id="azurirajButton" mnemonicParsing="false" onAction="#azurirajFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Update" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+                        <Button fx:id="obrisiButton" mnemonicParsing="false" onAction="#obrisiFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Delete" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
                         <Button fx:id="nazadButton2" mnemonicParsing="false" onAction="#nazadButtonClick" prefHeight="40.0" prefWidth="142.0" text="Sign out" GridPane.halignment="CENTER" GridPane.rowIndex="8">
                             <padding>
                                 <Insets bottom="20.0" />
@@ -176,7 +176,7 @@
                 </GridPane>
             </content>
         </Tab>
-      <Tab fx:id="filmoviTab1" text="Pregled korisnika">
+      <Tab fx:id="filmoviTab1" text="Users management">
          <content>
             <GridPane fx:id="pregledUseraAdmin" prefHeight="572.0" prefWidth="999.0">
                <columnConstraints>
@@ -199,20 +199,20 @@
                   <TableView fx:id="tabelaUsera" onMouseClicked="#getSelectedUser" prefHeight="571.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowSpan="10">
                      <columns>
                         <TableColumn fx:id="colID1" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" text="ID" />
-                        <TableColumn fx:id="colUser1" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0" text="USER" />
+                        <TableColumn fx:id="colUser1" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0" text="USERNAME" />
                         <TableColumn fx:id="colPassword1" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0" text="PASSWORD" />
-                        <TableColumn fx:id="colIme1" maxWidth="1.7976931348623157E308" minWidth="80.0" text="IME" />
+                        <TableColumn fx:id="colIme1" maxWidth="1.7976931348623157E308" minWidth="80.0" text="NAME" />
                         <TableColumn fx:id="colEmail1" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="EMAIL" />
-                        <TableColumn fx:id="colAdresa1" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="ADRESA" />
-                        <TableColumn fx:id="colGrad1" prefWidth="75.0" text="GRAD" />
-                        <TableColumn fx:id="colDatumRodj1" prefWidth="75.0" text="DATUM RODJ." />
+                        <TableColumn fx:id="colAdresa1" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="ADRESS" />
+                        <TableColumn fx:id="colGrad1" prefWidth="75.0" text="CITY" />
+                        <TableColumn fx:id="colDatumRodj1" prefWidth="75.0" text="DOB" />
                         <TableColumn fx:id="colAdmin1" minWidth="50.0" prefWidth="50.0" text="ADMIN" />
                      </columns>
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </TableView>
-                  <TextField fx:id="userField1" promptText="User">
+                  <TextField fx:id="userField1" promptText="Username">
                      <GridPane.margin>
                         <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                      </GridPane.margin>
@@ -222,7 +222,7 @@
                         <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="imeField1" promptText="Ime" GridPane.rowIndex="2">
+                  <TextField fx:id="imeField1" promptText="Full name" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                      </GridPane.margin>
@@ -237,9 +237,9 @@
                         <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Button fx:id="dodajButton1" mnemonicParsing="false" onAction="#dodajUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Dodaj" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                  <Button fx:id="azurirajButton1" mnemonicParsing="false" onAction="#azurirajUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Ažuriraj" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-                  <Button fx:id="obrisiButton1" mnemonicParsing="false" onAction="#obrisiUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Obriši" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+                  <Button fx:id="dodajButton1" mnemonicParsing="false" onAction="#dodajUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Add" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                  <Button fx:id="azurirajButton1" mnemonicParsing="false" onAction="#azurirajUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Update" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+                  <Button fx:id="obrisiButton1" mnemonicParsing="false" onAction="#obrisiUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Delete" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
                   <Button fx:id="nazadButton21" mnemonicParsing="false" onAction="#nazadButtonClick" prefHeight="40.0" prefWidth="142.0" text="Sign out" GridPane.halignment="CENTER" GridPane.rowIndex="8">
                      <padding>
                         <Insets bottom="20.0" />

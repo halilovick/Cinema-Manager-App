@@ -88,8 +88,8 @@ public class AdminPageController {
         if (imeField.getText().isEmpty() || zanrField.getText().isEmpty() || trajanjeField.getText().isEmpty() || cijenaField.getText().isEmpty() || brojsaleField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Pogresni podaci");
-            alert.setContentText("Uneseni su nevalidni podaci!");
+            alert.setHeaderText("Invalid details");
+            alert.setContentText("Please enter valid details!");
             alert.showAndWait();
             return;
         }
@@ -103,15 +103,15 @@ public class AdminPageController {
             fmanager.add(f);
             UpdateFilmoviTable();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Dodavanje uspješno");
+            alert.setTitle("Success!");
             alert.setHeaderText(null);
-            alert.setContentText("Film je dodan!");
+            alert.setContentText("Film has been successfully added");
             alert.showAndWait();
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Pogresni podaci");
-            alert.setContentText("Uneseni su nevalidni podaci!");
+            alert.setHeaderText("Invalid details");
+            alert.setContentText("Please enter valid details!");
             alert.showAndWait();
         } catch (FilmoviException e) {
             throw new FilmoviException(e.getMessage(), e);
@@ -122,8 +122,8 @@ public class AdminPageController {
         if (imeField.getText().isEmpty() || zanrField.getText().isEmpty() || trajanjeField.getText().isEmpty() || cijenaField.getText().isEmpty() || brojsaleField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Odaberite film!");
-            alert.setContentText("Niti jedan film nije odabran.");
+            alert.setHeaderText("Choose a film!");
+            alert.setContentText("A film has not been chosen");
             alert.showAndWait();
             return;
         }
@@ -136,9 +136,9 @@ public class AdminPageController {
         f.setBroj_sale(Integer.parseInt(brojsaleField.getText()));
         fmanager.update(f);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Uređivanje uspješno!");
+        alert.setTitle("Success!");
         alert.setHeaderText(null);
-        alert.setContentText("Film je uređen!");
+        alert.setContentText("Film has been successfully updated");
         UpdateFilmoviTable();
         alert.showAndWait();
     }
@@ -147,8 +147,8 @@ public class AdminPageController {
         if (imeField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Odaberite film!");
-            alert.setContentText("Niti jedan film nije odabran.");
+            alert.setHeaderText("Choose a film!");
+            alert.setContentText("A film has not been chosen");
             alert.showAndWait();
             return;
         }
@@ -156,9 +156,9 @@ public class AdminPageController {
         fmanager.delete(fmanager.getByIme(imeField.getText()).getId());
         UpdateFilmoviTable();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Brisanje uspješno");
+        alert.setTitle("Success!");
         alert.setHeaderText(null);
-        alert.setContentText("Odabrani film je obrisan!");
+        alert.setContentText("Film has been successfully deleted");
         alert.showAndWait();
     }
 
@@ -192,9 +192,9 @@ public class AdminPageController {
             try {
                 imeOdabranogFilma = listaFilmova.get(newValue.intValue());
                 Film f = fmanager.getByIme(imeOdabranogFilma);
-                trajanjeLabelFiksna.setText("TRAJANJE:");
-                cijenaLabelFiksna.setText("CIJENA:");
-                zanrLabelFiksna.setText("ZANR:");
+                trajanjeLabelFiksna.setText("DURATION:");
+                cijenaLabelFiksna.setText("PRICE:");
+                zanrLabelFiksna.setText("GENRE:");
                 trajanjeLabel.setText(f.getTrajanje() + " MIN");
                 zanrLabel.setText(f.getZanr());
                 cijenaLabel.setText(f.getCijena() + " KM");
@@ -218,7 +218,7 @@ public class AdminPageController {
         LoginController lc = fxmlLoader.getController();
         stage.setResizable(false);
         stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
-        stage.setTitle("Prijava");
+        stage.setTitle("Login page");
         stage.setScene(scene);
         stage.show();
         Node n = (Node) actionEvent.getSource();
@@ -230,8 +230,8 @@ public class AdminPageController {
         if (userField1.getText().isEmpty() || passwordField1.getText().isEmpty() || imeField1.getText().isEmpty() || emailField1.getText().isEmpty() || adminField1.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Pogresni podaci");
-            alert.setContentText("Uneseni su nevalidni podaci!");
+            alert.setHeaderText("Invalid details");
+            alert.setContentText("Please enter valid details.");
             alert.showAndWait();
             return;
         }
@@ -245,15 +245,15 @@ public class AdminPageController {
             umanager.add(u);
             UpdateUseriTable();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Dodavanje uspješno");
+            alert.setTitle("Success!");
             alert.setHeaderText(null);
-            alert.setContentText("Korisnik je dodan!");
+            alert.setContentText("User successfully added");
             alert.showAndWait();
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Pogresni podaci");
-            alert.setContentText("Uneseni su nevalidni podaci!");
+            alert.setHeaderText("Invalid details");
+            alert.setContentText("Please enter valid details.");
             alert.showAndWait();
         } catch (FilmoviException e) {
             throw new FilmoviException(e.getMessage(), e);
@@ -264,8 +264,8 @@ public class AdminPageController {
         if (userField1.getText().isEmpty() || passwordField1.getText().isEmpty() || imeField1.getText().isEmpty() || emailField1.getText().isEmpty() || adminField1.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Odaberite korisnika!");
-            alert.setContentText("Niti jedan korisnik nije odabran.");
+            alert.setHeaderText("Choose a user!");
+            alert.setContentText("A user has not been chosen!");
             alert.showAndWait();
             return;
         }
@@ -281,9 +281,9 @@ public class AdminPageController {
         u.setAdmin(Boolean.parseBoolean(adminField1.getText()));
         umanager.update(u);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Uređivanje uspješno!");
+        alert.setTitle("Success!");
         alert.setHeaderText(null);
-        alert.setContentText("Korisnik je uređen!");
+        alert.setContentText("User successfully updated!");
         UpdateUseriTable();
         alert.showAndWait();
     }
@@ -292,17 +292,17 @@ public class AdminPageController {
         if (userField1.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Odaberite film!");
-            alert.setContentText("Niti jedan film nije odabran.");
+            alert.setHeaderText("Choose a film");
+            alert.setContentText("A film has not been chosen!");
             alert.showAndWait();
             return;
         }
         umanager.delete(umanager.getLoggedInId(userField1.getText(), passwordField1.getText()));
         UpdateUseriTable();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Brisanje uspješno");
+        alert.setTitle("Success!");
         alert.setHeaderText(null);
-        alert.setContentText("Odabrani korisnik je obrisan!");
+        alert.setContentText("User has been successfully deleted.");
         alert.showAndWait();
     }
 
@@ -343,26 +343,34 @@ public class AdminPageController {
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Pogresni podaci");
-            alert.setContentText("Uneseni su nevalidni podaci!");
+            alert.setHeaderText("Choose number of tickets!");
+            alert.setContentText("A number of tickets has not been chosen");
             alert.showAndWait();
+            return;
         }
-        int ukupnaCijena = brojKarata * fmanager.getByIme(imeOdabranogFilma).getCijena();
         if (imeOdabranogFilma.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Odaberite film!");
-            alert.setContentText("Niti jedan film nije odabran.");
+            alert.setHeaderText("Choose a film!");
+            alert.setContentText("A film has not been chosen");
             alert.showAndWait();
             return;
         } else if (brojKarata <= 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Odaberite broj karata!");
-            alert.setContentText("Broj karata za film nije odabran.");
+            alert.setHeaderText("Choose number of tickets!");
+            alert.setContentText("A number of tickets has not been chosen");
+            alert.showAndWait();
+            return;
+        } else if (datum == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Choose a date!");
+            alert.setContentText("A date has not been chosen");
             alert.showAndWait();
             return;
         }
+        int ukupnaCijena = brojKarata * fmanager.getByIme(imeOdabranogFilma).getCijena();
         while (brojKarata != 0) {
             Karta k = new Karta();
             k.setFilm(fmanager.getByIme(imeOdabranogFilma));
@@ -374,12 +382,12 @@ public class AdminPageController {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/KupljenaKarta.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
         KupljenaKartaController kkc = fxmlLoader.getController();
-        kkc.imeFilma.setText("Ime filma: " + imeOdabranogFilma);
-        kkc.datumFilma.setText("Datum: " + datum);
-        kkc.cijenaKarte.setText("Cijena: " + ukupnaCijena + "KM");
+        kkc.imeFilma.setText("Title: " + imeOdabranogFilma);
+        kkc.datumFilma.setText("Date: " + datum);
+        kkc.cijenaKarte.setText("Price: " + ukupnaCijena + "KM");
         stage.setResizable(false);
         stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
-        stage.setTitle("Karta kupljena!");
+        stage.setTitle("Ticket successfully purchased!");
         stage.setScene(scene);
         stage.show();
     }
