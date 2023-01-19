@@ -61,7 +61,7 @@ public class NapraviRacunController {
                     } else {
                         usernameTextField.getStyleClass().removeAll("poljeIspravno");
                         usernameTextField.getStyleClass().add("poljeNijeIspravno");
-                        usernameZauzetLabel.setText("Username se koristi!");
+                        usernameZauzetLabel.setText("Username already exists!");
                     }
                 } catch (FilmoviException e) {
                     throw new RuntimeException(e);
@@ -107,24 +107,24 @@ public class NapraviRacunController {
         if (usernameTextField.getText().isEmpty() || lozinkaTextField.getText().isEmpty() || imeTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || adresaTextField.getText().isEmpty() || gradTextField.getText().isEmpty() || datumRodjenjaField.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Nedostaju podaci!");
-            alert.setContentText("Molim vas upišite sve tražene podatke.");
+            alert.setHeaderText("Missing credentials!");
+            alert.setContentText("You must fill out all of the fields.");
             alert.showAndWait();
             return;
         }
         if (passwordCheck(lozinkaTextField.getText()).equals("W")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Nevalidna lozinka!");
-            alert.setContentText("Molim vas upišite validnu lozinku.");
+            alert.setHeaderText("Password too weak!");
+            alert.setContentText("Please enter a stronger password.");
             alert.showAndWait();
             return;
         }
         if (!ispravanEmail) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Nevalidan e-mail!");
-            alert.setContentText("Molim vas upišite validan e-mail.");
+            alert.setHeaderText("Email not valid!");
+            alert.setContentText("Please enter a valid email address.");
             alert.showAndWait();
             return;
         }
@@ -140,9 +140,9 @@ public class NapraviRacunController {
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Racun kreiran!");
+        alert.setTitle("Success!");
         alert.setHeaderText(null);
-        alert.setContentText("Vaš račun je uspješno kreiran! Ulogujte se.");
+        alert.setContentText("Your account has been created. You can now log in.");
         alert.showAndWait();
         stage.close();
     }
