@@ -54,8 +54,8 @@ public class LoginController {
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Pogrešni podaci!");
-            alert.setContentText("Uneseni su pogrešni podaci.");
+            alert.setHeaderText("Wrong credentials");
+            alert.setContentText("Invalid username or password");
             alert.showAndWait();
         }
     }
@@ -71,7 +71,7 @@ public class LoginController {
         NapraviRacunController nrc = fxmlLoader.getController();
         stage.setResizable(false);
         stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
-        stage.setTitle("Napravi račun");
+        stage.setTitle("Sign up");
         stage.setScene(scene);
         stage.show();
     }

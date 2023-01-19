@@ -59,7 +59,7 @@
             </font>
         </TextField>
         <Button fx:id="prijavaButton" mnemonicParsing="false" onAction="#prijavaButtonClick" prefHeight="50.0" prefWidth="200.0" text="Login" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-        <Label fx:id="usernameTextField1" alignment="CENTER" text="Nemate nalog?" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="BOTTOM">
+        <Label fx:id="usernameTextField1" alignment="CENTER" text="Don't have an account?" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="BOTTOM">
             <font>
                 <Font name="Tahoma Bold" size="25.0" />
             </font>
