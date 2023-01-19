@@ -36,6 +36,10 @@ public class filmoviManager {
         return DaoFactory.filmDao().getByIme(ime);
     }
 
+    public Film getById(int id) throws FilmoviException {
+        return DaoFactory.filmDao().getById(id);
+    }
+
     public List<String> getAllNames() throws FilmoviException {
         return DaoFactory.filmDao().getAllNames();
     }
