@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.business.filmoviManager;
 import ba.unsa.etf.rpr.business.karteManager;
 import ba.unsa.etf.rpr.business.usersManager;
 import ba.unsa.etf.rpr.domain.Film;
+import ba.unsa.etf.rpr.domain.Karta;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import org.apache.commons.cli.*;
@@ -19,6 +20,7 @@ public class App {
     private static final Option getUsers = new Option("getU", "get-users", false, "Printing all users from database");
     private static final Option deleteUser = new Option("delU", "delete-user", false, "Deleting a user from database (user-id)");
     private static final Option getTickets = new Option("getT", "get-tickets", false, "Printing all tickets from database");
+    private static final Option addTicket = new Option("t", "add-ticket", false, "Adding a new ticket to database (user-id, film-id)");
 
     public static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
@@ -38,6 +40,7 @@ public class App {
         options.addOption(getTickets);
         options.addOption(deleteUser);
         options.addOption(addUser);
+        options.addOption(addTicket);
         return options;
     }
 
@@ -123,6 +126,24 @@ public class App {
             u.setAdmin(Boolean.parseBoolean(cl.getArgList().get(2)));
             um.add(u);
             System.out.println("User successfully added!");
+        } else if (cl.hasOption(addTicket.getOpt()) || cl.hasOption(addTicket.getLongOpt())) {
+            if (!isDigit(cl.getArgList().get(0))) {
+                System.out.println("You must enter a valid film id!");
+                return;
+            }
+            if (!isDigit(cl.getArgList().get(1))) {
+                System.out.println("You must enter a valid user id!");
+                return;
+            }
+            try {
+                Karta k = new Karta();
+                k.setFilm(fm.getById(Integer.parseInt(cl.getArgList().get(0))));
+                k.setUser(um.getById(Integer.parseInt(cl.getArgList().get(1))));
+                km.add(k);
+                System.out.println("Ticket successfuly added!");
+            } catch (FilmoviException f) {
+                System.out.println("User/film does not exist!");
+            }
         } else {
             printFormattedOptions(options);
             System.exit(-1);
