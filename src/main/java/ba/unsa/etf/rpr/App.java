@@ -4,13 +4,15 @@ import ba.unsa.etf.rpr.business.filmoviManager;
 import ba.unsa.etf.rpr.business.karteManager;
 import ba.unsa.etf.rpr.business.usersManager;
 import ba.unsa.etf.rpr.domain.Film;
+import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import org.apache.commons.cli.*;
 
 import java.io.PrintWriter;
 
 public class App {
-    private static final Option addFilm = new Option("f", "add-film", false, "Adding a new film to database (name, genre, duration)");
+    private static final Option addFilm = new Option("f", "add-film", false, "Adding a new film to database (\"name\", \"genre\", duration)");
+    private static final Option addUser = new Option("u", "add-user", false, "Adding a new user to database (\"username\", \"password\", admin(true/false))");
     private static final Option deleteFilm = new Option("delF", "delete-film", false, "Deleting a film from database (\"name\")");
     private static final Option getFilms = new Option("getF", "get-films", false, "Printing all films from database");
     private static final Option deleteTickets = new Option("delT", "delete-tickets", false, "Deleting existing tickets (ticket id to delete single ticket or \"name\" of film to delete all related tickets)");
@@ -21,7 +23,7 @@ public class App {
     public static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
         PrintWriter printWriter = new PrintWriter(System.out);
-        helpFormatter.printUsage(printWriter, 150, "java -jar cinema-manager-cli-jar-with-dependencies.jar [option] (parameters) ");
+        helpFormatter.printUsage(printWriter, 150, "java -jar cinema-manager-cli-jar-with-dependencies.jar [option] (parameters)");
         helpFormatter.printOptions(printWriter, 150, options, 2, 7);
         printWriter.close();
     }
@@ -35,6 +37,7 @@ public class App {
         options.addOption(getUsers);
         options.addOption(getTickets);
         options.addOption(deleteUser);
+        options.addOption(addUser);
         return options;
     }
 
@@ -109,6 +112,17 @@ public class App {
             } catch (FilmoviException f) {
                 System.out.println("User does not exist!");
             }
+        } else if (cl.hasOption(addUser.getOpt()) || cl.hasOption(addUser.getLongOpt())) {
+            if (!cl.getArgList().get(2).equals("1") && !cl.getArgList().get(2).equals("0") && !cl.getArgList().get(2).equals("true") && !cl.getArgList().get(2).equals("false")) {
+                System.out.println("You must enter a valid boolean value!");
+                return;
+            }
+            User u = new User();
+            u.setUser(cl.getArgList().get(0));
+            u.setPassword(cl.getArgList().get(1));
+            u.setAdmin(Boolean.parseBoolean(cl.getArgList().get(2)));
+            um.add(u);
+            System.out.println("User successfully added!");
         } else {
             printFormattedOptions(options);
             System.exit(-1);
