@@ -72,9 +72,9 @@ public class UserPageController {
             try {
                 imeOdabranogFilma = listaFilmova.get(newValue.intValue());
                 Film f = fmanager.getByIme(imeOdabranogFilma);
-                trajanjeLabelFiksna.setText("TRAJANJE:");
-                cijenaLabelFiksna.setText("CIJENA:");
-                zanrLabelFiksna.setText("ZANR:");
+                trajanjeLabelFiksna.setText("DURATION:");
+                cijenaLabelFiksna.setText("PRICE:");
+                zanrLabelFiksna.setText("GENRE:");
                 trajanjeLabel.setText(f.getTrajanje() + " MIN");
                 zanrLabel.setText(f.getZanr());
                 cijenaLabel.setText(f.getCijena() + " KM");
@@ -94,32 +94,40 @@ public class UserPageController {
         datumRodjenjaField.setValue(user.getDatum_rodjenja().toLocalDate());
     }
 
-    public void kupiButtonClick() throws IOException, FilmoviException {
+    public void kupiButtonClick(ActionEvent actionEvent) throws FilmoviException, IOException {
         try {
             brojKarata = Integer.parseInt(brojKarataTextField.getText());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Pogresni podaci");
-            alert.setContentText("Uneseni su nevalidni podaci!");
+            alert.setHeaderText("Choose number of tickets!");
+            alert.setContentText("A number of tickets has not been chosen");
             alert.showAndWait();
+            return;
         }
-        int ukupnaCijena = brojKarata * fmanager.getByIme(imeOdabranogFilma).getCijena();
         if (imeOdabranogFilma.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Odaberite film!");
-            alert.setContentText("Niti jedan film nije odabran.");
+            alert.setHeaderText("Choose a film!");
+            alert.setContentText("A film has not been chosen");
             alert.showAndWait();
             return;
         } else if (brojKarata <= 0) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
-            alert.setHeaderText("Odaberite broj karata!");
-            alert.setContentText("Broj karata za film nije odabran.");
+            alert.setHeaderText("Choose number of tickets!");
+            alert.setContentText("A number of tickets has not been chosen");
+            alert.showAndWait();
+            return;
+        } else if (datum == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Choose a date!");
+            alert.setContentText("A date has not been chosen");
             alert.showAndWait();
             return;
         }
+        int ukupnaCijena = brojKarata * fmanager.getByIme(imeOdabranogFilma).getCijena();
         while (brojKarata != 0) {
             Karta k = new Karta();
             k.setFilm(fmanager.getByIme(imeOdabranogFilma));
@@ -131,12 +139,12 @@ public class UserPageController {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/KupljenaKarta.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
         KupljenaKartaController kkc = fxmlLoader.getController();
-        kkc.imeFilma.setText("Ime filma: " + imeOdabranogFilma);
-        kkc.datumFilma.setText("Datum: " + datum);
-        kkc.cijenaKarte.setText("Cijena: " + ukupnaCijena + "KM");
+        kkc.imeFilma.setText("Title: " + imeOdabranogFilma);
+        kkc.datumFilma.setText("Date: " + datum);
+        kkc.cijenaKarte.setText("Price: " + ukupnaCijena + "KM");
         stage.setResizable(false);
         stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
-        stage.setTitle("Karta kupljena!");
+        stage.setTitle("Ticket successfully purchased!");
         stage.setScene(scene);
         stage.show();
     }
@@ -148,7 +156,7 @@ public class UserPageController {
         LoginController lc = fxmlLoader.getController();
         stage.setResizable(false);
         stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
-        stage.setTitle("Prijava");
+        stage.setTitle("Login page");
         stage.setScene(scene);
         stage.show();
         Node n = (Node) actionEvent.getSource();
@@ -170,9 +178,9 @@ public class UserPageController {
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Uređivanje uspješno!");
+        alert.setTitle("Success!");
         alert.setHeaderText(null);
-        alert.setContentText("Podaci su spašeni. Ulogujte se ponovo.");
+        alert.setContentText("Credentials have been changed. Please log in again.");
         alert.showAndWait();
         stage.close();
         Stage stage1 = new Stage();
@@ -181,7 +189,7 @@ public class UserPageController {
         LoginController lc = fxmlLoader.getController();
         stage1.setResizable(false);
         stage1.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
-        stage1.setTitle("Prijava");
+        stage1.setTitle("Login page");
         stage1.setScene(scene1);
         stage1.show();
     }
