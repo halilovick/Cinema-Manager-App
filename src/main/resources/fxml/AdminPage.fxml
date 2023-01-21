@@ -259,34 +259,61 @@
                      <GridPane.margin>
                         <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                      </GridPane.margin>
+                     <tooltip>
+                        <Tooltip text="Enter the username of the user" />
+                     </tooltip>
                   </TextField>
                   <TextField fx:id="passwordField1" promptText="Password" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                      </GridPane.margin>
+                     <tooltip>
+                        <Tooltip text="Enter the password of the user" />
+                     </tooltip>
                   </TextField>
                   <TextField fx:id="imeField1" promptText="Full name" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                      </GridPane.margin>
+                     <tooltip>
+                        <Tooltip text="Enter the full name of the user" />
+                     </tooltip>
                   </TextField>
                   <TextField fx:id="emailField1" promptText="Email" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                      </GridPane.margin>
+                     <tooltip>
+                        <Tooltip text="Enter the email of the user" />
+                     </tooltip>
                   </TextField>
                   <TextField fx:id="adminField1" promptText="Admin" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                      </GridPane.margin>
+                     <tooltip>
+                        <Tooltip text="Enter true if the user is an admin, false if the user is not an admin" />
+                     </tooltip>
                   </TextField>
-                  <Button fx:id="dodajButton1" mnemonicParsing="false" onAction="#dodajUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Add" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                  <Button fx:id="azurirajButton1" mnemonicParsing="false" onAction="#azurirajUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Update" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-                  <Button fx:id="obrisiButton1" mnemonicParsing="false" onAction="#obrisiUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Delete" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+                  <Button fx:id="dodajButton1" mnemonicParsing="false" onAction="#dodajUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Add" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                     <tooltip>
+                        <Tooltip text="Click here to add the user" />
+                     </tooltip></Button>
+                  <Button fx:id="azurirajButton1" mnemonicParsing="false" onAction="#azurirajUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Update" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                     <tooltip>
+                        <Tooltip text="Click here to update the user" />
+                     </tooltip></Button>
+                  <Button fx:id="obrisiButton1" mnemonicParsing="false" onAction="#obrisiUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Delete" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+                     <tooltip>
+                        <Tooltip text="Click here to delete the user" />
+                     </tooltip></Button>
                   <Button fx:id="nazadButton21" mnemonicParsing="false" onAction="#nazadButtonClick" prefHeight="40.0" prefWidth="142.0" text="Sign out" GridPane.halignment="CENTER" GridPane.rowIndex="8">
                      <padding>
                         <Insets bottom="20.0" />
                      </padding>
+                     <tooltip>
+                        <Tooltip text="Click here to sign out" />
+                     </tooltip>
                   </Button>
                </children>
             </GridPane>
