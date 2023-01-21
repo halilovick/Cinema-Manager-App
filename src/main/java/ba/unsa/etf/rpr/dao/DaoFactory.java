@@ -1,5 +1,8 @@
 package ba.unsa.etf.rpr.dao;
 
+/**
+ * The type Dao factory.
+ */
 public class DaoFactory {
     private static final FilmDao filmDao = FilmDaoSQLImpl.getInstance();
     private static final KartaDao kartaDao = KartaDaoSQLImpl.getInstance();

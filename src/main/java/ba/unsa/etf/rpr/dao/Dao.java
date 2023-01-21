@@ -43,10 +43,10 @@ public interface Dao<T> {
      * @return List of entities from database
      */
     List<T> getAll() throws FilmoviException;
-    void resetIncrement(int i) throws FilmoviException;
     /**
      * Resets increment of set table
      *
      *
      */
+    void resetIncrement(int i) throws FilmoviException;
 }
