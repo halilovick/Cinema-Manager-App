@@ -8,18 +8,32 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * The type Users dao sql.
+ */
 public class UsersDaoSQLImpl extends AbstractDao<User> implements UsersDao {
     private static UsersDaoSQLImpl instance = null;
 
+    /**
+     * Instantiates a new UsersDaoSql object.
+     */
     public UsersDaoSQLImpl() {
         super("users");
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static UsersDaoSQLImpl getInstance() {
         if (instance == null) instance = new UsersDaoSQLImpl();
         return instance;
     }
 
+    /**
+     * Remove instance.
+     */
     public static void removeInstance() {
         if (instance != null) instance = null;
     }

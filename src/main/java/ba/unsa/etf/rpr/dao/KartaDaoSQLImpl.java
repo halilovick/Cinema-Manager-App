@@ -10,19 +10,33 @@ import java.sql.Statement;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * The type Karta dao sql.
+ */
 public class KartaDaoSQLImpl extends AbstractDao<Karta> implements KartaDao {
     private static KartaDaoSQLImpl instance = null;
 
 
+    /**
+     * Instantiates a new KartaDaoSql object.
+     */
     public KartaDaoSQLImpl() {
         super("karta");
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static KartaDaoSQLImpl getInstance() {
         if (instance == null) instance = new KartaDaoSQLImpl();
         return instance;
     }
 
+    /**
+     * Remove instance.
+     */
     public static void removeInstance() {
         if (instance != null) instance = null;
     }

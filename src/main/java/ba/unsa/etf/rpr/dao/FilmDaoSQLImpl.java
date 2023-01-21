@@ -6,18 +6,32 @@ import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * The type Film dao sql.
+ */
 public class FilmDaoSQLImpl extends AbstractDao<Film> implements FilmDao {
     private static FilmDaoSQLImpl instance = null;
 
+    /**
+     * Instantiates a new FilmDaoSql object.
+     */
     public FilmDaoSQLImpl() {
         super("film");
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static FilmDaoSQLImpl getInstance() {
         if (instance == null) instance = new FilmDaoSQLImpl();
         return instance;
     }
 
+    /**
+     * Remove instance.
+     */
     public static void removeInstance() {
         if (instance != null) instance = null;
     }
