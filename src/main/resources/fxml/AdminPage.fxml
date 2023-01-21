@@ -11,6 +11,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -65,23 +66,35 @@
                         <Font name="Tahoma Bold" size="12.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="filmChoiceBox" prefWidth="300.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+                  <ChoiceBox fx:id="filmChoiceBox" prefWidth="300.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                     <tooltip>
+                        <Tooltip text="Click here to choose a film you would like to buy a ticket for" />
+                     </tooltip></ChoiceBox>
                   <Label text="Number of tickets" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                      <font>
                         <Font name="Tahoma Bold" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="brojKarataTextField" maxWidth="300.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+                  <TextField fx:id="brojKarataTextField" maxWidth="300.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
+                     <tooltip>
+                        <Tooltip text="Enter the number of tickets you would like to purchase for the chosen film" />
+                     </tooltip></TextField>
                   <Label text="Date of film" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                      <font>
                         <Font name="Tahoma Bold" size="16.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="odabirDatuma" maxWidth="300.0" onAction="#odabirDatumaClick" prefWidth="300.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
+                  <DatePicker fx:id="odabirDatuma" maxWidth="300.0" onAction="#odabirDatumaClick" prefWidth="300.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
+                      <tooltip>
+                          <Tooltip text="Choose the date for the chosen film" />
+                      </tooltip></DatePicker>
                   <Button fx:id="kupiButton" mnemonicParsing="false" onAction="#kupiButtonClick" prefHeight="84.0" prefWidth="167.0" text="Buy now!" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets left="30.0" />
                      </GridPane.margin>
+                      <tooltip>
+                          <Tooltip text="Click here to buy the ticket(s)" />
+                      </tooltip>
                   </Button>
                   <Label fx:id="zanrLabelFiksna" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
@@ -102,6 +115,9 @@
                      <GridPane.margin>
                         <Insets right="30.0" />
                      </GridPane.margin>
+                      <tooltip>
+                          <Tooltip text="Click here to sign out" />
+                      </tooltip>
                   </Button>
                </children>
             </GridPane>
