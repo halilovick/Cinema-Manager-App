@@ -159,34 +159,61 @@
                             <GridPane.margin>
                                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                             </GridPane.margin>
+                     <tooltip>
+                        <Tooltip text="Enter the name of the film" />
+                     </tooltip>
                         </TextField>
                         <TextField fx:id="zanrField" promptText="Genre" GridPane.rowIndex="1">
                             <GridPane.margin>
                                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                             </GridPane.margin>
+                     <tooltip>
+                        <Tooltip text="Enter the genre of the film" />
+                     </tooltip>
                         </TextField>
                         <TextField fx:id="trajanjeField" promptText="Duration" GridPane.rowIndex="2">
                             <GridPane.margin>
                                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                             </GridPane.margin>
+                     <tooltip>
+                        <Tooltip text="Enter the duration of the film" />
+                     </tooltip>
                         </TextField>
                         <TextField fx:id="cijenaField" promptText="Price" GridPane.rowIndex="3">
                             <GridPane.margin>
                                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                             </GridPane.margin>
+                     <tooltip>
+                        <Tooltip text="Enter the ticket price of the film" />
+                     </tooltip>
                         </TextField>
                         <TextField fx:id="brojsaleField" promptText="Theater number" GridPane.rowIndex="4">
                             <GridPane.margin>
                                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                             </GridPane.margin>
+                     <tooltip>
+                        <Tooltip text="Enter the theater number of the film" />
+                     </tooltip>
                         </TextField>
-                        <Button fx:id="dodajButton" mnemonicParsing="false" onAction="#dodajFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Add" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                        <Button fx:id="azurirajButton" mnemonicParsing="false" onAction="#azurirajFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Update" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-                        <Button fx:id="obrisiButton" mnemonicParsing="false" onAction="#obrisiFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Delete" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+                        <Button fx:id="dodajButton" mnemonicParsing="false" onAction="#dodajFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Add" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                     <tooltip>
+                        <Tooltip text="Click here to add the film" />
+                     </tooltip></Button>
+                        <Button fx:id="azurirajButton" mnemonicParsing="false" onAction="#azurirajFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Update" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                     <tooltip>
+                        <Tooltip text="Click here to update the film" />
+                     </tooltip></Button>
+                        <Button fx:id="obrisiButton" mnemonicParsing="false" onAction="#obrisiFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Delete" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+                     <tooltip>
+                        <Tooltip text="Click here to delete the film" />
+                     </tooltip></Button>
                         <Button fx:id="nazadButton2" mnemonicParsing="false" onAction="#nazadButtonClick" prefHeight="40.0" prefWidth="142.0" text="Sign out" GridPane.halignment="CENTER" GridPane.rowIndex="8">
                             <padding>
                                 <Insets bottom="20.0" />
                             </padding>
+                     <tooltip>
+                        <Tooltip text="Click here to sign out" />
+                     </tooltip>
                         </Button>
                     </children>
                 </GridPane>
