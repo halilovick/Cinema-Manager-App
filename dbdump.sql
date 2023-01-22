@@ -89,7 +89,8 @@ CREATE TABLE `users` (
   `grad` varchar(45) DEFAULT NULL,
   `datum_rodjenja` date DEFAULT NULL,
   `admin` tinyint DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_UNIQUE` (`user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -99,7 +100,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'khalilovic','password','Kerim Halilovic','khalilovic@gmail.com','Ferhadija 1','Sarajevo','2022-12-03',1),(2,'ahodzic','password','Amar Hodzic','ahodzic@gmail.com','Ferhadija 5','Sarajevo','2022-05-15',1),(3,'kahmetovic','password','Kemal Ahmetovic','kahmetovic@gmail.com','Kosevo 30','Sarajevo','2000-10-05',1),(4,'edzeko','password','Edin Dzeko','edzeko@gmail.com','Zvornicka 301','','2022-12-31',0),(5,'ecivic','password','Eldar Civic','ecivic@gmail.com','Drinska 22','Sarajevo','2022-12-15',0),(7,'admin','admin','admin','admin@admin.com','admin 1','admin','2022-12-22',0),(8,'proba','proba','proba','proba','proba','proba','2022-12-15',0),(9,'bakir','bakir','bakir','bakir','bakir@gmail.com','sarajevo','2002-03-26',0);
+INSERT INTO `users` VALUES (1,'khalilovic','password','Kerim Halilovic','khalilovic@gmail.com','Ferhadija 1','Sarajevo','2022-12-03',1),(2,'ahodzic','password','Amar Hodzic','ahodzic@gmail.com','Ferhadija 5','Sarajevo','2022-05-15',1),(3,'kahmetovic','password','Kemal Ahmetovic','kahmetovic@gmail.com','Kosevo 30','Sarajevo','2000-10-05',1),(4,'edzeko','password','Edin Dzeko','edzeko@gmail.com','Zvornicka 301','','2022-12-31',0),(5,'ecivic','password','Eldar Civic','ecivic@gmail.com','Drinska 22','Sarajevo','2022-12-15',0),(7,'admin','admin','admin','admin@admin.com','admin 1','admin','2022-12-22',0),(8,'proba1','proba','proba','proba','proba','proba','2022-12-15',0),(9,'bakir','bakir','bakir','bakir','bakir@gmail.com','sarajevo','2002-03-26',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -112,4 +113,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-22  0:21:38
+-- Dump completed on 2023-01-22  1:07:45
