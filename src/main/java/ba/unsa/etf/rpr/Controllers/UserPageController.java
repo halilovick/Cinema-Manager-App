@@ -165,6 +165,14 @@ public class UserPageController {
     }
 
     public void promjeniPodatkeButtonClick(ActionEvent actionEvent) throws FilmoviException, IOException {
+        if(umanager.userExists(usernameTextField.getText())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Username already exists!");
+            alert.setContentText("Choose a different username.");
+            alert.showAndWait();
+            return;
+        }
         User u = new User();
         u.setId(user.getId());
         u.setUser(usernameTextField.getText());
