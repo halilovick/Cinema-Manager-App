@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -74,5 +75,11 @@ public class LoginController {
         stage.setTitle("Sign up");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void passwordEnterPressed(javafx.scene.input.KeyEvent keyEvent) throws IOException, FilmoviException {
+        if(keyEvent.getCode() == KeyCode.ENTER){
+            prijavaButtonClick(new ActionEvent());
+        }
     }
 }
