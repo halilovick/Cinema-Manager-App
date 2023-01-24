@@ -53,4 +53,8 @@ public class karteManager {
     public void deleteWithFilmId(int id) throws FilmoviException {
         DaoFactory.kartaDao().deleteWithFilmId(id);
     }
+
+    public void deleteWithUserId(int id) throws FilmoviException {
+        DaoFactory.kartaDao().deleteWithUserId(id);
+    }
 }

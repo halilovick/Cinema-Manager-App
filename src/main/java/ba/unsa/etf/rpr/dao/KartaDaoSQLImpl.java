@@ -99,4 +99,17 @@ public class KartaDaoSQLImpl extends AbstractDao<Karta> implements KartaDao {
             throw new FilmoviException(e.getMessage(), e);
         }
     }
+
+    @Override
+    public void deleteWithUserId(int user_id) throws FilmoviException {
+        String sql = "DELETE FROM karta WHERE user_id = ?";
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, user_id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new FilmoviException(e.getMessage(), e);
+        }
+    }
+
 }

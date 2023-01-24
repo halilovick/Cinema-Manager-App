@@ -12,7 +12,7 @@ public interface KartaDao extends Dao<Karta> {
      *
      * @throws FilmoviException the filmovi exception
      */
-    public void deleteAll() throws FilmoviException;
+    void deleteAll() throws FilmoviException;
 
     /**
      * Delete all tickets with film id.
@@ -20,5 +20,7 @@ public interface KartaDao extends Dao<Karta> {
      * @param film_id the film id
      * @throws FilmoviException the filmovi exception
      */
-    public void deleteWithFilmId(int film_id) throws FilmoviException;
+    void deleteWithFilmId(int film_id) throws FilmoviException;
+
+    void deleteWithUserId(int user_id) throws FilmoviException;
 }
