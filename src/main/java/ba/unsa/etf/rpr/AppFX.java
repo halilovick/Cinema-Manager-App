@@ -19,7 +19,7 @@ public class AppFX extends Application {
         Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
         primarystage.setResizable(false);
         primarystage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
-        primarystage.setTitle("Prijava");
+        primarystage.setTitle("Login page");
         primarystage.setScene(scene);
         primarystage.show();
     }
