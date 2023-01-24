@@ -297,6 +297,7 @@ public class AdminPageController {
             alert.showAndWait();
             return;
         }
+        kmanager.deleteWithUserId(id);
         umanager.delete(umanager.getLoggedInId(userField1.getText(), passwordField1.getText()));
         UpdateUseriTable();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
