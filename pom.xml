@@ -88,9 +88,6 @@
     <profiles>
         <profile>
             <id>gui-app</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <build>
                 <finalName>${project.name}-gui</finalName>
                 <plugins>
@@ -102,7 +99,6 @@
                             <mainClass>ba.unsa.etf.rpr.AppFX</mainClass>
                         </configuration>
                     </plugin>
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-assembly-plugin</artifactId>
@@ -143,9 +139,6 @@
         </profile>
         <profile>
             <id>cli-app</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <build>
                 <finalName>${project.name}-cli</finalName>
                 <plugins>
