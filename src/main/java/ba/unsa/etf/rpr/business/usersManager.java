@@ -18,6 +18,7 @@ public class usersManager {
     }
 
     public User add(User u) throws FilmoviException {
+        if (userExists(u.getUser())) throw new FilmoviException("User with such username already exists!");
         try {
             return DaoFactory.usersDao().add(u);
         } catch (FilmoviException e) {
@@ -35,6 +36,7 @@ public class usersManager {
     }
 
     public User update(User u) throws FilmoviException {
+        if (userExists(u.getUser())) throw new FilmoviException("User with such username already exists!");
         return DaoFactory.usersDao().update(u);
     }
 
@@ -52,5 +54,9 @@ public class usersManager {
 
     public boolean userExists(String username) throws FilmoviException {
         return DaoFactory.usersDao().userExists(username);
+    }
+
+    public User getByUsername(String username) throws FilmoviException {
+        return DaoFactory.usersDao().getByUsername(username);
     }
 }
