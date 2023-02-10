@@ -54,11 +54,25 @@ class filmoviManagerTest {
         f.setIme("Test");
         fm.add(f);
         List<Film> films = fm.getAll();
-        boolean found = false;
+        boolean isAdded = false;
         for (Film fi : films) {
-            if (f.equals(fi)) found = true;
+            if (f.equals(fi)) isAdded = true;
         }
-        Assertions.assertTrue(found);
+        Assertions.assertTrue(isAdded);
         fm.delete(f.getId());
+    }
+
+    @Test
+    void deleteFilmTest() throws FilmoviException {
+        Film f = new Film();
+        f.setIme("Test");
+        fm.add(f);
+        fm.delete(f.getId());
+        List<Film> films = fm.getAll();
+        boolean isDeleted = true;
+        for (Film fi : films) {
+            if (f.equals(fi)) isDeleted = false;
+        }
+        Assertions.assertTrue(isDeleted);
     }
 }
