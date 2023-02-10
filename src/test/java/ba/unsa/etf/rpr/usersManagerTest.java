@@ -46,4 +46,14 @@ class usersManagerTest {
     void getLoggedInTest() throws FilmoviException {
         Assertions.assertEquals(0, um.getLoggedInId("doesnt_exist", "doesnt_exist!"));
     }
+
+    @Test
+    void getByUsernameTest() throws FilmoviException {
+        User u1 = new User();
+        u1.setUser("user1");
+        um.add(u1);
+        User u2 = um.getByUsername("user1");
+        Assertions.assertEquals(u1, u2);
+        um.delete(u1.getId());
+    }
 }
