@@ -35,4 +35,14 @@ class filmoviManagerTest {
         fm.delete(f.getId());
         um.delete(u.getId());
     }
+
+    @Test
+    void addingFilmWithId() {
+        Film f = new Film();
+        f.setId(10);
+        f.setIme("Test");
+        Assertions.assertThrows(FilmoviException.class, () -> {
+            fm.add(f);
+        });
+    }
 }
