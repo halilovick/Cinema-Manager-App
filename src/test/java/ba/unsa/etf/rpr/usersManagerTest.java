@@ -29,4 +29,16 @@ class usersManagerTest {
         Assertions.assertTrue(exists);
         um.delete(u.getId());
     }
+
+    @Test
+    void deleteUserTest() throws FilmoviException {
+        User u = new User();
+        u.setUser("Test");
+        u.setPassword("Test1");
+        um.add(u);
+        um.delete(u.getId());
+        boolean exists = true;
+        if (um.userExists("Test")) exists = false;
+        Assertions.assertTrue(exists);
+    }
 }
