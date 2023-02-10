@@ -10,6 +10,8 @@ import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 class filmoviManagerTest {
 
     filmoviManager fm = new filmoviManager();
@@ -44,5 +46,19 @@ class filmoviManagerTest {
         Assertions.assertThrows(FilmoviException.class, () -> {
             fm.add(f);
         });
+    }
+
+    @Test
+    void addFilmTest() throws FilmoviException {
+        Film f = new Film();
+        f.setIme("Test");
+        fm.add(f);
+        List<Film> films = fm.getAll();
+        boolean found = false;
+        for (Film fi : films) {
+            if (f.equals(fi)) found = true;
+        }
+        Assertions.assertTrue(found);
+        fm.delete(f.getId());
     }
 }
