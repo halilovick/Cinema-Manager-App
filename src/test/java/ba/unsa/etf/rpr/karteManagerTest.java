@@ -3,6 +3,9 @@ package ba.unsa.etf.rpr;
 import ba.unsa.etf.rpr.business.filmoviManager;
 import ba.unsa.etf.rpr.business.karteManager;
 import ba.unsa.etf.rpr.business.usersManager;
+import ba.unsa.etf.rpr.domain.Film;
+import ba.unsa.etf.rpr.domain.Karta;
+import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,6 +20,20 @@ class karteManagerTest {
     void deletingTicketWithoutId() {
         Assertions.assertThrows(FilmoviException.class, () -> {
             km.delete(1000);
+        });
+    }
+
+    @Test
+    void unexistingFilmToTicketTest() throws FilmoviException {
+        Film f = new Film();
+        f.setIme("Test");
+        User u = new User();
+        u.setIme("TestIme");
+        Karta k = new Karta();
+        k.setFilm(f);
+        k.setUser(u);
+        Assertions.assertThrows(FilmoviException.class, () -> {
+            km.add(k);
         });
     }
 }
