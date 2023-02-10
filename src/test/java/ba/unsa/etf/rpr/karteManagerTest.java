@@ -14,7 +14,7 @@ class karteManagerTest {
     usersManager um = new usersManager();
 
     @Test
-    void brisanjeNepostojeceKarteTest() {
+    void deletingTicketWithoutId() {
         Assertions.assertThrows(FilmoviException.class, () -> {
             km.delete(1000);
         });
