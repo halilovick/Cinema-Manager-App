@@ -17,7 +17,7 @@ class filmoviManagerTest {
     usersManager um = new usersManager();
 
     @Test
-    void deletingFilmWithRelatedTicket() throws FilmoviException {
+    void deletingFilmWithRelatedTicketTest() throws FilmoviException {
         Film f = new Film();
         f.setIme("Test");
         fm.add(f);
@@ -37,7 +37,7 @@ class filmoviManagerTest {
     }
 
     @Test
-    void addingFilmWithId() {
+    void addingFilmWithIdTest() {
         Film f = new Film();
         f.setId(10);
         f.setIme("Test");
