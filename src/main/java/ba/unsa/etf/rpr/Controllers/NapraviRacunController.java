@@ -112,6 +112,14 @@ public class NapraviRacunController {
             alert.showAndWait();
             return;
         }
+        if (umanager.userExists(usernameTextField.getText())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid username!");
+            alert.setContentText("User with such username already exists!");
+            alert.showAndWait();
+            return;
+        }
         if (passwordCheck(lozinkaTextField.getText()).equals("W")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
