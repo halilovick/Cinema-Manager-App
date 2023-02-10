@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.domain;
 
-public class Film implements Idable{
+public class Film implements Idable {
     private int id;
     private String ime;
     private String zanr;
@@ -8,7 +8,18 @@ public class Film implements Idable{
     private int cijena;
     private int broj_sale;
 
-    public int getCijena() { return cijena; }
+    public Film() {
+    }
+
+    public Film(String ime, String zanr, int trajanje) {
+        this.ime = ime;
+        this.zanr = zanr;
+        this.trajanje = trajanje;
+    }
+
+    public int getCijena() {
+        return cijena;
+    }
 
     public void setCijena(int cijena) {
         this.cijena = cijena;
@@ -56,7 +67,7 @@ public class Film implements Idable{
 
     @Override
     public String toString() {
-        return "Film{id=" + id + ", ime='" + ime + "\', zanr=" + zanr + ", trajanje=" + trajanje + "}" ;
+        return "Film{id=" + id + ", ime='" + ime + "\', zanr=" + zanr + ", trajanje=" + trajanje + "}";
     }
 
     @Override
