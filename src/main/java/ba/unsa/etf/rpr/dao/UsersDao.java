@@ -6,7 +6,7 @@ import ba.unsa.etf.rpr.exceptions.FilmoviException;
 /**
  * The interface Users dao.
  */
-public interface UsersDao extends Dao<User>{
+public interface UsersDao extends Dao<User> {
     /**
      * Gets logged in id.
      *
@@ -25,4 +25,6 @@ public interface UsersDao extends Dao<User>{
      * @throws FilmoviException the filmovi exception
      */
     boolean userExists(String username) throws FilmoviException;
+
+    User getByUsername(String username) throws FilmoviException;
 }

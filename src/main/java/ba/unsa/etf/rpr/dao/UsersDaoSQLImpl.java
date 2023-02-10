@@ -101,4 +101,14 @@ public class UsersDaoSQLImpl extends AbstractDao<User> implements UsersDao {
             return false;
         }
     }
+
+    @Override
+    public User getByUsername(String username) throws FilmoviException {
+        try {
+            User u = executeQueryUnique("SELECT * FROM users WHERE user = ?", new Object[]{username});
+            return u;
+        } catch (FilmoviException e) {
+            throw new FilmoviException(e.getMessage(), e);
+        }
+    }
 }
