@@ -2,7 +2,7 @@ package ba.unsa.etf.rpr.domain;
 
 import java.sql.Date;
 
-public class User implements Idable{
+public class User implements Idable {
     private int id;
     private String user;
     private String password;
@@ -12,6 +12,27 @@ public class User implements Idable{
     private String grad;
     private Date datum_rodjenja;
     private boolean admin;
+
+    public User(String user, String password, String ime, String email, String adresa, String grad, Date datum_rodjenja, boolean admin) {
+        this.user = user;
+        this.password = password;
+        this.ime = ime;
+        this.email = email;
+        this.adresa = adresa;
+        this.grad = grad;
+        this.datum_rodjenja = datum_rodjenja;
+        this.admin = admin;
+    }
+
+    public User(String user, String password, String ime, boolean admin) {
+        this.user = user;
+        this.password = password;
+        this.ime = ime;
+        this.admin = admin;
+    }
+
+    public User() {
+    }
 
     public String getUser() {
         return user;
@@ -77,7 +98,7 @@ public class User implements Idable{
         this.admin = admin;
     }
 
-    public Boolean getAdmin(){
+    public Boolean getAdmin() {
         return admin;
     }
 
@@ -91,7 +112,7 @@ public class User implements Idable{
 
     @Override
     public String toString() {
-        return "User{id=" + id + ", ime=" + ime + ", email=" + email + ", admin=" + admin + "}" ;
+        return "User{id=" + id + ", ime=" + ime + ", email=" + email + ", admin=" + admin + "}";
     }
 
     @Override
