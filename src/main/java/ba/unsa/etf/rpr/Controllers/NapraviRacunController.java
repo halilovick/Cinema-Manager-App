@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +31,7 @@ public class NapraviRacunController {
     public TextField imeTextField;
     public Label passwordStrengthLabel;
     public Label usernameZauzetLabel;
+    public Label dateRegex;
     private boolean ispravanEmail = false;
     private usersManager umanager = new usersManager();
 
@@ -101,6 +103,18 @@ public class NapraviRacunController {
                 }
             }
         });
+        datumRodjenjaField.valueProperty().addListener(new ChangeListener<LocalDate>() {
+            @Override
+            public void changed(ObservableValue<? extends LocalDate> observableValue, LocalDate localDate, LocalDate t1) {
+                Date d1 = Date.valueOf(datumRodjenjaField.getValue());
+                Date d2 = Date.valueOf("2007-01-01");
+                if (d1.compareTo(d2) > 0) {
+                    datumRodjenjaField.getStyleClass().removeAll("poljeIspravno");
+                    datumRodjenjaField.getStyleClass().add("poljeNijeIspravno");
+                    dateRegex.setText("To create an account, you must be at least 16 years old.");
+                }
+            }
+        });
     }
 
     public void napraviAccountButtonClick(ActionEvent actionEvent) throws FilmoviException {
@@ -133,6 +147,14 @@ public class NapraviRacunController {
             alert.setTitle("Error");
             alert.setHeaderText("Email not valid!");
             alert.setContentText("Please enter a valid email address.");
+            alert.showAndWait();
+            return;
+        }
+        if (Date.valueOf(datumRodjenjaField.getValue()).compareTo(Date.valueOf("2007-01-01")) > 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid date of birth!");
+            alert.setContentText("To create an account, you must be at least 16 years old.");
             alert.showAndWait();
             return;
         }
