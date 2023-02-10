@@ -41,4 +41,9 @@ class usersManagerTest {
         if (um.userExists("Test")) exists = false;
         Assertions.assertTrue(exists);
     }
+
+    @Test
+    void getLoggedInTest() throws FilmoviException {
+        Assertions.assertEquals(0, um.getLoggedInId("doesnt_exist", "doesnt_exist!"));
+    }
 }
