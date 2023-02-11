@@ -294,7 +294,7 @@
 }
 
 #ticketScreen {
-    -fx-background-image: url("/fxml/backgrounds/ticket.png");
+    -fx-background-image: url("/fxml/backgrounds/blank_ticket.png");
 }
 
 #nazadButton {

@@ -17,307 +17,366 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300.0" minWidth="500.0" prefHeight="600.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.Controllers.AdminPageController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300.0" minWidth="500.0" prefHeight="600.0"
+         prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19"
+         xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.Controllers.AdminPageController">
     <stylesheets>
-        <URL value="@config.css" />
+        <URL value="@config.css"/>
     </stylesheets>
     <tabs>
         <Tab fx:id="prodajaKarataAdminButton" text="Ticket shop">
-         <content>
-            <GridPane fx:id="ProdajaKarataScreen" prefHeight="550.0" prefWidth="999.0">
-               <stylesheets>
-                  <URL value="@config.css" />
-               </stylesheets>
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="133.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="133.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="133.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="16.9999942779541" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="0.0" prefHeight="60.79999084472652" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="41.59998474121093" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="40.00001220703126" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="38.40001220703124" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="35.99997558593748" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="223.80002441406248" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Label text="Choose a film" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Tahoma Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="zanrLabel" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                     <font>
-                        <Font name="Tahoma Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="trajanjeLabel" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                     <font>
-                        <Font name="Tahoma Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="cijenaLabel" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                     <font>
-                        <Font name="Tahoma Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <ChoiceBox fx:id="filmChoiceBox" prefWidth="300.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                     <tooltip>
-                        <Tooltip text="Click here to choose a film you would like to buy a ticket for" />
-                     </tooltip></ChoiceBox>
-                  <Label text="Number of tickets" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
-                     <font>
-                        <Font name="Tahoma Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="brojKarataTextField" maxWidth="300.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
-                     <tooltip>
-                        <Tooltip text="Enter the number of tickets you would like to purchase for the chosen film" />
-                     </tooltip></TextField>
-                  <Label text="Date of film" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="4">
-                     <font>
-                        <Font name="Tahoma Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="odabirDatuma" maxWidth="300.0" onAction="#odabirDatumaClick" prefWidth="300.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
-                      <tooltip>
-                          <Tooltip text="Choose the date for the chosen film" />
-                      </tooltip></DatePicker>
-                  <Button fx:id="kupiButton" mnemonicParsing="false" onAction="#kupiButtonClick" prefHeight="84.0" prefWidth="167.0" text="Buy now!" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.halignment="LEFT" GridPane.rowIndex="6">
-                     <GridPane.margin>
-                        <Insets left="30.0" />
-                     </GridPane.margin>
-                      <tooltip>
-                          <Tooltip text="Click here to buy the ticket(s)" />
-                      </tooltip>
-                  </Button>
-                  <Label fx:id="zanrLabelFiksna" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Tahoma Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="trajanjeLabelFiksna" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Tahoma Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="cijenaLabelFiksna" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Tahoma Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="nazadButtonProdaja" mnemonicParsing="false" onAction="#nazadButtonClick" prefHeight="84.0" prefWidth="167.0" text="Sign out" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
-                     <GridPane.margin>
-                        <Insets right="30.0" />
-                     </GridPane.margin>
-                      <tooltip>
-                          <Tooltip text="Click here to sign out" />
-                      </tooltip>
-                  </Button>
-               </children>
-            </GridPane>
-         </content></Tab>
-        <Tab fx:id="filmoviTab" text="Film management">
             <content>
-                <GridPane fx:id="pregledFilmovaAdmin" prefHeight="572.0" prefWidth="999.0">
+                <GridPane fx:id="ProdajaKarataScreen" prefHeight="550.0" prefWidth="999.0">
+                    <stylesheets>
+                        <URL value="@config.css"/>
+                    </stylesheets>
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="500.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="500.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="400.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="133.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="133.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="133.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                        <RowConstraints />
+                        <RowConstraints minHeight="10.0" prefHeight="16.9999942779541" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="0.0" prefHeight="60.79999084472652" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="41.59998474121093" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="40.00001220703126" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="38.40001220703124" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="35.99997558593748" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="223.80002441406248" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <TableView fx:id="tabelaFilmova" onMouseClicked="#getSelectedFilm" prefHeight="571.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowSpan="10">
-                            <columns>
-                                <TableColumn fx:id="colID" maxWidth="-1.0" minWidth="65.0" prefWidth="100.0" text="ID" />
-                                <TableColumn fx:id="colIme" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0" text="TITLE" />
-                                <TableColumn fx:id="colZanr" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0" text="GENRE" />
-                                <TableColumn fx:id="colTrajanje" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="DURATION" />
-                                <TableColumn fx:id="colCijena" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="PRICE" />
-                                <TableColumn fx:id="colBrojSale" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="THEATER" />
-                            </columns>
-                            <GridPane.margin>
-                                <Insets />
-                            </GridPane.margin>
-                        </TableView>
-                        <TextField fx:id="imeField" promptText="Film title">
-                            <GridPane.margin>
-                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                            </GridPane.margin>
-                     <tooltip>
-                        <Tooltip text="Enter the name of the film" />
-                     </tooltip>
+                        <Label text="Choose a film" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                               GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Tahoma Bold" size="16.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="zanrLabel" GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                               GridPane.rowIndex="2" GridPane.valignment="TOP">
+                            <font>
+                                <Font name="Tahoma Bold" size="12.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="trajanjeLabel" GridPane.columnIndex="3" GridPane.halignment="CENTER"
+                               GridPane.rowIndex="2" GridPane.valignment="TOP">
+                            <font>
+                                <Font name="Tahoma Bold" size="12.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="cijenaLabel" GridPane.columnIndex="4" GridPane.halignment="CENTER"
+                               GridPane.rowIndex="2" GridPane.valignment="TOP">
+                            <font>
+                                <Font name="Tahoma Bold" size="12.0"/>
+                            </font>
+                        </Label>
+                        <ChoiceBox fx:id="filmChoiceBox" prefWidth="300.0" GridPane.columnIndex="1"
+                                   GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                            <tooltip>
+                                <Tooltip text="Click here to choose a film you would like to buy a ticket for"/>
+                            </tooltip>
+                        </ChoiceBox>
+                        <Label text="Number of tickets" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                               GridPane.rowIndex="4">
+                            <font>
+                                <Font name="Tahoma Bold" size="16.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="brojKarataTextField" maxWidth="300.0" prefWidth="300.0"
+                                   GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5"
+                                   GridPane.valignment="TOP">
+                            <tooltip>
+                                <Tooltip
+                                        text="Enter the number of tickets you would like to purchase for the chosen film"/>
+                            </tooltip>
                         </TextField>
-                        <TextField fx:id="zanrField" promptText="Genre" GridPane.rowIndex="1">
+                        <Label text="Date of film" GridPane.columnIndex="2" GridPane.columnSpan="3"
+                               GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                            <font>
+                                <Font name="Tahoma Bold" size="16.0"/>
+                            </font>
+                        </Label>
+                        <DatePicker fx:id="odabirDatuma" maxWidth="300.0" onAction="#odabirDatumaClick"
+                                    prefWidth="300.0" GridPane.columnIndex="2" GridPane.columnSpan="3"
+                                    GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP">
+                            <tooltip>
+                                <Tooltip text="Choose the date for the chosen film"/>
+                            </tooltip>
+                        </DatePicker>
+                        <Button fx:id="kupiButton" mnemonicParsing="false" onAction="#kupiButtonClick" prefHeight="84.0"
+                                prefWidth="167.0" text="Buy now!" GridPane.columnIndex="2" GridPane.columnSpan="3"
+                                GridPane.halignment="LEFT" GridPane.rowIndex="6">
                             <GridPane.margin>
-                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                                <Insets left="30.0"/>
                             </GridPane.margin>
-                     <tooltip>
-                        <Tooltip text="Enter the genre of the film" />
-                     </tooltip>
-                        </TextField>
-                        <TextField fx:id="trajanjeField" promptText="Duration" GridPane.rowIndex="2">
+                            <tooltip>
+                                <Tooltip text="Click here to buy the ticket(s)"/>
+                            </tooltip>
+                        </Button>
+                        <Label fx:id="zanrLabelFiksna" GridPane.columnIndex="2" GridPane.halignment="CENTER"
+                               GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Tahoma Bold" size="12.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="trajanjeLabelFiksna" GridPane.columnIndex="3" GridPane.halignment="CENTER"
+                               GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Tahoma Bold" size="12.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="cijenaLabelFiksna" GridPane.columnIndex="4" GridPane.halignment="CENTER"
+                               GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Tahoma Bold" size="12.0"/>
+                            </font>
+                        </Label>
+                        <Button fx:id="nazadButtonProdaja" mnemonicParsing="false" onAction="#nazadButtonClick"
+                                prefHeight="84.0" prefWidth="167.0" text="Sign out" GridPane.columnIndex="1"
+                                GridPane.halignment="RIGHT" GridPane.rowIndex="6">
                             <GridPane.margin>
-                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                                <Insets right="30.0"/>
                             </GridPane.margin>
-                     <tooltip>
-                        <Tooltip text="Enter the duration of the film" />
-                     </tooltip>
-                        </TextField>
-                        <TextField fx:id="cijenaField" promptText="Price" GridPane.rowIndex="3">
-                            <GridPane.margin>
-                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                            </GridPane.margin>
-                     <tooltip>
-                        <Tooltip text="Enter the ticket price of the film" />
-                     </tooltip>
-                        </TextField>
-                        <TextField fx:id="brojsaleField" promptText="Theater number" GridPane.rowIndex="4">
-                            <GridPane.margin>
-                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                            </GridPane.margin>
-                     <tooltip>
-                        <Tooltip text="Enter the theater number of the film" />
-                     </tooltip>
-                        </TextField>
-                        <Button fx:id="dodajButton" mnemonicParsing="false" onAction="#dodajFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Add" GridPane.halignment="CENTER" GridPane.rowIndex="5">
-                     <tooltip>
-                        <Tooltip text="Click here to add the film" />
-                     </tooltip></Button>
-                        <Button fx:id="azurirajButton" mnemonicParsing="false" onAction="#azurirajFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Update" GridPane.halignment="CENTER" GridPane.rowIndex="6">
-                     <tooltip>
-                        <Tooltip text="Click here to update the film" />
-                     </tooltip></Button>
-                        <Button fx:id="obrisiButton" mnemonicParsing="false" onAction="#obrisiFilmButtonClick" prefHeight="40.0" prefWidth="250.0" text="Delete" GridPane.halignment="CENTER" GridPane.rowIndex="7">
-                     <tooltip>
-                        <Tooltip text="Click here to delete the film" />
-                     </tooltip></Button>
-                        <Button fx:id="nazadButton2" mnemonicParsing="false" onAction="#nazadButtonClick" prefHeight="40.0" prefWidth="142.0" text="Sign out" GridPane.halignment="CENTER" GridPane.rowIndex="8">
-                            <padding>
-                                <Insets bottom="20.0" />
-                            </padding>
-                     <tooltip>
-                        <Tooltip text="Click here to sign out" />
-                     </tooltip>
+                            <tooltip>
+                                <Tooltip text="Click here to sign out"/>
+                            </tooltip>
                         </Button>
                     </children>
                 </GridPane>
             </content>
         </Tab>
-      <Tab fx:id="filmoviTab1" text="Users management">
-         <content>
-            <GridPane fx:id="pregledUseraAdmin" prefHeight="572.0" prefWidth="999.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="700.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                  <RowConstraints />
-               </rowConstraints>
-               <children>
-                  <TableView fx:id="tabelaUsera" onMouseClicked="#getSelectedUser" prefHeight="571.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowSpan="10">
-                     <columns>
-                        <TableColumn fx:id="colID1" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" text="ID" />
-                        <TableColumn fx:id="colUser1" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0" text="USERNAME" />
-                        <TableColumn fx:id="colPassword1" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0" text="PASSWORD" />
-                        <TableColumn fx:id="colIme1" maxWidth="1.7976931348623157E308" minWidth="80.0" text="NAME" />
-                        <TableColumn fx:id="colEmail1" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="EMAIL" />
-                        <TableColumn fx:id="colAdresa1" maxWidth="1.7976931348623157E308" minWidth="90.0" prefWidth="90.0" text="ADRESS" />
-                        <TableColumn fx:id="colGrad1" prefWidth="75.0" text="CITY" />
-                        <TableColumn fx:id="colDatumRodj1" prefWidth="75.0" text="DOB" />
-                        <TableColumn fx:id="colAdmin1" minWidth="50.0" prefWidth="50.0" text="ADMIN" />
-                     </columns>
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                  </TableView>
-                  <TextField fx:id="userField1" promptText="Username">
-                     <GridPane.margin>
-                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                     </GridPane.margin>
-                     <tooltip>
-                        <Tooltip text="Enter the username of the user" />
-                     </tooltip>
-                  </TextField>
-                  <TextField fx:id="passwordField1" promptText="Password" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                     </GridPane.margin>
-                     <tooltip>
-                        <Tooltip text="Enter the password of the user" />
-                     </tooltip>
-                  </TextField>
-                  <TextField fx:id="imeField1" promptText="Full name" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                     </GridPane.margin>
-                     <tooltip>
-                        <Tooltip text="Enter the full name of the user" />
-                     </tooltip>
-                  </TextField>
-                  <TextField fx:id="emailField1" promptText="Email" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                     </GridPane.margin>
-                     <tooltip>
-                        <Tooltip text="Enter the email of the user" />
-                     </tooltip>
-                  </TextField>
-                  <TextField fx:id="adminField1" promptText="Admin" GridPane.rowIndex="4">
-                     <GridPane.margin>
-                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                     </GridPane.margin>
-                     <tooltip>
-                        <Tooltip text="Enter true if the user is an admin, false if the user is not an admin" />
-                     </tooltip>
-                  </TextField>
-                  <Button fx:id="dodajButton1" mnemonicParsing="false" onAction="#dodajUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Add" GridPane.halignment="CENTER" GridPane.rowIndex="5">
-                     <tooltip>
-                        <Tooltip text="Click here to add the user" />
-                     </tooltip></Button>
-                  <Button fx:id="azurirajButton1" mnemonicParsing="false" onAction="#azurirajUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Update" GridPane.halignment="CENTER" GridPane.rowIndex="6">
-                     <tooltip>
-                        <Tooltip text="Click here to update the user" />
-                     </tooltip></Button>
-                  <Button fx:id="obrisiButton1" mnemonicParsing="false" onAction="#obrisiUserButtonClick" prefHeight="40.0" prefWidth="250.0" text="Delete" GridPane.halignment="CENTER" GridPane.rowIndex="7">
-                     <tooltip>
-                        <Tooltip text="Click here to delete the user" />
-                     </tooltip></Button>
-                  <Button fx:id="nazadButton21" mnemonicParsing="false" onAction="#nazadButtonClick" prefHeight="40.0" prefWidth="142.0" text="Sign out" GridPane.halignment="CENTER" GridPane.rowIndex="8">
-                     <padding>
-                        <Insets bottom="20.0" />
-                     </padding>
-                     <tooltip>
-                        <Tooltip text="Click here to sign out" />
-                     </tooltip>
-                  </Button>
-               </children>
-            </GridPane>
-         </content>
-      </Tab>
+        <Tab fx:id="filmoviTab" text="Film management">
+            <content>
+                <GridPane fx:id="pregledFilmovaAdmin" prefHeight="572.0" prefWidth="999.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="500.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="500.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                        <RowConstraints/>
+                    </rowConstraints>
+                    <children>
+                        <TableView fx:id="tabelaFilmova" onMouseClicked="#getSelectedFilm" prefHeight="571.0"
+                                   prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowSpan="10">
+                            <columns>
+                                <TableColumn fx:id="colID" maxWidth="-1.0" minWidth="65.0" prefWidth="100.0" text="ID"/>
+                                <TableColumn fx:id="colIme" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0"
+                                             text="TITLE"/>
+                                <TableColumn fx:id="colZanr" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0"
+                                             text="GENRE"/>
+                                <TableColumn fx:id="colTrajanje" maxWidth="1.7976931348623157E308" minWidth="90.0"
+                                             prefWidth="90.0" text="DURATION"/>
+                                <TableColumn fx:id="colCijena" maxWidth="1.7976931348623157E308" minWidth="90.0"
+                                             prefWidth="90.0" text="PRICE"/>
+                                <TableColumn fx:id="colBrojSale" maxWidth="1.7976931348623157E308" minWidth="90.0"
+                                             prefWidth="90.0" text="THEATER"/>
+                            </columns>
+                            <GridPane.margin>
+                                <Insets/>
+                            </GridPane.margin>
+                        </TableView>
+                        <TextField fx:id="imeField" promptText="Film title">
+                            <GridPane.margin>
+                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+                            </GridPane.margin>
+                            <tooltip>
+                                <Tooltip text="Enter the name of the film"/>
+                            </tooltip>
+                        </TextField>
+                        <TextField fx:id="zanrField" promptText="Genre" GridPane.rowIndex="1">
+                            <GridPane.margin>
+                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+                            </GridPane.margin>
+                            <tooltip>
+                                <Tooltip text="Enter the genre of the film"/>
+                            </tooltip>
+                        </TextField>
+                        <TextField fx:id="trajanjeField" promptText="Duration" GridPane.rowIndex="2">
+                            <GridPane.margin>
+                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+                            </GridPane.margin>
+                            <tooltip>
+                                <Tooltip text="Enter the duration of the film"/>
+                            </tooltip>
+                        </TextField>
+                        <TextField fx:id="cijenaField" promptText="Price" GridPane.rowIndex="3">
+                            <GridPane.margin>
+                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+                            </GridPane.margin>
+                            <tooltip>
+                                <Tooltip text="Enter the ticket price of the film"/>
+                            </tooltip>
+                        </TextField>
+                        <TextField fx:id="brojsaleField" promptText="Theater number" GridPane.rowIndex="4">
+                            <GridPane.margin>
+                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+                            </GridPane.margin>
+                            <tooltip>
+                                <Tooltip text="Enter the theater number of the film"/>
+                            </tooltip>
+                        </TextField>
+                        <Button fx:id="dodajButton" mnemonicParsing="false" onAction="#dodajFilmButtonClick"
+                                prefHeight="40.0" prefWidth="250.0" text="Add" GridPane.halignment="CENTER"
+                                GridPane.rowIndex="5">
+                            <tooltip>
+                                <Tooltip text="Click here to add the film"/>
+                            </tooltip>
+                        </Button>
+                        <Button fx:id="azurirajButton" mnemonicParsing="false" onAction="#azurirajFilmButtonClick"
+                                prefHeight="40.0" prefWidth="250.0" text="Update" GridPane.halignment="CENTER"
+                                GridPane.rowIndex="6">
+                            <tooltip>
+                                <Tooltip text="Click here to update the film"/>
+                            </tooltip>
+                        </Button>
+                        <Button fx:id="obrisiButton" mnemonicParsing="false" onAction="#obrisiFilmButtonClick"
+                                prefHeight="40.0" prefWidth="250.0" text="Delete" GridPane.halignment="CENTER"
+                                GridPane.rowIndex="7">
+                            <tooltip>
+                                <Tooltip text="Click here to delete the film"/>
+                            </tooltip>
+                        </Button>
+                        <Button fx:id="nazadButton2" mnemonicParsing="false" onAction="#nazadButtonClick"
+                                prefHeight="40.0" prefWidth="142.0" text="Sign out" GridPane.halignment="CENTER"
+                                GridPane.rowIndex="8">
+                            <padding>
+                                <Insets bottom="20.0"/>
+                            </padding>
+                            <tooltip>
+                                <Tooltip text="Click here to sign out"/>
+                            </tooltip>
+                        </Button>
+                    </children>
+                </GridPane>
+            </content>
+        </Tab>
+        <Tab fx:id="filmoviTab1" text="Users management">
+            <content>
+                <GridPane fx:id="pregledUseraAdmin" prefHeight="572.0" prefWidth="999.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="700.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                        <RowConstraints/>
+                    </rowConstraints>
+                    <children>
+                        <TableView fx:id="tabelaUsera" onMouseClicked="#getSelectedUser" prefHeight="571.0"
+                                   prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowSpan="10">
+                            <columns>
+                                <TableColumn fx:id="colID1" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" text="ID"/>
+                                <TableColumn fx:id="colUser1" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0"
+                                             text="USERNAME"/>
+                                <TableColumn fx:id="colPassword1" maxWidth="-1.0" minWidth="90.0" prefWidth="90.0"
+                                             text="PASSWORD"/>
+                                <TableColumn fx:id="colIme1" maxWidth="1.7976931348623157E308" minWidth="80.0"
+                                             text="NAME"/>
+                                <TableColumn fx:id="colEmail1" maxWidth="1.7976931348623157E308" minWidth="90.0"
+                                             prefWidth="90.0" text="EMAIL"/>
+                                <TableColumn fx:id="colAdresa1" maxWidth="1.7976931348623157E308" minWidth="90.0"
+                                             prefWidth="90.0" text="ADRESS"/>
+                                <TableColumn fx:id="colGrad1" prefWidth="75.0" text="CITY"/>
+                                <TableColumn fx:id="colDatumRodj1" prefWidth="75.0" text="DOB"/>
+                                <TableColumn fx:id="colAdmin1" minWidth="50.0" prefWidth="50.0" text="ADMIN"/>
+                            </columns>
+                            <GridPane.margin>
+                                <Insets/>
+                            </GridPane.margin>
+                        </TableView>
+                        <TextField fx:id="userField1" promptText="Username">
+                            <GridPane.margin>
+                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+                            </GridPane.margin>
+                            <tooltip>
+                                <Tooltip text="Enter the username of the user"/>
+                            </tooltip>
+                        </TextField>
+                        <TextField fx:id="passwordField1" promptText="Password" GridPane.rowIndex="1">
+                            <GridPane.margin>
+                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+                            </GridPane.margin>
+                            <tooltip>
+                                <Tooltip text="Enter the password of the user"/>
+                            </tooltip>
+                        </TextField>
+                        <TextField fx:id="imeField1" promptText="Full name" GridPane.rowIndex="2">
+                            <GridPane.margin>
+                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+                            </GridPane.margin>
+                            <tooltip>
+                                <Tooltip text="Enter the full name of the user"/>
+                            </tooltip>
+                        </TextField>
+                        <TextField fx:id="emailField1" promptText="Email" GridPane.rowIndex="3">
+                            <GridPane.margin>
+                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+                            </GridPane.margin>
+                            <tooltip>
+                                <Tooltip text="Enter the email of the user"/>
+                            </tooltip>
+                        </TextField>
+                        <TextField fx:id="adminField1" promptText="Admin" GridPane.rowIndex="4">
+                            <GridPane.margin>
+                                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
+                            </GridPane.margin>
+                            <tooltip>
+                                <Tooltip text="Enter true if the user is an admin, false if the user is not an admin"/>
+                            </tooltip>
+                        </TextField>
+                        <Button fx:id="dodajButton1" mnemonicParsing="false" onAction="#dodajUserButtonClick"
+                                prefHeight="40.0" prefWidth="250.0" text="Add" GridPane.halignment="CENTER"
+                                GridPane.rowIndex="5">
+                            <tooltip>
+                                <Tooltip text="Click here to add the user"/>
+                            </tooltip>
+                        </Button>
+                        <Button fx:id="azurirajButton1" mnemonicParsing="false" onAction="#azurirajUserButtonClick"
+                                prefHeight="40.0" prefWidth="250.0" text="Update" GridPane.halignment="CENTER"
+                                GridPane.rowIndex="6">
+                            <tooltip>
+                                <Tooltip text="Click here to update the user"/>
+                            </tooltip>
+                        </Button>
+                        <Button fx:id="obrisiButton1" mnemonicParsing="false" onAction="#obrisiUserButtonClick"
+                                prefHeight="40.0" prefWidth="250.0" text="Delete" GridPane.halignment="CENTER"
+                                GridPane.rowIndex="7">
+                            <tooltip>
+                                <Tooltip text="Click here to delete the user"/>
+                            </tooltip>
+                        </Button>
+                        <Button fx:id="nazadButton21" mnemonicParsing="false" onAction="#nazadButtonClick"
+                                prefHeight="40.0" prefWidth="142.0" text="Sign out" GridPane.halignment="CENTER"
+                                GridPane.rowIndex="8">
+                            <padding>
+                                <Insets bottom="20.0"/>
+                            </padding>
+                            <tooltip>
+                                <Tooltip text="Click here to sign out"/>
+                            </tooltip>
+                        </Button>
+                    </children>
+                </GridPane>
+            </content>
+        </Tab>
     </tabs>
 </TabPane>

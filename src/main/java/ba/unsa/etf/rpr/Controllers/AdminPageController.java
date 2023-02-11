@@ -383,9 +383,9 @@ public class AdminPageController {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/KupljenaKarta.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
         KupljenaKartaController kkc = fxmlLoader.getController();
-        kkc.imeFilma.setText("Title: " + imeOdabranogFilma);
-        kkc.datumFilma.setText("Date: " + datum);
-        kkc.cijenaKarte.setText("Price: " + ukupnaCijena + "KM");
+        kkc.imeFilma.setText(imeOdabranogFilma);
+        kkc.datumFilma.setText(datum + "");
+        kkc.cijenaKarte.setText(ukupnaCijena + "KM");
         stage.setResizable(false);
         stage.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
         stage.setTitle("Ticket successfully purchased!");
