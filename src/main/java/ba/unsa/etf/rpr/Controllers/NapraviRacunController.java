@@ -50,6 +50,14 @@ public class NapraviRacunController {
         else return "W"; //weak
     }
 
+    private static boolean dateOfBirthCheck(Date d) {
+        Date d2 = Date.valueOf("2007-01-01");
+        if (d.compareTo(d2) > 0) {
+            return false;
+        }
+        return true;
+    }
+
     @FXML
     void initialize() {
         usernameTextField.textProperty().addListener(new ChangeListener<String>() {
@@ -106,12 +114,14 @@ public class NapraviRacunController {
         datumRodjenjaField.valueProperty().addListener(new ChangeListener<LocalDate>() {
             @Override
             public void changed(ObservableValue<? extends LocalDate> observableValue, LocalDate localDate, LocalDate t1) {
-                Date d1 = Date.valueOf(datumRodjenjaField.getValue());
-                Date d2 = Date.valueOf("2007-01-01");
-                if (d1.compareTo(d2) > 0) {
+                if (!dateOfBirthCheck(Date.valueOf(datumRodjenjaField.getValue()))) {
                     datumRodjenjaField.getStyleClass().removeAll("poljeIspravno");
                     datumRodjenjaField.getStyleClass().add("poljeNijeIspravno");
                     dateRegex.setText("To create an account, you must be at least 16 years old.");
+                }
+                else{
+                    datumRodjenjaField.getStyleClass().removeAll("poljeNijeIspravno");
+                    dateRegex.setText("");
                 }
             }
         });
