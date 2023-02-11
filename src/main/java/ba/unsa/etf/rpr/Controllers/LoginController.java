@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -25,6 +26,7 @@ public class LoginController {
     public TextField fieldUsername;
     public static User user = new User();
     public static Stage homeStage = new Stage();
+    public Button prijavaButton;
     private usersManager umanager = new usersManager();
 
     /**
@@ -105,7 +107,7 @@ public class LoginController {
      */
     public void passwordEnterPressed(javafx.scene.input.KeyEvent keyEvent) throws IOException, FilmoviException {
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            prijavaButtonClick(new ActionEvent());
+            prijavaButton.fire();
         }
     }
 
@@ -118,7 +120,7 @@ public class LoginController {
      */
     public void usernameKeyPress(KeyEvent keyEvent) throws IOException, FilmoviException {
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            prijavaButtonClick(new ActionEvent());
+            prijavaButton.fire();
         }
     }
 }
