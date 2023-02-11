@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.sql.Date;
+
 class usersManagerTest {
     usersManager um = new usersManager();
 
@@ -68,5 +70,18 @@ class usersManagerTest {
         Assertions.assertEquals("M", NapraviRacunController.passwordCheck(mockU.getById(0).getPassword()));
         Mockito.when(mockU.getById(0)).thenReturn(new User("user", "test", "ime", false));
         Assertions.assertEquals("W", NapraviRacunController.passwordCheck(mockU.getById(0).getPassword()));
+    }
+
+    @Test
+    void dobCheckTest() throws FilmoviException {
+        usersManager mockU = Mockito.mock(usersManager.class);
+        Mockito.when(mockU.getById(0)).thenReturn(new User("user", "password", "ime", "email@gmail.com", "Kosevo", "Sarajevo", Date.valueOf("2005-10-09"), false));
+        Assertions.assertTrue(NapraviRacunController.dateOfBirthCheck(mockU.getById(0).getDatum_rodjenja()));
+        Mockito.when(mockU.getById(0)).thenReturn(new User("user", "password", "ime", "email@gmail.com", "Kosevo", "Sarajevo", Date.valueOf("1989-11-03"), false));
+        Assertions.assertTrue(NapraviRacunController.dateOfBirthCheck(mockU.getById(0).getDatum_rodjenja()));
+        Mockito.when(mockU.getById(0)).thenReturn(new User("user", "password", "ime", "email@gmail.com", "Kosevo", "Sarajevo", Date.valueOf("2012-10-09"), false));
+        Assertions.assertFalse(NapraviRacunController.dateOfBirthCheck(mockU.getById(0).getDatum_rodjenja()));
+        Mockito.when(mockU.getById(0)).thenReturn(new User("user", "password", "ime", "email@gmail.com", "Kosevo", "Sarajevo", Date.valueOf("2050-11-03"), false));
+        Assertions.assertFalse(NapraviRacunController.dateOfBirthCheck(mockU.getById(0).getDatum_rodjenja()));
     }
 }
