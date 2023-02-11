@@ -35,7 +35,7 @@ public class NapraviRacunController {
     private boolean ispravanEmail = false;
     private usersManager umanager = new usersManager();
 
-    private static String passwordCheck(String password) {
+    public static String passwordCheck(String password) {
         int n = password.length();
         boolean hasLower = false, hasUpper = false, hasDigit = false, specialChar = false;
         Set<Character> set = new HashSet<Character>(Arrays.asList('!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+'));
@@ -50,7 +50,7 @@ public class NapraviRacunController {
         else return "W"; //weak
     }
 
-    private static boolean dateOfBirthCheck(Date d) {
+    public static boolean dateOfBirthCheck(Date d) {
         Date d2 = Date.valueOf("2007-01-01");
         if (d.compareTo(d2) > 0) {
             return false;

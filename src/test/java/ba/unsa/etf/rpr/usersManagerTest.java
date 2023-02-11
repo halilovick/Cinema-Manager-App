@@ -1,10 +1,12 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.Controllers.NapraviRacunController;
 import ba.unsa.etf.rpr.business.usersManager;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.FilmoviException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 class usersManagerTest {
     usersManager um = new usersManager();
@@ -55,5 +57,16 @@ class usersManagerTest {
         User u2 = um.getByUsername("user1");
         Assertions.assertEquals(u1, u2);
         um.delete(u1.getId());
+    }
+
+    @Test
+    void passwordStrengthTest() throws FilmoviException {
+        usersManager mockU = Mockito.mock(usersManager.class);
+        Mockito.when(mockU.getById(0)).thenReturn(new User("user", "TestPassword1!", "ime", false));
+        Assertions.assertEquals("S", NapraviRacunController.passwordCheck(mockU.getById(0).getPassword()));
+        Mockito.when(mockU.getById(0)).thenReturn(new User("user", "testpassword", "ime", false));
+        Assertions.assertEquals("M", NapraviRacunController.passwordCheck(mockU.getById(0).getPassword()));
+        Mockito.when(mockU.getById(0)).thenReturn(new User("user", "test", "ime", false));
+        Assertions.assertEquals("W", NapraviRacunController.passwordCheck(mockU.getById(0).getPassword()));
     }
 }
