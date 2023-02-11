@@ -11,11 +11,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class karteManagerTest {
-
     filmoviManager fm = new filmoviManager();
     karteManager km = new karteManager();
     usersManager um = new usersManager();
 
+    /**
+     * Deleting ticket with incorrect id.
+     *
+     * @throws FilmoviException the filmovi exception
+     */
     @Test
     void deletingTicketWithoutId() {
         Assertions.assertThrows(FilmoviException.class, () -> {
@@ -23,8 +27,13 @@ class karteManagerTest {
         });
     }
 
+    /**
+     * Adding unexisting film to ticket.
+     *
+     * @throws FilmoviException the filmovi exception
+     */
     @Test
-    void unexistingFilmToTicketTest() throws FilmoviException {
+    void unexistingFilmToTicketTest() {
         Film f = new Film();
         f.setIme("Test");
         User u = new User();

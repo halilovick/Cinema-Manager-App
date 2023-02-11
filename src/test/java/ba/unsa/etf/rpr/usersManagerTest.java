@@ -13,6 +13,11 @@ import java.sql.Date;
 class usersManagerTest {
     usersManager um = new usersManager();
 
+    /**
+     * Checks if username added is unique.
+     *
+     * @throws FilmoviException the filmovi exception
+     */
     @Test
     void uniqueUsernameTest() throws FilmoviException {
         um.add(new User("unique", "pass", "u", false));
@@ -22,6 +27,9 @@ class usersManagerTest {
         um.delete(um.getByUsername("unique").getId());
     }
 
+    /**
+     * Adds user to database.
+     */
     @Test
     void addUserTest() throws FilmoviException {
         User u = new User();
@@ -34,6 +42,9 @@ class usersManagerTest {
         um.delete(u.getId());
     }
 
+    /**
+     * Deletes user from database.
+     */
     @Test
     void deleteUserTest() throws FilmoviException {
         User u = new User();
@@ -46,11 +57,17 @@ class usersManagerTest {
         Assertions.assertTrue(exists);
     }
 
+    /**
+     * getLoggedIn method test.
+     */
     @Test
     void getLoggedInTest() throws FilmoviException {
         Assertions.assertEquals(0, um.getLoggedInId("doesnt_exist", "doesnt_exist!"));
     }
 
+    /**
+     * Gets user by username.
+     */
     @Test
     void getByUsernameTest() throws FilmoviException {
         User u1 = new User();
@@ -61,6 +78,10 @@ class usersManagerTest {
         um.delete(u1.getId());
     }
 
+    /**
+     * Mocking test.
+     * Checks password strength method by mocking user in database.
+     */
     @Test
     void passwordStrengthTest() throws FilmoviException {
         usersManager mockU = Mockito.mock(usersManager.class);
@@ -72,6 +93,10 @@ class usersManagerTest {
         Assertions.assertEquals("W", NapraviRacunController.passwordCheck(mockU.getById(0).getPassword()));
     }
 
+    /**
+     * Mocking test.
+     * Checks date of birth method by mocking user in database.
+     */
     @Test
     void dobCheckTest() throws FilmoviException {
         usersManager mockU = Mockito.mock(usersManager.class);

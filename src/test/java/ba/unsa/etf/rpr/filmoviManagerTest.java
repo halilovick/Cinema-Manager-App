@@ -18,6 +18,11 @@ class filmoviManagerTest {
     karteManager km = new karteManager();
     usersManager um = new usersManager();
 
+    /**
+     * Deleting film that has a ticket related to it
+     *
+     * @throws FilmoviException the filmovi exception
+     */
     @Test
     void deletingFilmWithRelatedTicketTest() throws FilmoviException {
         Film f = new Film();
@@ -38,6 +43,9 @@ class filmoviManagerTest {
         um.delete(u.getId());
     }
 
+    /**
+     * Adding film that already has an id assigned.
+     */
     @Test
     void addingFilmWithIdTest() {
         Film f = new Film();
@@ -48,6 +56,11 @@ class filmoviManagerTest {
         });
     }
 
+    /**
+     * Adding film to database test.
+     *
+     * @throws FilmoviException the filmovi exception
+     */
     @Test
     void addFilmTest() throws FilmoviException {
         Film f = new Film();
@@ -62,6 +75,11 @@ class filmoviManagerTest {
         fm.delete(f.getId());
     }
 
+    /**
+     * Deleting film from database test.
+     *
+     * @throws FilmoviException the filmovi exception
+     */
     @Test
     void deleteFilmTest() throws FilmoviException {
         Film f = new Film();
