@@ -36,7 +36,6 @@ public class usersManager {
     }
 
     public User update(User u) throws FilmoviException {
-        if (userExists(u.getUser())) throw new FilmoviException("User with such username already exists!");
         return DaoFactory.usersDao().update(u);
     }
 

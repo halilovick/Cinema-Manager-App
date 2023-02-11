@@ -165,41 +165,41 @@ public class UserPageController {
     }
 
     public void promjeniPodatkeButtonClick(ActionEvent actionEvent) throws FilmoviException, IOException {
-        if(umanager.userExists(usernameTextField.getText())){
+        try {
+            User u = new User();
+            u.setId(user.getId());
+            u.setUser(usernameTextField.getText());
+            u.setPassword(lozinkaTextField.getText());
+            u.setIme(imeTextField.getText());
+            u.setEmail(emailTextField.getText());
+            u.setAdresa(adresaTextField.getText());
+            u.setGrad(gradTextField.getText());
+            u.setDatum_rodjenja(Date.valueOf(datumRodjenjaField.getValue()));
+            umanager.update(u);
+            Node n = (Node) actionEvent.getSource();
+            Stage stage = (Stage) n.getScene().getWindow();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success!");
+            alert.setHeaderText(null);
+            alert.setContentText("Credentials have been changed. Please log in again.");
+            alert.showAndWait();
+            stage.close();
+            Stage stage1 = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/loginProzor.fxml"));
+            Scene scene1 = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
+            LoginController lc = fxmlLoader.getController();
+            stage1.setResizable(false);
+            stage1.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
+            stage1.setTitle("Login page");
+            stage1.setScene(scene1);
+            stage1.show();
+        } catch (FilmoviException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Username already exists!");
             alert.setContentText("Choose a different username.");
             alert.showAndWait();
-            return;
         }
-        User u = new User();
-        u.setId(user.getId());
-        u.setUser(usernameTextField.getText());
-        u.setPassword(lozinkaTextField.getText());
-        u.setIme(imeTextField.getText());
-        u.setEmail(emailTextField.getText());
-        u.setAdresa(adresaTextField.getText());
-        u.setGrad(gradTextField.getText());
-        u.setDatum_rodjenja(Date.valueOf(datumRodjenjaField.getValue()));
-        umanager.update(u);
-        Node n = (Node) actionEvent.getSource();
-        Stage stage = (Stage) n.getScene().getWindow();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success!");
-        alert.setHeaderText(null);
-        alert.setContentText("Credentials have been changed. Please log in again.");
-        alert.showAndWait();
-        stage.close();
-        Stage stage1 = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/loginProzor.fxml"));
-        Scene scene1 = new Scene(fxmlLoader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE);
-        LoginController lc = fxmlLoader.getController();
-        stage1.setResizable(false);
-        stage1.getIcons().add(new Image("https://cdn-icons-png.flaticon.com/512/3418/3418886.png"));
-        stage1.setTitle("Login page");
-        stage1.setScene(scene1);
-        stage1.show();
     }
 
     public void zatvoriButtonClick(ActionEvent actionEvent) throws IOException {
