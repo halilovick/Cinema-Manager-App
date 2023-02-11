@@ -35,6 +35,12 @@ public class NapraviRacunController {
     private boolean ispravanEmail = false;
     private usersManager umanager = new usersManager();
 
+    /**
+     * Password strength check.
+     *
+     * @param password the password
+     * @return strength of password "W" - weak, "M" - moderate, "S" - strong
+     */
     public static String passwordCheck(String password) {
         int n = password.length();
         boolean hasLower = false, hasUpper = false, hasDigit = false, specialChar = false;
@@ -50,6 +56,12 @@ public class NapraviRacunController {
         else return "W"; //weak
     }
 
+    /**
+     * Date of birth check. Checks if the user is older than 16.
+     *
+     * @param d the date
+     * @return the boolean
+     */
     public static boolean dateOfBirthCheck(Date d) {
         Date d2 = Date.valueOf("2007-01-01");
         if (d.compareTo(d2) > 0) {
@@ -58,6 +70,9 @@ public class NapraviRacunController {
         return true;
     }
 
+    /**
+     * Initialize. Checks if fields are valid.
+     */
     @FXML
     void initialize() {
         usernameTextField.textProperty().addListener(new ChangeListener<String>() {
@@ -127,6 +142,12 @@ public class NapraviRacunController {
         });
     }
 
+    /**
+     * Napravi account button click. Adds user to database.
+     *
+     * @param actionEvent the action event
+     * @throws FilmoviException the filmovi exception
+     */
     public void napraviAccountButtonClick(ActionEvent actionEvent) throws FilmoviException {
         if (usernameTextField.getText().isEmpty() || lozinkaTextField.getText().isEmpty() || imeTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || adresaTextField.getText().isEmpty() || gradTextField.getText().isEmpty() || datumRodjenjaField.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

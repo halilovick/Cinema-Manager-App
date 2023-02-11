@@ -84,6 +84,12 @@ public class AdminPageController {
     public AdminPageController() throws FilmoviException {
     }
 
+    /**
+     * Dodaj film button click. Adds film to database.
+     *
+     * @param actionEvent the action event
+     * @throws FilmoviException the filmovi exception
+     */
     public void dodajFilmButtonClick(ActionEvent actionEvent) throws FilmoviException {
         if (imeField.getText().isEmpty() || zanrField.getText().isEmpty() || trajanjeField.getText().isEmpty() || cijenaField.getText().isEmpty() || brojsaleField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -118,6 +124,12 @@ public class AdminPageController {
         }
     }
 
+    /**
+     * Azuriraj film button click. Updates film in database.
+     *
+     * @param actionEvent the action event
+     * @throws FilmoviException the filmovi exception
+     */
     public void azurirajFilmButtonClick(ActionEvent actionEvent) throws FilmoviException {
         if (imeField.getText().isEmpty() || zanrField.getText().isEmpty() || trajanjeField.getText().isEmpty() || cijenaField.getText().isEmpty() || brojsaleField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -143,6 +155,12 @@ public class AdminPageController {
         alert.showAndWait();
     }
 
+    /**
+     * Obrisi film button click. Deletes film in database.
+     *
+     * @param actionEvent the action event
+     * @throws FilmoviException the filmovi exception
+     */
     public void obrisiFilmButtonClick(ActionEvent actionEvent) throws FilmoviException {
         if (imeField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -162,6 +180,11 @@ public class AdminPageController {
         alert.showAndWait();
     }
 
+    /**
+     * Gets selected film.
+     *
+     * @param mouseEvent the mouse event
+     */
     public void getSelectedFilm(MouseEvent mouseEvent) {
         int index = tabelaFilmova.getSelectionModel().getSelectedIndex();
         if (index <= -1) return;
@@ -173,6 +196,11 @@ public class AdminPageController {
         brojsaleField.setText(colBrojSale.getCellData(index).toString());
     }
 
+    /**
+     * Update filmovi table. Updates table containing films.
+     *
+     * @throws FilmoviException the filmovi exception
+     */
     public void UpdateFilmoviTable() throws FilmoviException {
         colID.setCellValueFactory(new PropertyValueFactory<Film, Integer>("id"));
         colIme.setCellValueFactory(new PropertyValueFactory<Film, String>("ime"));
@@ -186,6 +214,9 @@ public class AdminPageController {
         tabelaFilmova.refresh();
     }
 
+    /**
+     * Update prodaja table. Updates films available for ticket selling.
+     */
     public void UpdateProdajaTable() {
         filmChoiceBox.setItems(filmovi);
         filmChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
@@ -204,6 +235,11 @@ public class AdminPageController {
         });
     }
 
+    /**
+     * Initializing the screens.
+     *
+     * @throws FilmoviException the filmovi exception
+     */
     @FXML
     public void initialize() throws FilmoviException {
         UpdateProdajaTable();
@@ -211,6 +247,12 @@ public class AdminPageController {
         UpdateUseriTable();
     }
 
+    /**
+     * Nazad button click. Goes back to log in screen.
+     *
+     * @param actionEvent the action event
+     * @throws IOException the io exception
+     */
     public void nazadButtonClick(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/loginProzor.fxml"));
@@ -226,6 +268,12 @@ public class AdminPageController {
         stage2.close();
     }
 
+    /**
+     * Dodaj user button click. Adds user to database.
+     *
+     * @param actionEvent the action event
+     * @throws FilmoviException the filmovi exception
+     */
     public void dodajUserButtonClick(ActionEvent actionEvent) throws FilmoviException {
         if (userField1.getText().isEmpty() || passwordField1.getText().isEmpty() || imeField1.getText().isEmpty() || emailField1.getText().isEmpty() || adminField1.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -260,6 +308,12 @@ public class AdminPageController {
         }
     }
 
+    /**
+     * Azuriraj user button click. Updates user in database.
+     *
+     * @param actionEvent the action event
+     * @throws FilmoviException the filmovi exception
+     */
     public void azurirajUserButtonClick(ActionEvent actionEvent) throws FilmoviException {
         if (userField1.getText().isEmpty() || passwordField1.getText().isEmpty() || imeField1.getText().isEmpty() || emailField1.getText().isEmpty() || adminField1.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -288,6 +342,12 @@ public class AdminPageController {
         alert.showAndWait();
     }
 
+    /**
+     * Obrisi user button click. Deletes user in database.
+     *
+     * @param actionEvent the action event
+     * @throws FilmoviException the filmovi exception
+     */
     public void obrisiUserButtonClick(ActionEvent actionEvent) throws FilmoviException {
         if (userField1.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -307,6 +367,11 @@ public class AdminPageController {
         alert.showAndWait();
     }
 
+    /**
+     * Gets selected user.
+     *
+     * @param mouseEvent the mouse event
+     */
     public void getSelectedUser(MouseEvent mouseEvent) {
         int index = tabelaUsera.getSelectionModel().getSelectedIndex();
         if (index <= -1) return;
@@ -318,6 +383,11 @@ public class AdminPageController {
         adminField1.setText(colAdmin1.getCellData(index).toString());
     }
 
+    /**
+     * Update useri table. Updates existing users.
+     *
+     * @throws FilmoviException the filmovi exception
+     */
     public void UpdateUseriTable() throws FilmoviException {
         colID1.setCellValueFactory(new PropertyValueFactory<User, Integer>("id"));
         colUser1.setCellValueFactory(new PropertyValueFactory<User, String>("user"));
@@ -334,10 +404,22 @@ public class AdminPageController {
         tabelaUsera.refresh();
     }
 
+    /**
+     * Odabir datuma click. Converts chosen date to correct type.
+     *
+     * @param actionEvent the action event
+     */
     public void odabirDatumaClick(ActionEvent actionEvent) {
         datum = odabirDatuma.getValue();
     }
 
+    /**
+     * Kupi button click. Adds ticket to database.
+     *
+     * @param actionEvent the action event
+     * @throws FilmoviException the filmovi exception
+     * @throws IOException      the io exception
+     */
     public void kupiButtonClick(ActionEvent actionEvent) throws FilmoviException, IOException {
         try {
             brojKarata = Integer.parseInt(brojKarataTextField.getText());

@@ -27,6 +27,13 @@ public class LoginController {
     public static Stage homeStage = new Stage();
     private usersManager umanager = new usersManager();
 
+    /**
+     * Prijava button click.
+     *
+     * @param actionEvent the action event
+     * @throws FilmoviException the filmovi exception
+     * @throws IOException      the io exception
+     */
     public void prijavaButtonClick(ActionEvent actionEvent) throws FilmoviException, IOException {
         int loginId = umanager.getLoggedInId(fieldUsername.getText(), fieldPassword.getText());
         if (loginId != 0) {
@@ -62,10 +69,21 @@ public class LoginController {
         }
     }
 
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Create account button click.
+     *
+     * @param actionEvent the action event
+     * @throws IOException the io exception
+     */
     public void createAccountButtonClick(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/napraviRacun.fxml"));
@@ -78,12 +96,26 @@ public class LoginController {
         stage.show();
     }
 
+    /**
+     * Enter key pressed on password field.
+     *
+     * @param keyEvent the key event
+     * @throws IOException      the io exception
+     * @throws FilmoviException the filmovi exception
+     */
     public void passwordEnterPressed(javafx.scene.input.KeyEvent keyEvent) throws IOException, FilmoviException {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             prijavaButtonClick(new ActionEvent());
         }
     }
 
+    /**
+     * Enter key pressed on username field.
+     *
+     * @param keyEvent the key event
+     * @throws IOException      the io exception
+     * @throws FilmoviException the filmovi exception
+     */
     public void usernameKeyPress(KeyEvent keyEvent) throws IOException, FilmoviException {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             prijavaButtonClick(new ActionEvent());
