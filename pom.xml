@@ -88,6 +88,9 @@
     <profiles>
         <profile>
             <id>gui-app</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
             <build>
                 <finalName>${project.name}-gui</finalName>
                 <plugins>
@@ -139,6 +142,9 @@
         </profile>
         <profile>
             <id>cli-app</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <finalName>${project.name}-cli</finalName>
                 <plugins>
