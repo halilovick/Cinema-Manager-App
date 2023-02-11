@@ -11,6 +11,10 @@ import org.apache.commons.cli.*;
 
 import java.io.PrintWriter;
 
+/**
+ * CLI (Command Line Interface) implementation
+ *
+ */
 public class App {
     private static final Option addFilm = new Option("f", "add-film", false, "Adding a new film to database (\"name\", \"genre\", duration)");
     private static final Option addUser = new Option("u", "add-user", false, "Adding a new user to database (\"username\", \"password\", admin(true/false))");
@@ -22,6 +26,11 @@ public class App {
     private static final Option getTickets = new Option("getT", "get-tickets", false, "Printing all tickets from database");
     private static final Option addTicket = new Option("t", "add-ticket", false, "Adding a new ticket to database (user-id, film-id)");
 
+    /**
+     * Print formatted options.
+     *
+     * @param options the options
+     */
     public static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
         PrintWriter printWriter = new PrintWriter(System.out);
@@ -30,6 +39,11 @@ public class App {
         printWriter.close();
     }
 
+    /**
+     * Add options.
+     *
+     * @return the options
+     */
     public static Options addOptions() {
         Options options = new Options();
         options.addOption(addFilm);
@@ -53,6 +67,13 @@ public class App {
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws ParseException   the parse exception
+     * @throws FilmoviException the filmovi exception
+     */
     public static void main(String[] args) throws ParseException, FilmoviException {
         Options options = addOptions();
         CommandLineParser commandLineParser = new DefaultParser();

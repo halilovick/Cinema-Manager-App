@@ -12,6 +12,9 @@ import java.sql.SQLException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * Main class for working with JavaFX framework
+ */
 public class AppFX extends Application {
     @Override
     public void start(Stage primarystage) throws IOException {
