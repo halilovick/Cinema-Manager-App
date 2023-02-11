@@ -94,6 +94,13 @@ public class UserPageController {
         datumRodjenjaField.setValue(user.getDatum_rodjenja().toLocalDate());
     }
 
+    /**
+     * Kupi button click. Adds ticket do database.
+     *
+     * @param actionEvent the action event
+     * @throws FilmoviException the filmovi exception
+     * @throws IOException      the io exception
+     */
     public void kupiButtonClick(ActionEvent actionEvent) throws FilmoviException, IOException {
         try {
             brojKarata = Integer.parseInt(brojKarataTextField.getText());
@@ -149,6 +156,12 @@ public class UserPageController {
         stage.show();
     }
 
+    /**
+     * Nazad button click. Goes back to login screen.
+     *
+     * @param actionEvent the action event
+     * @throws IOException the io exception
+     */
     public void nazadButtonClick(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/loginProzor.fxml"));
@@ -164,6 +177,13 @@ public class UserPageController {
         stage2.close();
     }
 
+    /**
+     * Promjeni podatke button click. Updates user in database.
+     *
+     * @param actionEvent the action event
+     * @throws FilmoviException the filmovi exception
+     * @throws IOException      the io exception
+     */
     public void promjeniPodatkeButtonClick(ActionEvent actionEvent) throws FilmoviException, IOException {
         try {
             User u = new User();
@@ -202,10 +222,19 @@ public class UserPageController {
         }
     }
 
+    /**
+     * Zatvori button click. Goes back to login screen.
+     *
+     * @param actionEvent the action event
+     * @throws IOException the io exception
+     */
     public void zatvoriButtonClick(ActionEvent actionEvent) throws IOException {
         nazadButtonClick(actionEvent);
     }
 
+    /**
+     * Odabir datuma click. Converts date to correct format.
+     */
     public void odabirDatumaClick() {
         datum = odabirDatuma.getValue();
     }
