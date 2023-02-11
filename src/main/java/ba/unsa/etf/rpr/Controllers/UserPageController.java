@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.apache.commons.validator.routines.EmailValidator;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -25,6 +26,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static ba.unsa.etf.rpr.Controllers.LoginController.user;
+import static ba.unsa.etf.rpr.Controllers.NapraviRacunController.dateOfBirthCheck;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class UserPageController {
@@ -185,6 +187,21 @@ public class UserPageController {
      * @throws IOException      the io exception
      */
     public void promjeniPodatkeButtonClick(ActionEvent actionEvent) throws FilmoviException, IOException {
+        if (!dateOfBirthCheck(Date.valueOf(datumRodjenjaField.getValue()))) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid date of birth!");
+            alert.setContentText("To create an account, you must be at least 16 years old.");
+            alert.showAndWait();
+            return;
+        } else if (!EmailValidator.getInstance().isValid(emailTextField.getText())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Email not valid!");
+            alert.setContentText("Please enter a valid email address.");
+            alert.showAndWait();
+            return;
+        }
         try {
             User u = new User();
             u.setId(user.getId());

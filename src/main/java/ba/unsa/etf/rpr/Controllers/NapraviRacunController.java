@@ -133,8 +133,7 @@ public class NapraviRacunController {
                     datumRodjenjaField.getStyleClass().removeAll("poljeIspravno");
                     datumRodjenjaField.getStyleClass().add("poljeNijeIspravno");
                     dateRegex.setText("To create an account, you must be at least 16 years old.");
-                }
-                else{
+                } else {
                     datumRodjenjaField.getStyleClass().removeAll("poljeNijeIspravno");
                     dateRegex.setText("");
                 }
@@ -181,7 +180,7 @@ public class NapraviRacunController {
             alert.showAndWait();
             return;
         }
-        if (Date.valueOf(datumRodjenjaField.getValue()).compareTo(Date.valueOf("2007-01-01")) > 0) {
+        if (!dateOfBirthCheck(Date.valueOf(datumRodjenjaField.getValue()))) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid date of birth!");
