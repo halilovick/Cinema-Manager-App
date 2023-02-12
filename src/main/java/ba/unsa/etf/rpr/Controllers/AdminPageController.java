@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -245,6 +246,30 @@ public class AdminPageController {
         UpdateProdajaTable();
         UpdateFilmoviTable();
         UpdateUseriTable();
+        initializeDatePicker();
+    }
+
+    /**
+     * Initializing the date picker.
+     */
+    private void initializeDatePicker() {
+        odabirDatuma.setValue(LocalDate.now());
+        final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item.isBefore(LocalDate.now())) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }
+                    }
+                };
+            }
+        };
+        odabirDatuma.setDayCellFactory(dayCellFactory);
     }
 
     /**
