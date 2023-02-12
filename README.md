@@ -10,13 +10,13 @@ Running and testing the project is not possible without database connection deta
 Clone the project
 
 ```bash
-  git clone https://github.com/halilovick/rpr-projekat
+  git clone https://github.com/halilovick/cinema-manager
 ```
 
 Go to the project directory
 
 ```bash
-  cd rpr-projekat
+  cd cinema-manager
 ```
 
 Install dependencies
