@@ -13,7 +13,6 @@ import java.io.PrintWriter;
 
 /**
  * CLI (Command Line Interface) implementation
- *
  */
 public class App {
     private static final Option addFilm = new Option("f", "add-film", false, "Adding a new film to database (\"name\", \"genre\", duration)");
@@ -82,16 +81,22 @@ public class App {
         karteManager km = new karteManager();
         usersManager um = new usersManager();
         if (cl.hasOption(addFilm.getOpt()) || cl.hasOption(addFilm.getLongOpt())) {
-            Film f = new Film();
-            f.setIme(cl.getArgList().get(0));
-            f.setZanr(cl.getArgList().get(1));
-            if (!isDigit(cl.getArgList().get(2))) {
-                System.out.println("You must enter a valid price!");
-                return;
+            try {
+                Film f = new Film();
+                f.setIme(cl.getArgList().get(0));
+                f.setZanr(cl.getArgList().get(1));
+                if (!isDigit(cl.getArgList().get(2))) {
+                    System.out.println("You must enter a valid price!");
+                    return;
+                }
+                f.setCijena(Integer.parseInt(cl.getArgList().get(2)));
+                fm.add(f);
+                System.out.println("Film successfully added to database!");
+            } catch (Exception e) {
+                System.out.println("Error. Invalid parameters.");
+                printFormattedOptions(options);
+                System.exit(-1);
             }
-            f.setCijena(Integer.parseInt(cl.getArgList().get(2)));
-            fm.add(f);
-            System.out.println("Film successfully added to database!");
         } else if (cl.hasOption(deleteFilm.getOpt()) || cl.hasOption(deleteFilm.getLongOpt())) {
             Film f = new Film();
             try {
@@ -106,64 +111,88 @@ public class App {
         } else if (cl.hasOption(getFilms.getOpt()) || cl.hasOption(getFilms.getLongOpt())) {
             fm.getAll().forEach(f -> System.out.println(f.getIme()));
         } else if (cl.hasOption(deleteTickets.getOpt()) || cl.hasOption(deleteTickets.getLongOpt())) {
-            if (isDigit(cl.getArgList().get(0))) {
-                try {
-                    km.delete(Integer.parseInt(cl.getArgList().get(0)));
-                    System.out.println("Ticket successfully deleted from database!");
-                } catch (FilmoviException f) {
-                    System.out.println("Ticket does not exist!");
+            try {
+                if (isDigit(cl.getArgList().get(0))) {
+                    try {
+                        km.delete(Integer.parseInt(cl.getArgList().get(0)));
+                        System.out.println("Ticket successfully deleted from database!");
+                    } catch (FilmoviException f) {
+                        System.out.println("Ticket does not exist!");
+                    }
+                } else {
+                    try {
+                        km.deleteWithFilmId(fm.getByIme(cl.getArgList().get(0)).getId());
+                        System.out.println("Tickets successfully deleted from database!");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Film with that name does not exist.");
+                    }
                 }
-            } else {
-                try {
-                    km.deleteWithFilmId(fm.getByIme(cl.getArgList().get(0)).getId());
-                    System.out.println("Tickets successfully deleted from database!");
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Film with that name does not exist.");
-                }
+            } catch (Exception e) {
+                System.out.println("Error. Invalid parameters.");
+                printFormattedOptions(options);
+                System.exit(-1);
             }
         } else if (cl.hasOption(getUsers.getOpt()) || cl.hasOption(getUsers.getLongOpt())) {
             um.getAll().forEach(u -> System.out.println(u.getIme()));
         } else if (cl.hasOption(getTickets.getOpt()) || cl.hasOption(getTickets.getLongOpt())) {
             km.getAll().forEach(k -> System.out.println("User:" + k.getUser().getIme() + "; Film: " + k.getFilm().getIme()));
         } else if (cl.hasOption(deleteUser.getOpt()) || cl.hasOption(deleteUser.getLongOpt())) {
-            if (!isDigit(cl.getArgList().get(0))) {
-                System.out.println("You must enter a valid user id!");
-                return;
-            }
             try {
-                um.delete(Integer.parseInt(cl.getArgList().get(0)));
-                System.out.println("User deleted successfully!");
-            } catch (FilmoviException f) {
-                System.out.println("User does not exist!");
+                if (!isDigit(cl.getArgList().get(0))) {
+                    System.out.println("You must enter a valid user id!");
+                    return;
+                }
+                try {
+                    um.delete(Integer.parseInt(cl.getArgList().get(0)));
+                    System.out.println("User deleted successfully!");
+                } catch (FilmoviException f) {
+                    System.out.println("User does not exist!");
+                }
+            } catch (Exception e) {
+                System.out.println("Error. Invalid parameters.");
+                printFormattedOptions(options);
+                System.exit(-1);
             }
         } else if (cl.hasOption(addUser.getOpt()) || cl.hasOption(addUser.getLongOpt())) {
-            if (!cl.getArgList().get(2).equals("1") && !cl.getArgList().get(2).equals("0") && !cl.getArgList().get(2).equals("true") && !cl.getArgList().get(2).equals("false")) {
-                System.out.println("You must enter a valid boolean value!");
-                return;
-            }
-            User u = new User();
-            u.setUser(cl.getArgList().get(0));
-            u.setPassword(cl.getArgList().get(1));
-            u.setAdmin(Boolean.parseBoolean(cl.getArgList().get(2)));
-            um.add(u);
-            System.out.println("User successfully added!");
-        } else if (cl.hasOption(addTicket.getOpt()) || cl.hasOption(addTicket.getLongOpt())) {
-            if (!isDigit(cl.getArgList().get(0))) {
-                System.out.println("You must enter a valid film id!");
-                return;
-            }
-            if (!isDigit(cl.getArgList().get(1))) {
-                System.out.println("You must enter a valid user id!");
-                return;
-            }
             try {
-                Karta k = new Karta();
-                k.setFilm(fm.getById(Integer.parseInt(cl.getArgList().get(0))));
-                k.setUser(um.getById(Integer.parseInt(cl.getArgList().get(1))));
-                km.add(k);
-                System.out.println("Ticket successfuly added!");
-            } catch (FilmoviException f) {
-                System.out.println("User/film does not exist!");
+                if (!cl.getArgList().get(2).equals("1") && !cl.getArgList().get(2).equals("0") && !cl.getArgList().get(2).equals("true") && !cl.getArgList().get(2).equals("false")) {
+                    System.out.println("You must enter a valid boolean value!");
+                    return;
+                }
+                User u = new User();
+                u.setUser(cl.getArgList().get(0));
+                u.setPassword(cl.getArgList().get(1));
+                u.setAdmin(Boolean.parseBoolean(cl.getArgList().get(2)));
+                um.add(u);
+                System.out.println("User successfully added!");
+            } catch (Exception e) {
+                System.out.println("Error. Invalid parameters.");
+                printFormattedOptions(options);
+                System.exit(-1);
+            }
+        } else if (cl.hasOption(addTicket.getOpt()) || cl.hasOption(addTicket.getLongOpt())) {
+            try {
+                if (!isDigit(cl.getArgList().get(0))) {
+                    System.out.println("You must enter a valid film id!");
+                    return;
+                }
+                if (!isDigit(cl.getArgList().get(1))) {
+                    System.out.println("You must enter a valid user id!");
+                    return;
+                }
+                try {
+                    Karta k = new Karta();
+                    k.setUser(um.getById(Integer.parseInt(cl.getArgList().get(0))));
+                    k.setFilm(fm.getById(Integer.parseInt(cl.getArgList().get(1))));
+                    km.add(k);
+                    System.out.println("Ticket successfuly added!");
+                } catch (FilmoviException f) {
+                    System.out.println("User/film does not exist!");
+                }
+            } catch (Exception e) {
+                System.out.println("Error. Invalid parameters.");
+                printFormattedOptions(options);
+                System.exit(-1);
             }
         } else {
             printFormattedOptions(options);
