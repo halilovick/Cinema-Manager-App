@@ -31,15 +31,15 @@ import static ba.unsa.etf.rpr.Controllers.LoginController.user;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class AdminPageController {
-    public TableColumn colID1;
-    public TableColumn colUser1;
-    public TableColumn colPassword1;
-    public TableColumn colIme1;
-    public TableColumn colEmail1;
-    public TableColumn colAdresa1;
-    public TableColumn colGrad1;
-    public TableColumn colDatumRodj1;
-    public TableColumn colAdmin1;
+    public TableColumn<User, Integer> colID1;
+    public TableColumn<User, String> colUser1;
+    public TableColumn<User, String> colPassword1;
+    public TableColumn<User, String> colIme1;
+    public TableColumn<User, String> colEmail1;
+    public TableColumn<User, String> colAdresa1;
+    public TableColumn<User, String> colGrad1;
+    public TableColumn<User, Date> colDatumRodj1;
+    public TableColumn<User, Boolean> colAdmin1;
     public TextField userField1;
     public TextField passwordField1;
     public TextField imeField1;
@@ -49,17 +49,16 @@ public class AdminPageController {
     public Button azurirajButton1;
     public Button obrisiButton1;
     public Button nazadButton21;
-    public TableView tabelaUsera;
+    public TableView<User> tabelaUsera;
     public Label cijenaLabelFiksna;
     public Label trajanjeLabelFiksna;
     public Label zanrLabelFiksna;
     public Tab prodajaKarataAdminButton;
-    private int brojKarata = 0;
     private final filmoviManager fmanager = new filmoviManager();
     private final karteManager kmanager = new karteManager();
     private final List<String> listaFilmova = fmanager.getAllNames();
     private final ObservableList<String> filmovi = FXCollections.observableArrayList(listaFilmova);
-    public ChoiceBox filmChoiceBox;
+    public ChoiceBox<String> filmChoiceBox;
     public Label zanrLabel;
     public Label trajanjeLabel;
     public Label cijenaLabel;
@@ -68,12 +67,12 @@ public class AdminPageController {
     private LocalDate datum;
     String imeOdabranogFilma = "";
     private Integer id;
-    public TableColumn colID;
-    public TableColumn colIme;
-    public TableColumn colZanr;
-    public TableColumn colTrajanje;
-    public TableColumn colCijena;
-    public TableColumn colBrojSale;
+    public TableColumn<Film, Integer> colID;
+    public TableColumn<Film, String> colIme;
+    public TableColumn<Film, String> colZanr;
+    public TableColumn<Film, Integer> colTrajanje;
+    public TableColumn<Film, Integer> colCijena;
+    public TableColumn<Film, Integer> colBrojSale;
     public TableView<Film> tabelaFilmova;
     private final usersManager umanager = new usersManager();
     public TextField imeField;
@@ -88,10 +87,9 @@ public class AdminPageController {
     /**
      * Dodaj film button click. Adds film to database.
      *
-     * @param actionEvent the action event
      * @throws FilmoviException the filmovi exception
      */
-    public void dodajFilmButtonClick(ActionEvent actionEvent) throws FilmoviException {
+    public void dodajFilmButtonClick() throws FilmoviException {
         if (imeField.getText().isEmpty() || zanrField.getText().isEmpty() || trajanjeField.getText().isEmpty() || cijenaField.getText().isEmpty() || brojsaleField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -128,10 +126,9 @@ public class AdminPageController {
     /**
      * Azuriraj film button click. Updates film in database.
      *
-     * @param actionEvent the action event
      * @throws FilmoviException the filmovi exception
      */
-    public void azurirajFilmButtonClick(ActionEvent actionEvent) throws FilmoviException {
+    public void azurirajFilmButtonClick() throws FilmoviException {
         if (imeField.getText().isEmpty() || zanrField.getText().isEmpty() || trajanjeField.getText().isEmpty() || cijenaField.getText().isEmpty() || brojsaleField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -159,10 +156,9 @@ public class AdminPageController {
     /**
      * Obrisi film button click. Deletes film in database.
      *
-     * @param actionEvent the action event
      * @throws FilmoviException the filmovi exception
      */
-    public void obrisiFilmButtonClick(ActionEvent actionEvent) throws FilmoviException {
+    public void obrisiFilmButtonClick() throws FilmoviException {
         if (imeField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -183,15 +179,13 @@ public class AdminPageController {
 
     /**
      * Gets selected film.
-     *
-     * @param mouseEvent the mouse event
      */
-    public void getSelectedFilm(MouseEvent mouseEvent) {
+    public void getSelectedFilm() {
         int index = tabelaFilmova.getSelectionModel().getSelectedIndex();
         if (index <= -1) return;
         id = Integer.valueOf(colID.getCellData(index).toString());
-        imeField.setText(colIme.getCellData(index).toString());
-        zanrField.setText(colZanr.getCellData(index).toString());
+        imeField.setText(colIme.getCellData(index));
+        zanrField.setText(colZanr.getCellData(index));
         trajanjeField.setText(colTrajanje.getCellData(index).toString());
         cijenaField.setText(colCijena.getCellData(index).toString());
         brojsaleField.setText(colBrojSale.getCellData(index).toString());
@@ -329,17 +323,20 @@ public class AdminPageController {
             alert.setContentText("Please enter valid details.");
             alert.showAndWait();
         } catch (FilmoviException e) {
-            throw new FilmoviException(e.getMessage(), e);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Cannot add an existing user!");
+            alert.showAndWait();
+            return;
         }
     }
 
     /**
      * Azuriraj user button click. Updates user in database.
      *
-     * @param actionEvent the action event
      * @throws FilmoviException the filmovi exception
      */
-    public void azurirajUserButtonClick(ActionEvent actionEvent) throws FilmoviException {
+    public void azurirajUserButtonClick() throws FilmoviException {
         if (userField1.getText().isEmpty() || passwordField1.getText().isEmpty() || imeField1.getText().isEmpty() || emailField1.getText().isEmpty() || adminField1.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -401,10 +398,10 @@ public class AdminPageController {
         int index = tabelaUsera.getSelectionModel().getSelectedIndex();
         if (index <= -1) return;
         id = Integer.valueOf(colID1.getCellData(index).toString());
-        userField1.setText(colUser1.getCellData(index).toString());
-        passwordField1.setText(colPassword1.getCellData(index).toString());
-        imeField1.setText(colIme1.getCellData(index).toString());
-        emailField1.setText(colEmail1.getCellData(index).toString());
+        userField1.setText(colUser1.getCellData(index));
+        passwordField1.setText(colPassword1.getCellData(index));
+        imeField1.setText(colIme1.getCellData(index));
+        emailField1.setText(colEmail1.getCellData(index));
         adminField1.setText(colAdmin1.getCellData(index).toString());
     }
 
@@ -446,6 +443,7 @@ public class AdminPageController {
      * @throws IOException      the io exception
      */
     public void kupiButtonClick(ActionEvent actionEvent) throws FilmoviException, IOException {
+        int brojKarata = 0;
         try {
             brojKarata = Integer.parseInt(brojKarataTextField.getText());
         } catch (Exception e) {
